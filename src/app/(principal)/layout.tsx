@@ -1,4 +1,5 @@
 
+import { Footer } from "@/components/principal/Footer";
 import { Header } from "@/components/principal/Header";
 import type { Metadata } from "next";
 
@@ -16,6 +17,7 @@ export default function PrincipalLayout({
     <>
         <Header />
         {children}
+        <Footer />
     </>
   );
 }
