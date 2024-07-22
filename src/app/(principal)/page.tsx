@@ -44,6 +44,7 @@ export default function Home() {
         </div>
         <PopularProducts/>
         <OfferProducts/>
+        <RecomendedProducts />
         <div className="mt-12 bg-[#141410] flex justify-center items-center">
             <div className="py-8 flex flex-col gap-5">
                 <h2 className="text-white text-xl lg:text-2xl font-bold text-center">Assine Nosso Prime E <br />Tenha descontos exclusivos</h2>
@@ -51,7 +52,6 @@ export default function Home() {
             </div>
         </div>
         <KnowOurBlog />
-        <RecomendedProducts />
       </>
     );
   }

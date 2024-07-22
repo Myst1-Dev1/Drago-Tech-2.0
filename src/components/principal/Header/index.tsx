@@ -22,7 +22,7 @@ export function Header() {
                         <FaUser className="text-xs transition-all duration-500 hover:text-red-600" />
                     </div>
                 </div>
-                <div className="flex items-center w-full max-w-96 border border-gray-300 rounded-md">
+                <div className="flex items-center w-full max-w-full lg:max-w-96 border border-gray-300 rounded-md">
                     <input className="p-4 outline-none w-full" type="text" placeholder="Pesquise por seus produtos" />
                     <div className="w-10 h-10 flex justify-center items-center">
                         <FaSearch className="text-gray-500" />
