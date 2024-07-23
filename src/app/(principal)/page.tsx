@@ -6,6 +6,7 @@ import { PopularProducts } from "@/components/principal/PopularProducts";
 import { OfferProducts } from "@/components/principal/OfferProducts";
 import { KnowOurBlog } from "@/components/principal/KnowOurBlog";
 import { RecomendedProducts } from "@/components/principal/RecomendedProducts";
+import Link from "next/link";
 
 export default function Home() {
     return (
@@ -48,7 +49,7 @@ export default function Home() {
         <div className="mt-12 bg-[#141410] flex justify-center items-center">
             <div className="py-8 flex flex-col gap-5">
                 <h2 className="text-white text-xl lg:text-2xl font-bold text-center">Assine Nosso Prime E <br />Tenha descontos exclusivos</h2>
-                <button className="font-bold max-w-72 w-full p-4 rounded-md bg-red-500 text-white transition-all duration-500 hover:bg-red-700">Quero ser Prime</button>
+                <Link href="/prime"><button className="font-bold max-w-72 w-full p-4 rounded-md bg-red-500 text-white transition-all duration-500 hover:bg-red-700">Quero ser Prime</button></Link>
             </div>
         </div>
         <KnowOurBlog />

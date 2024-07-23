@@ -30,19 +30,19 @@ export function Header() {
                 </div>
                 <div className="hidden lg:flex gap-8">
                     <div className="flex flex-col gap-1 items-center">
-                        <FaHeart className="text-2xl" />
-                        <Link className="transition-all duration-500 hover:text-red-600" href="">Lista de desejos</Link>
+                        <FaHeart className="text-2xl duration-500 hover:text-red-600" />
+                        <Link className="transition-all duration-500 hover:text-red-600" href="/favorites">Lista de desejos</Link>
                     </div>
                     <div className="flex flex-col gap-1 items-center">
-                        <FaShoppingCart className="text-2xl"  />
-                        <Link className="transition-all duration-500 hover:text-red-600" href="">Carrinho</Link>
+                        <FaShoppingCart className="cursor-pointer text-2xl duration-500 hover:text-red-600" />
+                        <h6 className="transition-all duration-500 hover:text-red-600">Carrinho</h6>
                     </div>
                     <div className="flex flex-col gap-1 items-center">
-                        <FaUser className="text-2xl"  />
+                        <FaUser className="text-2xl duration-500 hover:text-red-600"  />
                         <div className="flex gap-1">
-                            <Link className="transition-all duration-500 hover:text-red-600" href="">Login</Link>
+                            <Link className="transition-all duration-500 hover:text-red-600" href="/signIn">Login</Link>
                             <span>/</span>
-                            <Link className="transition-all duration-500 hover:text-red-600" href="">Cadastro</Link>
+                            <Link className="transition-all duration-500 hover:text-red-600" href="/signUp">Cadastro</Link>
                         </div>
                     </div>
                 </div>
