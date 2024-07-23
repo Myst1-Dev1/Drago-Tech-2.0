@@ -20,7 +20,7 @@ export function OfferProducts() {
                     <Image className="object-cover mt-10" src={limitedTimeImage} width={350} height={200} alt="imagem da edição especial" />
                 </div>
                 <div className="flex flex-col gap-5 w-full">
-                    <div className="p-5 border border-gray-200 rounded-md flex flex-wrap justify-between items-center w-full">
+                    <div className="p-5 border border-gray-200 rounded-md flex flex-wrap justify-between items-center w-full transition-all duration-500 hover:bg-black hover:text-white">
                         <div className="flex flex-wrap items-center gap-4">
                             <Image className="m-auto" src={productImage} width={100} height={100} alt="imagem do produto" />
                             <div className="flex items-start flex-col gap-3">
@@ -44,7 +44,7 @@ export function OfferProducts() {
                             </div>
                         </div>
                     </div>
-                    <div className="p-5 border border-gray-200 rounded-md flex flex-wrap justify-between items-center w-full">
+                    <div className="p-5 border border-gray-200 rounded-md flex flex-wrap justify-between items-center w-full transition-all duration-500 hover:bg-black hover:text-white">
                         <div className="flex flex-wrap items-center gap-4">
                             <Image className="m-auto" src={productImage} width={100} height={100} alt="imagem do produto" />
                             <div className="flex items-start flex-col gap-3">
@@ -68,7 +68,7 @@ export function OfferProducts() {
                             </div>
                         </div>
                     </div>
-                    <div className="p-5 border border-gray-200 rounded-md flex flex-wrap justify-between items-center w-full">
+                    <div className="p-5 border border-gray-200 rounded-md flex flex-wrap justify-between items-center w-full transition-all duration-500 hover:bg-black hover:text-white">
                         <div className="flex flex-wrap items-center gap-4">
                             <Image className="m-auto" src={productImage} width={100} height={100} alt="imagem do produto" />
                             <div className="flex items-start flex-col gap-3">

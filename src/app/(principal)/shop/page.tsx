@@ -9,7 +9,6 @@ export default function Shop() {
             <div className="flex flex-col lg:flex-row gap-12 px-4 lg:px-20 py-8">
                 <ShopFilter />
                 <div>
-                    <h2 className="font-bold text-xl">Produtos</h2>
                     <div className="grid gap-8 grid-cols-1 md:grid-cols-2 2xl:grid-cols-5 lg:grid-cols-4 py-8">
                         <div className="mb-5 m-auto relative overflow-hidden max-w-[200px] flex flex-col gap-4 transition-all duration-300 hover:scale-110 group">
                             <Image className="object-cover m-auto" src={productImg} width={150} height={150} alt="imagem do produto" />

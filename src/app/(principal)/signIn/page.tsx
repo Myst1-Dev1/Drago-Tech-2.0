@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function SignIn() {
     return (
         <>
-            <div className="px-4 lg:px-28 py-8 flex flex-col justify-center items-center">
+            <div className="px-4 lg:px-28 py-16 flex flex-col justify-center items-center">
                 <h2 className="text-xl lg:text-2xl font-bold mb-8">Login</h2>
                 <form className="max-w-96 w-full flex flex-col">
                     <input className="outline-none p-4 rounded-md w-full border border-gray-300 mb-5" type="email" placeholder="Email" />
