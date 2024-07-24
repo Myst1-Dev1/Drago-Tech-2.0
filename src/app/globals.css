@@ -58,3 +58,7 @@
     border: none;
     cursor: pointer;
   }
+
+  .cartScroll::-webkit-scrollbar {
+    display: none;
+  }

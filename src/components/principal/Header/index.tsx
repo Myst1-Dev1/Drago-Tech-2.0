@@ -24,7 +24,7 @@ export function Header() {
                     </div>
                     <div className="flex gap-4 lg:hidden">
                         {/* <FaHeart className="text-xs transition-all duration-500 hover:text-red-600" /> */}
-                        <FaShoppingCart className="transition-all duration-500 hover:text-red-600" />
+                        <FaShoppingCart onClick={() => setIsCartOpen(true)}  className="transition-all duration-500 hover:text-red-600" />
                         <FaUser className="transition-all duration-500 hover:text-red-600" />
                     </div>
                 </div>
