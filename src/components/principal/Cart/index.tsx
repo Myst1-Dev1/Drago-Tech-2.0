@@ -74,7 +74,7 @@ export function Cart({ setIsCartOpen }:CartProps) {
                                 <h6 className="font-bold">R$:0,00</h6>
                             </div>
                             <button className="mt-5 bg-red-500 p-4 w-full rounded-md text-white transition-all duration-500 hover:bg-red-600">Ir para o pagamento</button>
-                            <button className="mt-4 border border-red-500 p-4 w-full rounded-md transition-all duration-500 hover:bg-red-600">Continuar comprando</button>
+                            {/* <button className="mt-4 border border-red-500 p-4 w-full rounded-md transition-all duration-500 hover:bg-red-600">Continuar comprando</button> */}
                         </div>
                     </div>
                 </div>
