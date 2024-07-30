@@ -9,7 +9,7 @@ export function KnowOurBlog() {
         <>
             <div className="px-4 lg:px-28 py-12">
                 <h2 className="font-bold text-2xl">Conheça o Drago Blog</h2>
-                <div className="mt-12 grid grid-cols-1 lg:grid-cols-4">
+                <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
                     <Link href="" className="max-w-64 m-auto mb-8 lg:m-0 flex flex-col gap-4">
                         <Image className="object-cover w-full" src={blogPostImage} width={200} height={200} alt="imagem do post do blog" />
                         <div className="flex flex-col gap-4">

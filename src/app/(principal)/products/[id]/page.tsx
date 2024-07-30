@@ -2,6 +2,7 @@ import { FaArrowLeft, FaArrowRight, FaHeart, FaPlus, FaShoppingCart, FaStar } fr
 import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md";
 import productImg from "../../../../../public/images/productImg.jpg";
 import Image from "next/image";
+import { ProductsInformations } from "@/components/principal/ProductsInformations";
 
 export default function Product() {
     return (
@@ -58,14 +59,7 @@ export default function Product() {
                     </div>
                 </div>
 
-                <div className="py-16">
-                    <div className="flex items-center flex-wrap gap-7">
-                        <h6 className="text-sm lg:text-xl font-bold border-b pb-1 border-red-300 cursor-pointer transition-all duration-500 hover:text-red-700">Descrição do produto</h6>
-                        <h6 className="text-sm lg:text-xl font-bold text-gray-200 pb-1 cursor-pointer transition-all duration-500 hover:text-red-700">Informações técnicas</h6>
-                        <h6 className="text-sm lg:text-xl font-bold text-gray-200 cursor-pointer transition-all duration-500 hover:text-red-700" >Especificações</h6>
-                    </div>
-                    <p className="mt-8">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                </div>
+                <ProductsInformations />
 
                 <div className="py-12">
                     <div className="flex gap-3 items-center">

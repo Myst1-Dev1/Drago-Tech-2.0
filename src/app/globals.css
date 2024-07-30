@@ -62,3 +62,35 @@
   .cartScroll::-webkit-scrollbar {
     display: none;
   }
+
+  .active-tab {
+    position: relative;
+}
+
+.active-tab::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #F87171;
+    animation: slideBorder 0.5s forwards;
+}
+
+.fadeIn {
+  animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+}
+
+  @keyframes slideBorder {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
