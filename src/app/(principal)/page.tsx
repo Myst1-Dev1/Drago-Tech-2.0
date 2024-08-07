@@ -1,3 +1,5 @@
+'use server'
+
 import Image from "next/image";
 import laptopImg from "../../../public/images/laptopsImg.png";
 import eletronicsImg from "../../../public/images/eletronicsImg.png";
@@ -7,8 +9,20 @@ import { OfferProducts } from "@/components/principal/OfferProducts";
 import { KnowOurBlog } from "@/components/principal/KnowOurBlog";
 import { RecomendedProducts } from "@/components/principal/RecomendedProducts";
 import Link from "next/link";
+import { getProducts } from "@/services/graphql/getProducts"
+import { getClient } from "@/services/client";
 
-export default function Home() {
+// interface ProductsResponse = {
+    
+// }
+
+export default async function Home() {
+    const client = getClient();
+
+    const { data } = await client.query<any>({query: getProducts});
+
+    const products = data.produtos.nodes;
+
     return (
       <>
         <div className="flex justify-center items-center bg-homeBanner bg-cover bg-center w-full min-h-[70vh] text-white">
@@ -43,7 +57,7 @@ export default function Home() {
                 </div>
             </div>
         </div>
-        <PopularProducts/>
+        <PopularProducts products={products} />
         <OfferProducts/>
         <RecomendedProducts />
         <div className="mt-12 bg-[#141410] flex justify-center items-center">
