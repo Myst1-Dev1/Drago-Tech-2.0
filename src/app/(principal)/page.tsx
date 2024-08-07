@@ -9,19 +9,15 @@ import { OfferProducts } from "@/components/principal/OfferProducts";
 import { KnowOurBlog } from "@/components/principal/KnowOurBlog";
 import { RecomendedProducts } from "@/components/principal/RecomendedProducts";
 import Link from "next/link";
-import { getProducts } from "@/services/graphql/getProducts"
-import { getClient } from "@/services/client";
+import { FetchProducts } from "@/services/fetchData/fetchProducts";
 
 // interface ProductsResponse = {
     
 // }
 
 export default async function Home() {
-    const client = getClient();
 
-    const { data } = await client.query<any>({query: getProducts});
-
-    const products = data.produtos.nodes;
+    const { products } = await FetchProducts();
 
     return (
       <>
@@ -59,7 +55,7 @@ export default async function Home() {
         </div>
         <PopularProducts products={products} />
         <OfferProducts/>
-        <RecomendedProducts />
+        <RecomendedProducts products={products} />
         <div className="mt-12 bg-[#141410] flex justify-center items-center">
             <div className="py-8 flex flex-col gap-5">
                 <h2 className="text-white text-xl lg:text-2xl font-bold text-center">Assine Nosso Prime E <br />Tenha descontos exclusivos</h2>
