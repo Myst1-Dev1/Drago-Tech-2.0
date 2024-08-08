@@ -35,6 +35,7 @@ export const getProducts = gql`
                 }
                 }
             }
+                slug
             }
         }
 }

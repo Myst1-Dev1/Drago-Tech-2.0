@@ -1,10 +1,21 @@
+'use client'
+
 import { FaArrowLeft, FaArrowRight, FaHeart, FaPlus, FaShoppingCart, FaStar } from "react-icons/fa";
 import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md";
 import productImg from "../../../../../public/images/productImg.jpg";
 import Image from "next/image";
 import { ProductsInformations } from "@/components/principal/ProductsInformations";
+import { usePathname } from "next/navigation";
 
 export default function Product() {
+    const router = usePathname();
+
+    const parts = router.split('/');
+    const productIndex = parts.indexOf('product');
+    const productValue = productIndex !== -1 ? parts[productIndex + 1] : null;
+    
+    console.log(productValue);
+
     return (
         <>
             <div className="px-4 lg:px-28 py-12">

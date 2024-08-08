@@ -18,6 +18,7 @@ type ProductImage = {
     id: number;
     popularProduct: boolean;
     productName: string;
+    slug:string;
     image: {
       node: {
         mediaItemUrl: string;
@@ -34,6 +35,7 @@ type ProductImage = {
   
  export type ProductNode = {
     produtos: Product;
+    slug:string;
   }
   
   type ProductsData = {

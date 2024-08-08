@@ -51,7 +51,7 @@ export function CarouselProducts({ productsArray }: CarouselProductsProps) {
                     {productsArray.length === 0 ? <SkeletonProducts /> : productsArray?.map(product => (
                         <SwiperSlide key={product.produtos.id}>
                             <div className="mb-8 m-auto relative overflow-hidden max-w-[250px] transition-all duration-300 hover:scale-110 group">
-                                <Link className="flex flex-col gap-4" href={`/product/${product.produtos.id}`}>
+                                <Link className="flex flex-col gap-4" href={`/product/${product.slug}`}>
                                     <Image className="object-cover m-auto" src={product.produtos.image.node?.mediaItemUrl} width={150} height={150} alt="imagem do produto" />
                                     <span className="text-zinc-400">{product.produtos.category}</span>
                                     <p className='text-sm max-w-[50ch] overflow-hidden text-ellipsis whitespace-nowrap'>{product.produtos.productName}</p>
