@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const getProducts = gql`
     query NewQuery {
-        produtos(first:14) {
+        produtos(first: 14) {
             nodes {
             produtos {
                 brand
@@ -34,9 +34,13 @@ export const getProducts = gql`
                     mediaItemUrl
                 }
                 }
+                inoffer {
+                isoffer
+                priceoffer
+                }
             }
-                slug
+            slug
             }
         }
-}
+        }
 `

@@ -11,7 +11,7 @@ type ProductImage = {
     };
   }
   
-  type Product = {
+  export type Product = {
     brand: string;
     category: string[];
     description: string;
@@ -26,6 +26,10 @@ type ProductImage = {
     };
     price: number;
     recomendedProduct: boolean;
+    inoffer: {
+      isoffer:boolean;
+      priceoffer:number;
+    }
     similarProducts: {
       itens: {
         nodes: SimilarProduct[];
@@ -38,7 +42,7 @@ type ProductImage = {
     slug:string;
   }
   
-  type ProductsData = {
+ export type ProductsData = {
     produtos: {
       nodes: ProductNode[];
     };

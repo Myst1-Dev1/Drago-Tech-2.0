@@ -16,7 +16,6 @@ import { FetchProducts } from "@/services/fetchData/fetchProducts";
 // }
 
 export default async function Home() {
-
     const { products } = await FetchProducts();
 
     return (
@@ -54,7 +53,7 @@ export default async function Home() {
             </div>
         </div>
         <PopularProducts products={products} />
-        <OfferProducts/>
+        <OfferProducts products={products}/>
         <RecomendedProducts products={products} />
         <div className="mt-12 bg-[#141410] flex justify-center items-center">
             <div className="py-8 flex flex-col gap-5">
