@@ -1,9 +1,17 @@
 'use client';
 
+import { ProductTechInfo } from "@/utils/dataProducts";
 import { useState } from "react";
 
-export function ProductsInformations() {
+interface ProductsInformationsProps {
+    description:string;
+    id:number;
+}
+
+export function ProductsInformations({ description, id }:ProductsInformationsProps) {
     const [isActiveTab, setIsActiveTab] = useState('description');
+
+    const techInfoData = ProductTechInfo.filter(info => info.id === id);
 
     const handleTabClick = (tab: string) => {
         setIsActiveTab(tab);
@@ -29,64 +37,22 @@ export function ProductsInformations() {
                 <div className="transition-all duration-500">
                     {isActiveTab === 'description' && (
                         <p className={`mt-8 ${isActiveTab === 'description' ? 'fadeIn' : ''}`}>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                            {description}
                         </p>
                     )}
-                    {isActiveTab === 'information' && (
-                        <div className={`mt-8 grid grid-cols-1 lg:grid-cols-2 m-auto ${isActiveTab === 'information' ? 'fadeIn' : ''}`}>
-                            <div className="flex flex-col gap-4">
-                                <div className="max-w-96 w-full flex justify-between items-center">
-                                    <h6 className="font-bold">Marca</h6>
-                                    <span className="text-gray-500">Asus</span>
-                                </div>
-                                <div className="max-w-96 w-full flex justify-between items-center">
-                                    <h6 className="font-bold">Tela</h6>
-                                    <span className="text-gray-500">Full Hd 144hz</span>
-                                </div>
-                                <div className="max-w-96 w-full flex justify-between items-center">
-                                    <h6 className="font-bold">Processador</h6>
-                                    <span className="text-gray-500">inter core i5 12400H</span>
-                                </div>
-                                <div className="max-w-96 w-full flex justify-between items-center">
-                                    <h6 className="font-bold">Gráficos</h6>
-                                    <span className="text-gray-500">Nvidia RTX 3050</span>
-                                </div>
-                                <div className="max-w-96 w-full flex justify-between items-center">
-                                    <h6 className="font-bold">Memória</h6>
-                                    <span className="text-gray-500">32gb DDR4</span>
-                                </div>
-                                <div className="max-w-96 w-full flex justify-between items-center">
-                                    <h6 className="font-bold">Armazenamento</h6>
-                                    <span className="text-gray-500">1TB ssd nvme 2.0</span>
-                                </div>
+                  {isActiveTab === 'information' && (
+                    <div className={`w-full mt-8 gap-6 m-auto ${isActiveTab === 'information' ? 'fadeIn' : ''}`}>
+                        {techInfoData.map(info => (
+                            <div key={info.id} className="flex flex-col gap-4">
+                                {info.techInfo.map(infoTech => (
+                                    <div key={infoTech.id} className="w-full flex-flow flex justify-between items-center">
+                                        <h6 className="font-bold">{infoTech.techInfoTitle}</h6>
+                                        <span className="text-gray-500 text-xs lg:text-sm">{infoTech.techInfoValue}</span>
+                                    </div>
+                                ))}
                             </div>
-                            <div className="flex flex-col gap-4">
-                                <div className="max-w-96 w-full flex justify-between items-center">
-                                    <h6 className="font-bold">Audio</h6>
-                                    <span className="text-gray-500">Lorem ipsum</span>
-                                </div>
-                                <div className="max-w-96 w-full flex justify-between items-center">
-                                    <h6 className="font-bold">Conexao</h6>
-                                    <span className="text-gray-500">Lorem ipsum</span>
-                                </div>
-                                <div className="max-w-96 w-full flex justify-between items-center">
-                                    <h6 className="font-bold">Teclado</h6>
-                                    <span className="text-gray-500">Lorem ipsum</span>
-                                </div>
-                                <div className="max-w-96 w-full flex justify-between items-center">
-                                    <h6 className="font-bold">Bateria</h6>
-                                    <span className="text-gray-500">Lorem ipsum</span>
-                                </div>
-                                <div className="max-w-96 w-full flex justify-between items-center">
-                                    <h6 className="font-bold">Dimensões</h6>
-                                    <span className="text-gray-500">Lorem ipsum</span>
-                                </div>
-                                <div className="max-w-96 w-full flex justify-between items-center">
-                                    <h6 className="font-bold">Altura</h6>
-                                    <span className="text-gray-500">Lorem ipsum</span>
-                                </div>
-                            </div>
-                        </div>
+                        ))}
+                    </div>
                     )}
                 </div>
             </div>

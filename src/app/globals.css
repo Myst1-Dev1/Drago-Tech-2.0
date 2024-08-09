@@ -67,6 +67,10 @@
     position: relative;
 }
 
+.flex-flow {
+  flex-flow: row wrap;
+}
+
 .active-tab::after {
     content: '';
     position: absolute;
@@ -84,7 +88,7 @@
 
 .swiper-button-disabled-custom {
   opacity: 0.5;
-} 
+}
 
 @keyframes fadeIn {
   0% {opacity: 0;}

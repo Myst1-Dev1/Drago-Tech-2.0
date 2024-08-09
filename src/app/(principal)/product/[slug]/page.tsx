@@ -1,76 +1,73 @@
-'use client'
+'use server'
 
 import { FaArrowLeft, FaArrowRight, FaHeart, FaPlus, FaShoppingCart, FaStar } from "react-icons/fa";
 import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md";
 import productImg from "../../../../../public/images/productImg.jpg";
 import Image from "next/image";
 import { ProductsInformations } from "@/components/principal/ProductsInformations";
-import { usePathname } from "next/navigation";
+import { FetchProductDetails } from "@/services/fetchData/fetchProductDetails";
+import { formatPrice } from "@/utils/useFormatPrice";
 
-export default function Product() {
-    const router = usePathname();
-
-    const parts = router.split('/');
-    const productIndex = parts.indexOf('product');
-    const productValue = productIndex !== -1 ? parts[productIndex + 1] : null;
-    
-    console.log(productValue);
+export default async function Product({ params: {slug} }:any) {
+    const { products } = await FetchProductDetails(slug);
 
     return (
         <>
             <div className="px-4 lg:px-28 py-12">
-                <h2 className="font-bold m-auto text-xl lg:text-2xl">Notebook ASUS Vivobook 15, AMD Ryzen 7, 4600H SSD, 256GB, 8GB, KeepOS, Tela 15,60", Icelight Silver - M1502IA-EJ252</h2>
-                <div className="mt-12 gap-12 lg:justify-between xl:justify-between 2xl:justify-evenly lg:gap-0 items-center flex flex-col lg:flex-row">
-                    <div className="max-w-[450px]">
-                        <div className="flex justify-between items-center">
-                            <div className="flex items-center gap-3">
-                                <FaStar className="text-yellow-400" />
-                                <FaStar className="text-yellow-400" />
-                                <FaStar className="text-yellow-400" />
-                                <FaStar className="text-yellow-400" />
-                                <FaStar className="text-yellow-400" />
-                                <span className="text-gray-400">(2)</span>
-                            </div>
-                            <FaHeart className="text-gray-500 cursor-pointer transition-all duration-500 hover:text-red-500" />
-                        </div>
-                        <div>
-                            <Image className="w-full object-cover" src={productImg} width={400} height={400} alt="imagem do produto" />
-                            <div className="max-w-[450px] overflow-x-auto flex justify-center items-center gap-8">
-                                <Image className="w-[80px] h-[80px] object-cover" src={productImg} width={80} height={80} alt="imagem do produto" />
-                                <Image className="w-[80px] h-[80px] object-cover" src={productImg} width={80} height={80} alt="imagem do produto" />
-                                <Image className="w-[80px] h-[80px] object-cover" src={productImg} width={80} height={80} alt="imagem do produto" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex flex-col gap-7">
-                        <h3 className="font-bold text-2xl">R$:2359,00</h3>
-                        <p className="font-bold">
-                            Á vista com o Prime em até 5% OFF <br /> R$3.371,55 <br /> Em até 10x de R$:354,90 sem juros no cartão <br /> Ou em 1x no cartão com 5% OFF
-                        </p>
-                        <button className="text-xl text-white flex items-center justify-center gap-4 font-bold bg-red-500 rounded-md max-w-60 w-full p-4 transition-all duration-500 hover:bg-red-700">
-                            <FaShoppingCart />
-                            Comprar
-                        </button>
-                        <div className="relative flex flex-col gap-4">
-                            <h6 className="text-xl font-bold">Produtos Similares</h6>
-                            <div className="max-w-[450px] overflow-x-hidden flex gap-8">
-                                <div className="z-50 bg-white -left-5 top-16 absolute aspect-square border border-gray-400 rounded-full w-[30px] h-[30px] flex justify-center items-center">
-                                    <MdOutlineArrowBackIos className="text-gray-500 text-sm" />
+                    <div>
+                        <h2 className="font-bold m-auto text-xl lg:text-2xl">{products.produtos.productName}</h2>
+                        <div className="mt-12 gap-12 lg:justify-between xl:justify-between 2xl:justify-evenly lg:gap-0 items-center flex flex-col lg:flex-row">
+                            <div className="max-w-[450px]">
+                                <div className="flex justify-between items-center">
+                                    <div className="flex items-center gap-3">
+                                        <FaStar className="text-yellow-400" />
+                                        <FaStar className="text-yellow-400" />
+                                        <FaStar className="text-yellow-400" />
+                                        <FaStar className="text-yellow-400" />
+                                        <FaStar className="text-yellow-400" />
+                                        <span className="text-gray-400">(2)</span>
+                                    </div>
+                                    <FaHeart className="text-gray-500 cursor-pointer transition-all duration-500 hover:text-red-500" />
                                 </div>
-                                <Image className="w-[80px] h-[80px] object-cover" src={productImg} width={80} height={80} alt="imagem do produto" />
-                                <Image className="w-[80px] h-[80px] object-cover" src={productImg} width={80} height={80} alt="imagem do produto" />
-                                <Image className="w-[80px] h-[80px] object-cover" src={productImg} width={80} height={80} alt="imagem do produto" />
-                                <Image className="w-[80px] h-[80px] object-cover" src={productImg} width={80} height={80} alt="imagem do produto" />
-                                <Image className="w-[80px] h-[80px] object-cover -ml-5" src={productImg} width={80} height={80} alt="imagem do produto" />
-                                <div className="z-50 bg-white -right-5 top-16 absolute aspect-square border border-gray-400 rounded-full w-[30px] h-[30px] flex justify-center items-center">
-                                    <MdOutlineArrowForwardIos className="text-gray-500 text-sm" />
+                                <div>
+                                    <Image className="w-full object-cover" src={products.produtos.image.node.mediaItemUrl} width={400} height={400} alt="imagem do produto" />
+                                    <div className="max-w-[450px] overflow-x-auto flex justify-center items-center gap-8">
+                                        <Image className="w-[80px] h-[80px] object-cover" src={products.produtos.image.node.mediaItemUrl} width={80} height={80} alt="imagem do produto" />
+                                        <Image className="w-[80px] h-[80px] object-cover" src={products.produtos.image.node.mediaItemUrl} width={80} height={80} alt="imagem do produto" />
+                                        <Image className="w-[80px] h-[80px] object-cover" src={products.produtos.image.node.mediaItemUrl} width={80} height={80} alt="imagem do produto" />
+                                    </div>
                                 </div>
-                            </div> 
+                            </div>
+                            <div className="flex flex-col gap-7">
+                                <h3 className="font-bold text-2xl">{formatPrice(products.produtos.price)}</h3>
+                                <p className="font-bold">
+                                    Á vista com o Prime em até 5% OFF <br /> {formatPrice(products.produtos.price * 0.95)} <br /> Em até 10x de {formatPrice(products.produtos.price / 10)} sem juros no cartão <br /> Ou em 1x no cartão com 5% OFF
+                                </p>
+                                <button className="text-xl text-white flex items-center justify-center gap-4 font-bold bg-red-500 rounded-md max-w-60 w-full p-4 transition-all duration-500 hover:bg-red-700">
+                                    <FaShoppingCart />
+                                    Comprar
+                                </button>
+                                <div className="relative flex flex-col gap-4">
+                                    <h6 className="text-xl font-bold">Produtos Similares</h6>
+                                    <div className="max-w-[450px] overflow-x-hidden flex gap-8">
+                                        <div className="z-50 bg-white -left-5 top-16 absolute aspect-square border border-gray-400 rounded-full w-[30px] h-[30px] flex justify-center items-center">
+                                            <MdOutlineArrowBackIos className="text-gray-500 text-sm" />
+                                        </div>
+                                        <Image className="w-[80px] h-[80px] object-cover" src={productImg} width={80} height={80} alt="imagem do produto" />
+                                        <Image className="w-[80px] h-[80px] object-cover" src={productImg} width={80} height={80} alt="imagem do produto" />
+                                        <Image className="w-[80px] h-[80px] object-cover" src={productImg} width={80} height={80} alt="imagem do produto" />
+                                        <Image className="w-[80px] h-[80px] object-cover" src={productImg} width={80} height={80} alt="imagem do produto" />
+                                        <Image className="w-[80px] h-[80px] object-cover -ml-5" src={productImg} width={80} height={80} alt="imagem do produto" />
+                                        <div className="z-50 bg-white -right-5 top-16 absolute aspect-square border border-gray-400 rounded-full w-[30px] h-[30px] flex justify-center items-center">
+                                            <MdOutlineArrowForwardIos className="text-gray-500 text-sm" />
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <ProductsInformations />
+                        <ProductsInformations description={products.produtos.description} id={products.produtos.id} />
+                    </div>
 
                 <div className="py-12">
                     <div className="flex gap-3 items-center">
