@@ -1,6 +1,7 @@
-
+import "react-toastify/dist/ReactToastify.css";
 import { Footer } from "@/components/principal/Footer";
 import { Header } from "@/components/principal/Header";
+import { ToastContainer } from 'react-toastify';
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -17,6 +18,7 @@ export default function PrincipalLayout({
     <>
         <Header />
         {children}
+        <ToastContainer position="top-right" theme="light" />
         <Footer />
     </>
   );

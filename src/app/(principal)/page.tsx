@@ -11,10 +11,6 @@ import { RecomendedProducts } from "@/components/principal/RecomendedProducts";
 import Link from "next/link";
 import { FetchProducts } from "@/services/fetchData/fetchProducts";
 
-// interface ProductsResponse = {
-    
-// }
-
 export default async function Home() {
     const { products } = await FetchProducts();
 

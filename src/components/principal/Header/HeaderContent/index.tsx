@@ -9,12 +9,15 @@ import { Cart } from "../../Cart";
 import { useState } from "react";
 import { ProductNode } from "@/types/products";
 import { Search } from "../../Search";
+import { useCart } from "@/services/hooks/useCart";
 
 interface HeaderContentProps {
     products: ProductNode[];
 }
 
 export function HeaderContent({ products }:HeaderContentProps) {
+    const { cart } = useCart();
+
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [isResponsiveNavBarOpen, setIsResponsiveNavBarOpen] = useState(false);
 
@@ -31,8 +34,15 @@ export function HeaderContent({ products }:HeaderContentProps) {
                     </div>
                     <div className="flex gap-4 lg:hidden">
                         {/* <FaHeart className="text-xs transition-all duration-500 hover:text-red-600" /> */}
-                        <FaShoppingCart onClick={() => setIsCartOpen(true)}  className="transition-all duration-500 hover:text-red-600" />
-                        <FaUser className="transition-all duration-500 hover:text-red-600" />
+                        <div className="relative">
+                            {cart.length === 0 ? '' : <div className="absolute -top-[10px] left-[10px] w-4 h-4 rounded-full flex justify-center items-center text-white bg-red-600">
+                                <span className="text-xs">{cart.length}</span>
+                            </div>}
+                            <FaShoppingCart onClick={() => setIsCartOpen(true)}  className="transition-all duration-500 hover:text-red-600" />
+                        </div>
+                        <Link href="/signIn">
+                            <FaUser className="transition-all duration-500 hover:text-red-600" />
+                        </Link>
                     </div>
                 </div>
                     <Search products={products} />
@@ -42,7 +52,12 @@ export function HeaderContent({ products }:HeaderContentProps) {
                         <Link className="transition-all duration-500 hover:text-red-600" href="/favorites">Lista de desejos</Link>
                     </div> */}
                     <div className="flex flex-col gap-1 items-center">
-                        <FaShoppingCart onClick={() => setIsCartOpen(true)} className="cursor-pointer text-2xl duration-500 hover:text-red-600" />
+                        <div className="relative">
+                            {cart.length === 0 ? '' : <div className="absolute -top-[10px] left-[10px] w-5 h-5 rounded-full flex justify-center items-center text-white bg-red-600">
+                                <span>{cart.length}</span>
+                            </div>}
+                            <FaShoppingCart onClick={() => setIsCartOpen(true)} className="cursor-pointer text-2xl duration-500 hover:text-red-600" />
+                        </div>
                         <h6 className="transition-all duration-500 hover:text-red-600">Carrinho</h6>
                     </div>
                     <div className="flex flex-col gap-1 items-center">

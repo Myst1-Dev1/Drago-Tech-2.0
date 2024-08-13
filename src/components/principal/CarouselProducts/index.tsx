@@ -9,12 +9,19 @@ import { ProductNode } from "@/types/products"
 import { formatPrice } from "@/utils/useFormatPrice";
 import { SkeletonProducts } from "../SkeletonProducts";
 import Link from "next/link";
+import { useCart } from "@/services/hooks/useCart";
 
 interface CarouselProductsProps {
     productsArray: ProductNode[];
 }
 
 export function CarouselProducts({ productsArray }: CarouselProductsProps) {
+    const { handleAddToCart } = useCart();
+
+    function addProduct(id:number) {
+        handleAddToCart(id, productsArray);
+    }
+
     return( 
         <>
             <div className="mt-10 relative">
@@ -57,7 +64,7 @@ export function CarouselProducts({ productsArray }: CarouselProductsProps) {
                                     <p className='text-sm max-w-[50ch] overflow-hidden text-ellipsis whitespace-nowrap'>{product.produtos.productName}</p>
                                     <h6 className="text-xl font-bold text-center">{formatPrice(product.produtos.price)}</h6>
                                 </Link>
-                                <div className="text-red-300 cursor-pointer absolute right-0 top-0 lg:top-[15px] lg:right-[-100%] w-8 h-8 lg:w-[40px] lg:h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white group-hover:right-2">
+                                <div onClick={() => addProduct(product.produtos.id)} className="text-red-300 cursor-pointer absolute right-0 top-0 lg:top-[15px] lg:right-[-100%] w-8 h-8 lg:w-[40px] lg:h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white group-hover:right-2">
                                     <FaShoppingCart />
                                 </div>
                                 <div className="text-red-300 cursor-pointer absolute right-0 top-[65px] lg:right-[-100%] w-8 h-8 lg:w-[40px] lg:h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white group-hover:right-2">
