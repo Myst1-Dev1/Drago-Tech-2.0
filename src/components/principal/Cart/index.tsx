@@ -3,6 +3,7 @@ import { FaMinus, FaPlus, FaTimes, FaTrashAlt } from "react-icons/fa";
 import { Dispatch, SetStateAction } from "react";
 import { useCart } from "@/services/hooks/useCart";
 import { formatPrice } from "@/utils/useFormatPrice";
+import Link from "next/link";
 
 interface CartProps {
     setIsCartOpen:Dispatch<SetStateAction<boolean>>
@@ -59,7 +60,9 @@ export function Cart({ setIsCartOpen }:CartProps) {
                                 <h6>Frete:</h6>
                                 <h6 className="font-bold">{formatPrice(Number(totalPrice) + 5)}</h6>
                             </div>
-                            <button className="mt-5 bg-red-500 p-4 w-full rounded-md text-white transition-all duration-500 hover:bg-red-600">Ir para o pagamento</button>
+                            <Link href="/checkout" className={`${cart.length === 0 ? 'pointer-events-none' : 'pointer-events-auto'}`}>
+                                <button className={`${cart.length === 0 ? 'opacity-55' : 'opacity-100'} mt-5 bg-red-500 p-4 w-full rounded-md text-white transition-all duration-500 hover:bg-red-600`}>Ir para o pagamento</button>
+                            </Link>
                             {/* <button className="mt-4 border border-red-500 p-4 w-full rounded-md transition-all duration-500 hover:bg-red-600">Continuar comprando</button> */}
                         </div>
                     </div>

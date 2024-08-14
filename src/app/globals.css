@@ -71,6 +71,12 @@
   flex-flow: row wrap;
 }
 
+ /* O código abaixo foi utilizado para remover as arrows do input number */
+input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+    
+}
+
 .active-tab::after {
     content: '';
     position: absolute;
