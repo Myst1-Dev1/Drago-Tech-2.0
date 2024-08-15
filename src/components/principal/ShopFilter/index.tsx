@@ -1,18 +1,46 @@
+'use client';
+
 import Image from "next/image"
 import ArrowUp from "../../../../public/images/arrowUp.svg";
 import { FaFilter } from "react-icons/fa";
+import gsap from "gsap";
+import { useState } from "react";
 
 export function ShopFilter() {
+    const [showFilter, setShowFilter] = useState(false);
+    const [showBrand, setShowBrand] = useState(false);
+
+    function handleShowCategory(name: string, value: string, isCategory: boolean) {
+        const element = document.querySelector(`.${name}`);
+        if (!isCategory ? showBrand : showFilter) {
+            gsap.to(element, {
+                height: 0,
+                duration: 0.5,
+            });
+        } else {
+            gsap.to(element, {
+                height: value,
+                duration: 0.5,
+            });
+        }
+
+        if (isCategory) {
+            setShowFilter(!showFilter);
+        } else {
+            setShowBrand(!showBrand);
+        }
+    }
+
     return (
         <>
             <FaFilter className="block mb-5 lg:hidden transition-all duration-500 hover:text-red-600" />
-            <div className="hidden lg:flex flex-col gap-6 text-white bg-[#121214] rounded-md max-w-96 p-5">
+            <div className="h-fit hidden lg:flex flex-col gap-6 text-white bg-[#121214] rounded-md max-w-96 p-5">
                     <div className="border-b border-[#4a4747] pb-6">
                         <div className="flex justify-between items-center">
                             <h3 className="font-bold text-xl">Categorias</h3>
-                            <Image className="cursor-pointer" src={ArrowUp} width={20} height={20} alt="flecha que abre o menu de items" />
+                            <Image onClick={() => handleShowCategory('category', '240px', true)} className={`cursor-pointer transition-all duration-500 ${showFilter ? 'rotate-0' : 'rotate-180'}`} src={ArrowUp} width={20} height={20} alt="flecha que abre o menu de items" />
                         </div>
-                        <div className="mt-6 flex flex-col gap-4">
+                        <div className="category overflow-hidden h-0 mt-6 flex flex-col gap-4">
                             <div className="flex gap-4 items-center">
                                 <input className="appearance-none bg-transparent border border-white w-3 h-3 checked:bg-red-300 checked:border-transparent checked:before:content-['✔'] checked:before:text-black checked:before:leading-3 checked:before:flex checked:before:justify-center checked:before:items-center" type="checkbox" id="hardware" />
                                 <label htmlFor="hardware" className="font-bold">Hardware</label>
@@ -42,9 +70,9 @@ export function ShopFilter() {
                     <div className="border-b border-[#4a4747] pb-6">
                         <div className="flex justify-between items-center">
                             <h3 className="font-bold text-xl">Marcas</h3>
-                            <Image className="cursor-pointer" src={ArrowUp} width={20} height={20} alt="flecha que abre o menu de items" />
+                            <Image onClick={() => handleShowCategory('brand', '240px', false)} className={`cursor-pointer transition-all duration-500 ${showBrand ? 'rotate-0' : 'rotate-180'}`} src={ArrowUp} width={20} height={20} alt="flecha que abre o menu de items" />
                         </div>
-                        <div className="mt-6 flex flex-col gap-4">
+                        <div className="brand overflow-hidden h-0 mt-6 flex flex-col gap-4">
                             <div className="flex gap-4 items-center">
                                 <input className="appearance-none bg-transparent border border-white w-3 h-3 checked:bg-red-300 checked:border-transparent checked:before:content-['✔'] checked:before:text-black checked:before:leading-3 checked:before:flex checked:before:justify-center checked:before:items-center" type="checkbox" id="asus" />
                                 <label htmlFor="asus" className="font-bold">Asus</label>
@@ -72,9 +100,8 @@ export function ShopFilter() {
                         </div>
                     </div>
                     <div>
-                        <div className="flex justify-between items-center">
+                        <div>
                             <h3 className="font-bold text-xl">Preço</h3>
-                            <Image className="cursor-pointer" src={ArrowUp} width={20} height={20} alt="flecha que abre o menu de items" />
                         </div>
                         <div className="flex justify-center items-center gap-5 py-4">
                             <div className="border border-[#4a4747] rounded-md p-3">
