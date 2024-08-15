@@ -9,20 +9,24 @@ import { SkeletonProducts } from "../SkeletonProducts";
 import { useCart } from "@/services/hooks/useCart";
 
 interface ShopProductsProps {
+    filteredCategory:string[];
     products:ProductNode[];
+    productsFiltered: ProductNode[];
 }
 
-export function ShopProducts({ products }:ShopProductsProps) {
+export function ShopProducts({ filteredCategory ,products, productsFiltered }:ShopProductsProps) {
     const { handleAddToCart } = useCart();
 
     function addProduct(id:number) {
         handleAddToCart(id, products);
     }
 
+    const displayedProducts = filteredCategory ? productsFiltered : products;
+
     return (
         <>
             <div className="grid gap-8 grid-cols-1 md:grid-cols-2 2xl:grid-cols-5 lg:grid-cols-4 py-8">
-                {products.length === 0 ? <SkeletonProducts /> : products?.map(product => (
+                {displayedProducts.length === 0 ? <SkeletonProducts /> : displayedProducts?.map(product => (
                 <div key={product.produtos.id} className="mb-5 m-auto relative overflow-hidden max-w-[200px] transition-all duration-300 hover:scale-110 group">
                     <Link className="flex flex-col gap-4" href={`product/${product.slug}`}>
                     <Image className="object-cover m-auto" src={product.produtos.image.node.mediaItemUrl} width={100} height={100} alt="imagem do produto" />

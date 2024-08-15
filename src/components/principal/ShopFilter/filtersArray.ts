@@ -1,0 +1,64 @@
+export const filtersArray = [
+    {
+        id:1,
+        filterName:'Categorias',
+        showName: 'category',
+        categories: [
+            {
+                id:1,
+                categoryName:"Hardware"
+            },
+            {
+                id:2,
+                categoryName:"Câmera"
+            },
+            {
+                id:3,
+                categoryName:"Eletrodoméstico"
+            },
+            {
+                id:4,
+                categoryName:"Periférico"
+            },
+            {
+                id:5,
+                categoryName:"Celular"
+            },
+            {
+                id:6,
+                categoryName:"Laptop"
+            },
+        ]
+    },
+    {
+        id:2,
+        filterName:'Marcas',
+        showName: 'brand',
+        categories: [
+            {
+                id:1,
+                categoryName:"Asus"
+            },
+            {
+                id:2,
+                categoryName:"Sony"
+            },
+            {
+                id:3,
+                categoryName:"HyperX"
+            },
+            {
+                id:4,
+                categoryName:"Lenovo"
+            },
+            {
+                id:5,
+                categoryName:"Redragon"
+            },
+            {
+                id:6,
+                categoryName:"Razer"
+            },
+        ]
+    },
+]
