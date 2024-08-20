@@ -8,10 +8,11 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { filtersArray } from "./filtersArray";
 
 interface ShopFilterProps {
+    setLoading: Dispatch<SetStateAction<boolean>>
     setFilteredCategory:Dispatch<SetStateAction<string>> | any
 }
 
-export function ShopFilter({ setFilteredCategory }:ShopFilterProps) {
+export function ShopFilter({ setLoading, setFilteredCategory }:ShopFilterProps) {
     const [activeFilter, setActiveFilter] = useState<string | null>(null);
 
     function handleShowCategory(name: string, value: string) {
@@ -38,13 +39,21 @@ export function ShopFilter({ setFilteredCategory }:ShopFilterProps) {
     }
 
     function handleCategorySelection(category: string) {
-        setFilteredCategory((prevCategories:any) => {
+        setLoading(true);
+        setFilteredCategory((prevCategories: any) => {
+            let updatedCategories;
+            
             if (prevCategories.includes(category)) {
-                const updatedCategories = prevCategories.filter((cat:any) => cat !== category);
-                return updatedCategories.length > 0 ? updatedCategories : [];
+                updatedCategories = prevCategories.filter((cat: any) => cat !== category);
             } else {
-                return [...prevCategories, category];
+                updatedCategories = [...prevCategories, category];
             }
+    
+            setTimeout(() => {
+                setLoading(false);
+            }, 300);
+    
+            return updatedCategories.length > 0 ? updatedCategories : [];
         });
     }
 

@@ -12,19 +12,22 @@ interface ShopContentProps {
 
 export function ShopContent({ products }:ShopContentProps) {
     const [filteredCategories, setFilteredCategories] = useState<string[] | any>([]);
+    const [loading, setLoading] = useState(false);
 
     const productsFiltered = filteredCategories.length === 0
     ? products
     : products.filter(product => 
-        filteredCategories.some((category:any) => product.produtos.category.includes(category))
+        filteredCategories.some((filter: any) => 
+            product.produtos.category.includes(filter) || product.produtos.brand.includes(filter)
+        )
     );
 
     return (
         <>
             <div className="flex flex-col lg:flex-row gap-12 px-4 lg:px-20 py-8">
-                <ShopFilter setFilteredCategory={setFilteredCategories} />
+                <ShopFilter setLoading = {setLoading} setFilteredCategory={setFilteredCategories} />
                 <div>
-                    <ShopProducts filteredCategory={filteredCategories} products={products} productsFiltered = {productsFiltered} />
+                    <ShopProducts loading = {loading} filteredCategory={filteredCategories} products={products} productsFiltered = {productsFiltered} />
                     <div className="flex justify-center items-center gap-5">
                         <div className="cursor-pointer p-2 flex justify-center items-center bg-black rounded-md transition-all duration-500 hover:bg-red-600">
                             <FaArrowLeft className="text-white" />
