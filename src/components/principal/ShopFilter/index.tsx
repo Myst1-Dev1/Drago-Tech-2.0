@@ -6,13 +6,16 @@ import { FaFilter } from "react-icons/fa";
 import gsap from "gsap";
 import { Dispatch, SetStateAction, useState } from "react";
 import { filtersArray } from "./filtersArray";
+import { formatPrice } from "@/utils/useFormatPrice";
 
 interface ShopFilterProps {
     setLoading: Dispatch<SetStateAction<boolean>>
     setFilteredCategory:Dispatch<SetStateAction<string>> | any
+    filterPrice:number;
+    setFilterPrice:Dispatch<SetStateAction<number>>;
 }
 
-export function ShopFilter({ setLoading, setFilteredCategory }:ShopFilterProps) {
+export function ShopFilter({ setLoading, setFilteredCategory, filterPrice, setFilterPrice }:ShopFilterProps) {
     const [activeFilter, setActiveFilter] = useState<string | null>(null);
 
     function handleShowCategory(name: string, value: string) {
@@ -51,16 +54,25 @@ export function ShopFilter({ setLoading, setFilteredCategory }:ShopFilterProps) 
     
             setTimeout(() => {
                 setLoading(false);
-            }, 300);
+            }, 1000);
     
             return updatedCategories.length > 0 ? updatedCategories : [];
         });
+    }
+    
+    function handlePriceChange(e:any) {
+        setLoading(true);
+        setFilterPrice(e);
+
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000);
     }
 
     return (
         <>
             <FaFilter className="block mb-5 lg:hidden transition-all duration-500 hover:text-red-600" />
-            <div className="h-fit hidden lg:flex flex-col gap-6 text-white bg-[#121214] rounded-md max-w-96 p-5">
+            <div className="h-fit hidden lg:flex flex-col gap-6 text-white bg-[#121214] rounded-md max-w-80 p-5">
                     {filtersArray.map(filter => (
                         <div key={filter.id} className="border-b border-[#4a4747] pb-6">
                             <div className="flex justify-between items-center">
@@ -79,15 +91,15 @@ export function ShopFilter({ setLoading, setFilteredCategory }:ShopFilterProps) 
                     ))}
                     <div className="flex flex-col gap-3">
                         <h3 className="font-bold text-xl">Preço</h3>
-                        <div className="flex justify-center items-center gap-5 py-4">
-                            <div className="border border-[#4a4747] rounded-md p-3">
-                                <h6>R$:100,00</h6>
+                        <div className="transition-all duration-500 flex justify-center items-center gap-5 py-4">
+                            <div className="w-[125px] text-center border border-[#4a4747] rounded-md p-3">
+                                <h6>{formatPrice(filterPrice)}</h6>
                             </div>
                             <div className="border border-[#4a4747] rounded-md p-3">
-                                <h6>R$:500,00</h6>
+                                <h6>R$:10.000,00</h6>
                             </div>
                         </div>
-                        <input min={0} max={6000} type="range" className="w-full h-1 bg-gray-700 rounded-lg cursor-pointer range-slider" />
+                        <input min={0} max={10000} value={filterPrice} onChange={e => handlePriceChange(Number(e.target.value))} type="range" className="w-full h-1 bg-gray-700 rounded-lg cursor-pointer range-slider" />
                     </div>
             </div>
         </>

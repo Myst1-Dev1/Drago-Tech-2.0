@@ -11,23 +11,25 @@ import { useCart } from "@/services/hooks/useCart";
 interface ShopProductsProps {
     loading:boolean;
     filteredCategory:string[];
+    filterPrice:number;
+    productFilteredByPrice:ProductNode[];
     products:ProductNode[];
     productsFiltered: ProductNode[];
 }
 
-export function ShopProducts({ loading, filteredCategory ,products, productsFiltered }:ShopProductsProps) {
+export function ShopProducts({ loading ,filteredCategory , filterPrice, productFilteredByPrice ,products, productsFiltered }:ShopProductsProps) {
     const { handleAddToCart } = useCart();
 
     function addProduct(id:number) {
         handleAddToCart(id, products);
     }
 
-    const displayedProducts = filteredCategory ? productsFiltered : products;
+    const displayedProducts = filterPrice ? productFilteredByPrice : filteredCategory ? productsFiltered : products;
 
     return (
         <>
-            <div className="grid gap-8 grid-cols-1 md:grid-cols-2 2xl:grid-cols-5 lg:grid-cols-4 py-8">
-                {loading ? <SkeletonProducts count={displayedProducts.length} /> :  displayedProducts?.map(product => (
+            {loading ? <SkeletonProducts count={displayedProducts.length} /> : <div className="grid gap-8 grid-cols-1 md:grid-cols-2 2xl:grid-cols-5 lg:grid-cols-4 py-8">
+                {displayedProducts?.map(product => (
                 <div key={product.produtos.id} className="mb-5 m-auto relative overflow-hidden max-w-[200px] transition-all duration-300 hover:scale-110 group">
                     <Link className="flex flex-col gap-4" href={`product/${product.slug}`}>
                     <Image className="object-cover m-auto" src={product.produtos.image.node.mediaItemUrl} width={100} height={100} alt="imagem do produto" />
@@ -43,7 +45,7 @@ export function ShopProducts({ loading, filteredCategory ,products, productsFilt
                     </div>
                 </div>
                 ))}
-            </div>
+            </div>}
         </>
     )
 }

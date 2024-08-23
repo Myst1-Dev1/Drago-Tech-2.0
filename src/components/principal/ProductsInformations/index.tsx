@@ -43,7 +43,7 @@ export function ProductsInformations({ description, id }:ProductsInformationsPro
                   {isActiveTab === 'information' && (
                     <div className={`w-full mt-8 gap-6 m-auto ${isActiveTab === 'information' ? 'fadeIn' : ''}`}>
                         {techInfoData.map(info => (
-                            <div key={info.id} className="flex flex-col gap-4">
+                            <div key={info.id} className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                                 {info.techInfo.map(infoTech => (
                                     <div key={infoTech.id} className="w-full flex-flow flex justify-between items-center">
                                         <h6 className="font-bold">{infoTech.techInfoTitle}</h6>

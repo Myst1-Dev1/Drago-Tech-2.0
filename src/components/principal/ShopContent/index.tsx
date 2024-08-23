@@ -13,6 +13,7 @@ interface ShopContentProps {
 export function ShopContent({ products }:ShopContentProps) {
     const [filteredCategories, setFilteredCategories] = useState<string[] | any>([]);
     const [loading, setLoading] = useState(false);
+    const [filterPrice, setFilterPrice] = useState(0);
 
     const productsFiltered = filteredCategories.length === 0
     ? products
@@ -22,12 +23,16 @@ export function ShopContent({ products }:ShopContentProps) {
         )
     );
 
+    const productFilteredByPrice = products.filter(product => {
+        return product.produtos.price >= filterPrice;
+    });
+
     return (
         <>
-            <div className="flex flex-col lg:flex-row gap-12 px-4 lg:px-20 py-8">
-                <ShopFilter setLoading = {setLoading} setFilteredCategory={setFilteredCategories} />
+            <div className="flex flex-col lg:flex-row gap-12 px-4 py-8">
+                <ShopFilter filterPrice={filterPrice} setFilterPrice={setFilterPrice} setLoading = {setLoading} setFilteredCategory={setFilteredCategories} />
                 <div>
-                    <ShopProducts loading = {loading} filteredCategory={filteredCategories} products={products} productsFiltered = {productsFiltered} />
+                    <ShopProducts loading = {loading} filteredCategory={filteredCategories} filterPrice={filterPrice} productFilteredByPrice={productFilteredByPrice} products={products} productsFiltered = {productsFiltered} />
                     <div className="flex justify-center items-center gap-5">
                         <div className="cursor-pointer p-2 flex justify-center items-center bg-black rounded-md transition-all duration-500 hover:bg-red-600">
                             <FaArrowLeft className="text-white" />

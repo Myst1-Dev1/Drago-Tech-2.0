@@ -19,7 +19,7 @@ export function Search({ products }:SearchProps) {
 
     return (
         <>
-            <div className="relative flex flex-col w-full max-w-full lg:max-w-[470px]">
+            <div className="z-30 relative flex flex-col w-full max-w-full lg:max-w-[470px]">
                 <div className="flex items-center w-full border border-gray-300 rounded-md">
                     <input 
                         className="p-4 outline-none w-full" 
