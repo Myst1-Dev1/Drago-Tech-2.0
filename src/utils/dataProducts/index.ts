@@ -923,6 +923,60 @@ export const ProductTechInfo = [
                 techInfoValue: '51cm x 43cm x 47cm'
             }
         ]
-    }
-        
+    },
+    {
+        id: 18,
+        techInfo: [
+            {
+                id: 1,
+                techInfoTitle: 'Capacidade de Peso',
+                techInfoValue: 'Até 130 kg'
+            },
+            {
+                id: 2,
+                techInfoTitle: 'Iluminação',
+                techInfoValue: 'LED RGB'
+            },
+            {
+                id: 3,
+                techInfoTitle: 'Almofadas',
+                techInfoValue: 'Para cabeça e lombar'
+            },
+            {
+                id: 4,
+                techInfoTitle: 'Reclinável',
+                techInfoValue: 'Sim'
+            },
+            {
+                id: 5,
+                techInfoTitle: 'Material',
+                techInfoValue: 'Couro sintético'
+            },
+            {
+                id: 6,
+                techInfoTitle: 'Cor',
+                techInfoValue: 'Preta'
+            },
+            {
+                id: 7,
+                techInfoTitle: 'Ajuste de Altura',
+                techInfoValue: 'Sim'
+            },
+            {
+                id: 8,
+                techInfoTitle: 'Base',
+                techInfoValue: 'Metálica com rodízios'
+            },
+            {
+                id: 9,
+                techInfoTitle: 'Inclinação',
+                techInfoValue: 'Até 180 graus'
+            },
+            {
+                id: 10,
+                techInfoTitle: 'Fonte de Alimentação para LED',
+                techInfoValue: 'USB'
+            }
+        ]
+    }    
 ]
