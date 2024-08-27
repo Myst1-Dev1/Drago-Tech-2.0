@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const getProducts = gql`
     query NewQuery {
-        produtos(first: 14) {
+        produtos(first: 9999) {
             nodes {
             produtos {
                 brand

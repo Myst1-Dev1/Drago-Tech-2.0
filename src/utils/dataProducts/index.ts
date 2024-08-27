@@ -593,5 +593,336 @@ export const ProductTechInfo = [
                 techInfoValue: 'Face ID'
             }
         ]
+    },
+    {
+        id: 12,
+        techInfo: [
+            {
+                id: 1,
+                techInfoTitle: 'Tipo de Teclado',
+                techInfoValue: 'Mecânico'
+            },
+            {
+                id: 2,
+                techInfoTitle: 'Switches',
+                techInfoValue: 'Brown'
+            },
+            {
+                id: 3,
+                techInfoTitle: 'Iluminação',
+                techInfoValue: 'RGB'
+            },
+            {
+                id: 4,
+                techInfoTitle: 'Layout',
+                techInfoValue: 'ABNT2'
+            },
+            {
+                id: 5,
+                techInfoTitle: 'Anti-Ghosting',
+                techInfoValue: 'Sim'
+            },
+            {
+                id: 6,
+                techInfoTitle: 'Conectividade',
+                techInfoValue: 'USB'
+            },
+            {
+                id: 7,
+                techInfoTitle: 'Compatibilidade',
+                techInfoValue: 'Windows, macOS, Linux'
+            },
+            {
+                id: 8,
+                techInfoTitle: 'Dimensões',
+                techInfoValue: '35,5 x 12,4 x 3,5 cm'
+            },
+            {
+                id: 9,
+                techInfoTitle: 'Peso',
+                techInfoValue: '800g'
+            },
+            {
+                id: 10,
+                techInfoTitle: 'Material',
+                techInfoValue: 'Plástico ABS'
+            }
+        ]
+    },
+    {
+        id: 13,
+        techInfo: [
+            {
+                id: 1,
+                techInfoTitle: 'Tipo de Conectividade',
+                techInfoValue: 'Sem Fio (Bluetooth e Razer HyperSpeed Wireless)'
+            },
+            {
+                id: 2,
+                techInfoTitle: 'Sensor',
+                techInfoValue: 'Óptico'
+            },
+            {
+                id: 3,
+                techInfoTitle: 'DPI Máximo',
+                techInfoValue: '18.000 DPI'
+            },
+            {
+                id: 4,
+                techInfoTitle: 'Número de Botões',
+                techInfoValue: '6'
+            },
+            {
+                id: 5,
+                techInfoTitle: 'Cor',
+                techInfoValue: 'Mercury White (Branco)'
+            },
+            {
+                id: 6,
+                techInfoTitle: 'Peso',
+                techInfoValue: 'Menos de 60g'
+            },
+            {
+                id: 7,
+                techInfoTitle: 'Switches',
+                techInfoValue: 'Ópticos (70 milhões de cliques)'
+            },
+            {
+                id: 8,
+                techInfoTitle: 'Vida Útil da Bateria',
+                techInfoValue: 'Até 950 horas com 1 pilha AA'
+            },
+            {
+                id: 9,
+                techInfoTitle: 'Compatibilidade',
+                techInfoValue: 'Windows, macOS'
+            },
+            {
+                id: 10,
+                techInfoTitle: 'Iluminação',
+                techInfoValue: 'Não possui'
+            }
+        ]
+    },
+    {
+        id: 14,
+        techInfo: [
+            {
+                id: 1,
+                techInfoTitle: 'Tamanho da Tela',
+                techInfoValue: '27 polegadas'
+            },
+            {
+                id: 2,
+                techInfoTitle: 'Resolução',
+                techInfoValue: 'Full HD (1920 x 1080)'
+            },
+            {
+                id: 3,
+                techInfoTitle: 'Taxa de Atualização',
+                techInfoValue: '180Hz'
+            },
+            {
+                id: 4,
+                techInfoTitle: 'Tempo de Resposta',
+                techInfoValue: '1ms'
+            },
+            {
+                id: 5,
+                techInfoTitle: 'Conectividade',
+                techInfoValue: 'DisplayPort e HDMI'
+            },
+            {
+                id: 6,
+                techInfoTitle: 'Tecnologia',
+                techInfoValue: 'Adaptive Sync'
+            },
+            {
+                id: 7,
+                techInfoTitle: 'Curvatura da Tela',
+                techInfoValue: 'Curvo'
+            },
+            {
+                id: 8,
+                techInfoTitle: 'Ajuste de Ângulo',
+                techInfoValue: 'Sim'
+            },
+            {
+                id: 9,
+                techInfoTitle: 'Tipo de Painel',
+                techInfoValue: 'VA'
+            },
+            {
+                id: 10,
+                techInfoTitle: 'Brilho',
+                techInfoValue: '250 cd/m²'
+            }
+        ]
+    },
+    {
+        id: 15,
+        techInfo: [
+            {
+                id: 1,
+                techInfoTitle: 'Frequência Base',
+                techInfoValue: '4.2GHz'
+            },
+            {
+                id: 2,
+                techInfoTitle: 'Frequência Máxima Turbo',
+                techInfoValue: '5.0GHz'
+            },
+            {
+                id: 3,
+                techInfoTitle: 'Número de Núcleos',
+                techInfoValue: '8 Núcleos'
+            },
+            {
+                id: 4,
+                techInfoTitle: 'Número de Threads',
+                techInfoValue: '16 Threads'
+            },
+            {
+                id: 5,
+                techInfoTitle: 'Cache Total',
+                techInfoValue: '104MB'
+            },
+            {
+                id: 6,
+                techInfoTitle: 'Soquete',
+                techInfoValue: 'AM5'
+            },
+            {
+                id: 7,
+                techInfoTitle: 'Suporte a Memória',
+                techInfoValue: 'DDR5'
+            },
+            {
+                id: 8,
+                techInfoTitle: 'PCIe',
+                techInfoValue: 'PCIe 5.0'
+            },
+            {
+                id: 9,
+                techInfoTitle: 'Vídeo Integrado',
+                techInfoValue: 'Não possui'
+            },
+            {
+                id: 10,
+                techInfoTitle: 'TDP',
+                techInfoValue: '120W'
+            }
+        ]
+    },
+    {
+        id: 16,
+        techInfo: [
+            {
+                id: 1,
+                techInfoTitle: 'Processador',
+                techInfoValue: 'Intel Core i5 1235U'
+            },
+            {
+                id: 2,
+                techInfoTitle: 'Memória RAM',
+                techInfoValue: '8GB'
+            },
+            {
+                id: 3,
+                techInfoTitle: 'Armazenamento',
+                techInfoValue: 'SSD 512GB'
+            },
+            {
+                id: 4,
+                techInfoTitle: 'Tamanho da Tela',
+                techInfoValue: '15.6 polegadas'
+            },
+            {
+                id: 5,
+                techInfoTitle: 'Resolução da Tela',
+                techInfoValue: 'Full HD (1920 x 1080)'
+            },
+            {
+                id: 6,
+                techInfoTitle: 'Sistema Operacional',
+                techInfoValue: 'Linux Keepos'
+            },
+            {
+                id: 7,
+                techInfoTitle: 'Cor',
+                techInfoValue: 'Azul'
+            },
+            {
+                id: 8,
+                techInfoTitle: 'Placa Gráfica',
+                techInfoValue: 'Integrada Intel Iris Xe'
+            },
+            {
+                id: 9,
+                techInfoTitle: 'Conectividade',
+                techInfoValue: 'Wi-Fi 6, Bluetooth 5.0'
+            },
+            {
+                id: 10,
+                techInfoTitle: 'Portas',
+                techInfoValue: 'USB-C, USB-A, HDMI, Áudio'
+            }
+        ]
+    },
+    {
+        id: 17,
+        techInfo: [
+            {
+                id: 1,
+                techInfoTitle: 'Capacidade',
+                techInfoValue: '45 Litros'
+            },
+            {
+                id: 2,
+                techInfoTitle: 'Degelo',
+                techInfoValue: 'Manual'
+            },
+            {
+                id: 3,
+                techInfoTitle: 'Controle de Temperatura',
+                techInfoValue: 'Ajustável'
+            },
+            {
+                id: 4,
+                techInfoTitle: 'Voltagem',
+                techInfoValue: '110V'
+            },
+            {
+                id: 5,
+                techInfoTitle: 'Cor',
+                techInfoValue: 'Preto'
+            },
+            {
+                id: 6,
+                techInfoTitle: 'Tipo de Porta',
+                techInfoValue: 'Única'
+            },
+            {
+                id: 7,
+                techInfoTitle: 'Prateleiras',
+                techInfoValue: 'Removíveis'
+            },
+            {
+                id: 8,
+                techInfoTitle: 'Pés Niveladores',
+                techInfoValue: 'Sim'
+            },
+            {
+                id: 9,
+                techInfoTitle: 'Consumo de Energia',
+                techInfoValue: 'Baixo'
+            },
+            {
+                id: 10,
+                techInfoTitle: 'Dimensões (AxLxP)',
+                techInfoValue: '51cm x 43cm x 47cm'
+            }
+        ]
     }
+        
 ]
