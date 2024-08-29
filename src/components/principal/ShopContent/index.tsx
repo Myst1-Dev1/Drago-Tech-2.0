@@ -23,7 +23,7 @@ export function ShopContent({ products }:ShopContentProps) {
 
     const productsFiltered = filteredCategories.length === 0
     ? productsData
-    : productsData.filter(product => 
+    : products.filter(product => 
         filteredCategories.some((filter: any) => 
             product.produtos.category.includes(filter) || product.produtos.brand.includes(filter)
         )

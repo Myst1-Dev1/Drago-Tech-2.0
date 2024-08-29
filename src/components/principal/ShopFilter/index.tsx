@@ -17,6 +17,7 @@ interface ShopFilterProps {
 
 export function ShopFilter({ setLoading, setFilteredCategory, filterPrice, setFilterPrice }:ShopFilterProps) {
     const [activeFilter, setActiveFilter] = useState<string | null>(null);
+    const [isFilterMobile, setIsFilterMobile] = useState(false);
 
     function handleShowCategory(name: string, value: string) {
         if (activeFilter === name) {
@@ -71,8 +72,8 @@ export function ShopFilter({ setLoading, setFilteredCategory, filterPrice, setFi
 
     return (
         <>
-            <FaFilter className="block mb-5 lg:hidden transition-all duration-500 hover:text-red-600" />
-            <div className="h-fit hidden lg:flex flex-col gap-6 text-white bg-[#121214] rounded-md max-w-80 p-5">
+            <FaFilter onClick={() => setIsFilterMobile(!isFilterMobile)} className="block mb-5 lg:hidden transition-all duration-500 hover:text-red-600" />
+            <div className={`transition-all duration-500 absolute top-1/4 ${isFilterMobile ? 'left-0' : '-left-[100%]'} z-30 lg:top-0 lg:left-0 lg:relative h-fit lg:flex flex-col gap-6 text-white bg-[#121214] rounded-md max-w-80 p-5`}>
                     {filtersArray.map(filter => (
                         <div key={filter.id} className="border-b border-[#4a4747] pb-6">
                             <div className="flex justify-between items-center">

@@ -20,11 +20,10 @@ export function ProductContent({ products }:ProductContentProps) {
         handleAddToCart(id, products);
     }
 
-    console.log(products);
-
     return (
         <>
             <div className="px-4 lg:px-28 py-12">
+                    {products.map((products:any) => (
                     <div>
                         <h2 className="font-bold m-auto text-xl lg:text-2xl">{products.produtos.productName}</h2>
                         <div className="mt-12 gap-12 lg:justify-between xl:justify-between 2xl:justify-evenly lg:gap-0 items-center flex flex-col lg:flex-row">
@@ -54,8 +53,8 @@ export function ProductContent({ products }:ProductContentProps) {
                                 <p className="font-bold">
                                     Á vista com o Prime em até 5% OFF <br /> {formatPrice(products.produtos.price * 0.95)} <br /> Em até 10x de {formatPrice(products.produtos.price / 10)} sem juros no cartão <br /> Ou em 1x no cartão com 5% OFF
                                 </p>
-                                <button className="text-xl text-white flex items-center justify-center gap-4 font-bold bg-red-500 rounded-md max-w-60 w-full p-4 transition-all duration-500 hover:bg-red-700">
-                                    <FaShoppingCart onClick={() => addProduct(products.produtos.id)} />
+                                <button onClick={() => addProduct(products.produtos.id)} className="text-xl text-white flex items-center justify-center gap-4 font-bold bg-red-500 rounded-md max-w-60 w-full p-4 transition-all duration-500 hover:bg-red-700">
+                                    <FaShoppingCart />
                                     Comprar
                                 </button>
                                 <div className="relative flex flex-col gap-4">
@@ -78,7 +77,7 @@ export function ProductContent({ products }:ProductContentProps) {
                         </div>
 
                         <ProductsInformations description={products.produtos.description} id={products.produtos.id} />
-                    </div>
+                    </div>))}
 
                 <div className="py-12">
                     <div className="flex gap-3 items-center">
