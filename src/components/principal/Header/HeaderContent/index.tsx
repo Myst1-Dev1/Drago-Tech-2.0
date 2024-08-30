@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import logo from "../../../../../public/images/logo.jpg";
+import userIcon from "../../../../../public/images/user-icon.webp";
 import { FaShoppingCart, FaUser, FaBars, FaTimes } from "react-icons/fa";
 import Link from "next/link";
 import { NavBar } from "../../NavBar";
@@ -10,6 +11,7 @@ import { useState } from "react";
 import { ProductNode } from "@/types/products";
 import { Search } from "../../Search";
 import { useCart } from "@/services/hooks/useCart";
+import { signOut, useSession } from "next-auth/react";
 
 interface HeaderContentProps {
     products: ProductNode[];
@@ -17,6 +19,8 @@ interface HeaderContentProps {
 
 export function HeaderContent({ products }:HeaderContentProps) {
     const { cart } = useCart();
+
+    const { status } = useSession();
 
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [isResponsiveNavBarOpen, setIsResponsiveNavBarOpen] = useState(false);
@@ -40,12 +44,17 @@ export function HeaderContent({ products }:HeaderContentProps) {
                             </div>}
                             <FaShoppingCart onClick={() => setIsCartOpen(true)}  className="transition-all duration-500 hover:text-red-600" />
                         </div>
-                        <Link href="/signIn">
+                        {status === 'authenticated' ? 
+                            <div>
+                                <Image src={userIcon} width={40} height={40} alt="icone de usuário" />
+                            </div>
+                            :
+                            <Link href="/signIn">
                             <FaUser className="transition-all duration-500 hover:text-red-600" />
-                        </Link>
+                        </Link>}
                     </div>
                 </div>
-                    <Search products={products} />
+                <Search products={products} />
                 <div className="hidden lg:flex gap-8">
                     {/* <div className="flex flex-col gap-1 items-center">
                         <FaHeart className="text-2xl duration-500 hover:text-red-600" />
@@ -60,14 +69,21 @@ export function HeaderContent({ products }:HeaderContentProps) {
                         </div>
                         <h6 className="transition-all duration-500 hover:text-red-600">Carrinho</h6>
                     </div>
-                    <div className="flex flex-col gap-1 items-center">
+                    
+                        {status === 'authenticated' ? 
+                            <div className="flex items-center gap-3">
+                                <Image src={userIcon} width={60} height={60} alt="icone de usuário" />
+                                <span className="cursor-pointer" onClick={() => signOut()}>Sair</span>
+                            </div>
+                        :
+                        <div className="flex flex-col gap-1 items-center">
                         <FaUser className="text-2xl duration-500 hover:text-red-600"  />
                         <div className="flex gap-1">
                             <Link className="transition-all duration-500 hover:text-red-600" href="/signIn">Login</Link>
                             <span>/</span>
                             <Link className="transition-all duration-500 hover:text-red-600" href="/signUp">Cadastro</Link>
                         </div>
-                    </div>
+                    </div>}
                 </div>
             </header>
             <NavBar/>
