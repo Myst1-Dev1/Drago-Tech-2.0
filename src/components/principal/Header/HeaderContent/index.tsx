@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import logo from "../../../../../public/images/logo.jpg";
-import userIcon from "../../../../../public/images/user-icon.webp";
+import userIcon from "../../../../../public/images/profileUserIcon.png";
 import { FaShoppingCart, FaUser, FaBars, FaTimes } from "react-icons/fa";
 import Link from "next/link";
 import { NavBar } from "../../NavBar";
@@ -45,9 +45,9 @@ export function HeaderContent({ products }:HeaderContentProps) {
                             <FaShoppingCart onClick={() => setIsCartOpen(true)}  className="transition-all duration-500 hover:text-red-600" />
                         </div>
                         {status === 'authenticated' ? 
-                            <div>
+                            <Link href="/profile">
                                 <Image src={userIcon} width={40} height={40} alt="icone de usuário" />
-                            </div>
+                            </Link>
                             :
                             <Link href="/signIn">
                             <FaUser className="transition-all duration-500 hover:text-red-600" />
@@ -72,7 +72,9 @@ export function HeaderContent({ products }:HeaderContentProps) {
                     
                         {status === 'authenticated' ? 
                             <div className="flex items-center gap-3">
-                                <Image src={userIcon} width={60} height={60} alt="icone de usuário" />
+                                <Link href='/profile'>
+                                    <Image src={userIcon} width={40} height={40} alt="icone de usuário" />
+                                </Link>
                                 <span className="cursor-pointer" onClick={() => signOut()}>Sair</span>
                             </div>
                         :

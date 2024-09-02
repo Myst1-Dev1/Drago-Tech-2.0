@@ -9,6 +9,7 @@ export default function SignUp() {
     const router = useRouter();
 
     const [isLoading, setIsLoading] = useState(false);
+    const [errorText, setErrorText] = useState('');
 
     async function handleRegister(e:FormEvent | any) {
         e.preventDefault();
@@ -20,7 +21,9 @@ export default function SignUp() {
             const formEntries = Object.fromEntries(formData.entries());
             const { name, email, phone, address, state, city, zipCode , password, confirmPassword } = formEntries as { [key: string]: string };
 
-            if(password !== confirmPassword) return;
+            if(password !== confirmPassword) {
+                return setErrorText('As senhas não coincidem');
+            }
 
             await fetch('/api/auth/register', {
                 method:'POST',
@@ -42,18 +45,32 @@ export default function SignUp() {
 
                 if(result.status === 201) {
                     toast.success(result.message);
+                    router.push('/signIn');
                 }else {
-                    toast.error(result.message);
+                    return setErrorText(result.message);
                 }
             });
 
-            router.push('/signIn');
+            if(errorText !== '') return;
 
         } catch (error) {
             console.log('tivemos um erro ao criar a conta', error);
         }finally {
             setIsLoading(false);
         }
+    }
+
+    const phoneMask = (value:string) => {
+        if(!value) return "";
+        value = value.replace(/\D/g, '');
+        value = value.replace(/(\d{2})(\d)/, "($1) $2");
+        value = value.replace(/(\d)(\d{4})$/,"$1-$2");
+        return value;
+    }
+
+    const handlePhone = (e:{ target: HTMLInputElement | any }) => {
+        let input = e.target;
+        input.value = phoneMask(input.value);
     }
 
     return (
@@ -66,7 +83,7 @@ export default function SignUp() {
                         <input className="outline-none p-4 rounded-md w-full border border-gray-300" type="email" placeholder="Email" name="email" />
                     </div>
                     <div className="flex flex-col lg:flex-row gap-5 mb-5">
-                        <input className="outline-none p-4 rounded-md w-full border border-gray-300" type="tel" placeholder="(DD) XXXXX-XXXX" name="phone" />
+                        <input onChange={(e) => handlePhone(e)} maxLength={15} className="outline-none p-4 rounded-md w-full border border-gray-300" type="tel" placeholder="(DD) XXXXX-XXXX" name="phone" />
                         <input className="outline-none p-4 rounded-md w-full border border-gray-300" type="text" placeholder="Endereço" name="address" />
                     </div>
                     <div className="flex flex-col lg:flex-row gap-5 mb-5">
@@ -79,6 +96,9 @@ export default function SignUp() {
                         <input className="outline-none p-4 rounded-md w-full border border-gray-300" type="password" placeholder="Confirme a senha" name="confirmPassword" />
                     </div>
                     <span className="mb-6 text-center">Já possui uma conta? <Link href="/signIn" className="font-bold text-red-600 transition-all duration-500 hover:text-red-900">Entrar</Link></span>
+                    {errorText !== '' ?
+                    <span className="text-red-600 mb-3 font-bold m-auto">{ errorText }</span>
+                    : ''}
                     <button className="p-4 rounded-md w-full text-white font-bold bg-red-500 transition-all duration-500 hover:bg-red-700">
                         {isLoading ? 
                             <div role="status">

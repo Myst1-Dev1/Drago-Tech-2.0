@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 
 export default function SignIn() {
     const [isLoading, setIsLoading] = useState(false);
+    const [errorText, setErrorText] = useState('');
 
     const router = useRouter();
 
@@ -29,13 +30,10 @@ export default function SignIn() {
                         toast.success('Login feito com sucesso');
                         router.push("/");
                     } else {
-                        console.log('Erro ao fazer login:', error);
-                        toast.error('Erro ao fazer login. Verifique suas credenciais e tente novamente.');
+                        setErrorText('Credenciais erradas');
                     }
                 }
             );
-            
-            // router.push('/');
         } catch (error) {
             console.log('tivemos um erro ao criar a conta', error);
         }finally {
@@ -51,6 +49,9 @@ export default function SignIn() {
                     <input className="outline-none p-4 rounded-md w-full border border-gray-300 mb-5" type="email" placeholder="Email" name="email" />
                     <input className="outline-none p-4 rounded-md w-full border border-gray-300 mb-2" type="password" placeholder="Senha" name="password" />
                     <span className="mb-6 text-center">Nao possui uma conta? <Link href="/signUp" className="font-bold text-red-600 transition-all duration-500 hover:text-red-900">Cadastro</Link></span>
+                    {errorText !== '' ?
+                    <span className="text-red-600 mb-3 font-bold m-auto">{ errorText }</span>
+                    : ''}
                     <button className="p-4 rounded-md w-full text-white font-bold bg-red-500 transition-all duration-500 hover:bg-red-700">
                     {isLoading ? 
                             <div role="status">
