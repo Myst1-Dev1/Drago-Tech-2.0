@@ -12,12 +12,14 @@ import { ProductNode } from "@/types/products";
 import { Search } from "../../Search";
 import { useCart } from "@/services/hooks/useCart";
 import { signOut, useSession } from "next-auth/react";
+import { Session } from "next-auth";
 
 interface HeaderContentProps {
     products: ProductNode[];
+    session: Session | null;
 }
 
-export function HeaderContent({ products }:HeaderContentProps) {
+export function HeaderContent({ products, session }:HeaderContentProps) {
     const { cart } = useCart();
 
     const { status } = useSession();
@@ -44,7 +46,7 @@ export function HeaderContent({ products }:HeaderContentProps) {
                             </div>}
                             <FaShoppingCart onClick={() => setIsCartOpen(true)}  className="transition-all duration-500 hover:text-red-600" />
                         </div>
-                        {status === 'authenticated' ? 
+                        {session ? 
                             <Link href="/profile">
                                 <Image src={userIcon} width={40} height={40} alt="icone de usuário" />
                             </Link>

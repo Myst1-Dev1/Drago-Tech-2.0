@@ -24,7 +24,7 @@ export function ProductContent({ products }:ProductContentProps) {
         <>
             <div className="px-4 lg:px-28 py-12">
                     {products.map((products:any) => (
-                    <div>
+                    <div key={products.id}>
                         <h2 className="font-bold m-auto text-xl lg:text-2xl">{products.produtos.productName}</h2>
                         <div className="mt-12 gap-12 lg:justify-between xl:justify-between 2xl:justify-evenly lg:gap-0 items-center flex flex-col lg:flex-row">
                             <div className="max-w-[450px]">

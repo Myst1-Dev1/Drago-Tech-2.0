@@ -1,10 +1,12 @@
 import User from '@/Models/User';
-import NextAuth from 'next-auth';
+import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
 import connect from '@/utils/db';
+import { cookies } from 'next/headers';
 
-const options = NextAuth({
+const OPTIONS:NextAuthOptions = NextAuth({
+    secret: process.env.AUTH_SECRET,
     providers:[
         CredentialsProvider({
             id: 'Credentials',
@@ -18,7 +20,8 @@ const options = NextAuth({
 
                 try {
                     const user = await User.findOne({ email: credentials!.email });
-                    console.log("Usuário encontrado:", user);
+                    console.log("Usuário encontrado:", user?._id);
+                    cookies().set('user', user?._id);
 
                     if (user) {
                         const validPassword = await bcrypt.compare(credentials!.password, user.password);
@@ -41,8 +44,17 @@ const options = NextAuth({
     ],
     pages: {
         error:"/signIn"
-    }
-
+    },
+    callbacks: {
+        async jwt({ token, user }) {
+          user && (token.user = user)
+          return token
+        },
+        async session({ session, token }) {
+          session = token.user as any
+          return session
+        },
+      },
 });
 
-export { options as GET, options as POST };
+export { OPTIONS as GET, OPTIONS as POST, OPTIONS };
