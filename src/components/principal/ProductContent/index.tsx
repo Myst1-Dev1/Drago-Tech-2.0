@@ -1,16 +1,15 @@
 'use client';
 
 import { FaArrowLeft, FaArrowRight, FaHeart, FaPlus, FaShoppingCart, FaStar } from "react-icons/fa";
-import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md";
-import productImg from "../../../../public/images/productImg.jpg";
 import Image from "next/image";
 import { ProductsInformations } from "@/components/principal/ProductsInformations";
 import { formatPrice } from "@/utils/useFormatPrice";
 import { ProductNode } from "@/types/products";
 import { useCart } from "@/services/hooks/useCart";
+import { SimilarProducts } from "./SimilarProducts";
 
 interface ProductContentProps {
-    products:ProductNode[] | any;
+    products:ProductNode[];
 }
 
 export function ProductContent({ products }:ProductContentProps) {
@@ -20,11 +19,13 @@ export function ProductContent({ products }:ProductContentProps) {
         handleAddToCart(id, products);
     }
 
+    console.log(products);
+
     return (
         <>
             <div className="px-4 lg:px-28 py-12">
-                    {products.map((products:any) => (
-                    <div key={products.id}>
+                    {products.map((products) => (
+                    <div key={products.produtos.id}>
                         <h2 className="font-bold m-auto text-xl lg:text-2xl">{products.produtos.productName}</h2>
                         <div className="mt-12 gap-12 lg:justify-between xl:justify-between 2xl:justify-evenly lg:gap-0 items-center flex flex-col lg:flex-row">
                             <div className="max-w-[450px]">
@@ -57,22 +58,7 @@ export function ProductContent({ products }:ProductContentProps) {
                                     <FaShoppingCart />
                                     Comprar
                                 </button>
-                                <div className="relative flex flex-col gap-4">
-                                    <h6 className="text-xl font-bold">Produtos Similares</h6>
-                                    <div className="max-w-[450px] overflow-x-hidden flex gap-8">
-                                        <div className="z-50 bg-white -left-5 top-16 absolute aspect-square border border-gray-400 rounded-full w-[30px] h-[30px] flex justify-center items-center">
-                                            <MdOutlineArrowBackIos className="text-gray-500 text-sm" />
-                                        </div>
-                                        <Image className="w-[80px] h-[80px] object-cover" src={productImg} width={80} height={80} alt="imagem do produto" />
-                                        <Image className="w-[80px] h-[80px] object-cover" src={productImg} width={80} height={80} alt="imagem do produto" />
-                                        <Image className="w-[80px] h-[80px] object-cover" src={productImg} width={80} height={80} alt="imagem do produto" />
-                                        <Image className="w-[80px] h-[80px] object-cover" src={productImg} width={80} height={80} alt="imagem do produto" />
-                                        <Image className="w-[80px] h-[80px] object-cover -ml-5" src={productImg} width={80} height={80} alt="imagem do produto" />
-                                        <div className="z-50 bg-white -right-5 top-16 absolute aspect-square border border-gray-400 rounded-full w-[30px] h-[30px] flex justify-center items-center">
-                                            <MdOutlineArrowForwardIos className="text-gray-500 text-sm" />
-                                        </div>
-                                    </div> 
-                                </div>
+                              <SimilarProducts similarProducts = {products.produtos.similarProducts.itens?.nodes} />
                             </div>
                         </div>
 

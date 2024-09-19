@@ -17,6 +17,7 @@ export const getProductDetails = gql`
             nodes {
               ... on Produto {
                 id
+                slug
                 produtos {
                   image {
                     node {

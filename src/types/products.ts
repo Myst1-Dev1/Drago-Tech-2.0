@@ -4,8 +4,9 @@ type ProductImage = {
     };
   }
   
-  type SimilarProduct = {
+ export type SimilarProduct = {
     id: number;
+    slug:string;
     produtos: {
       image: ProductImage;
     };
