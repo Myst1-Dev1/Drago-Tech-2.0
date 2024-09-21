@@ -11,6 +11,20 @@ type ProductImage = {
       image: ProductImage;
     };
   }
+
+  export type Comment = {
+      nodes: [
+        {
+          author: {
+            node: {
+              name:string;
+            }
+          };
+          content:string;
+          date:string;
+        }
+      ]
+  }
   
   export type Product = {
     brand: string;
@@ -40,7 +54,9 @@ type ProductImage = {
   
  export type ProductNode = {
     produtos: Product;
+    comments: Comment;
     slug:string;
+    databaseId:number;
   }
   
  export type ProductsData = {

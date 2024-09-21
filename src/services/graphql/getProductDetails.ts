@@ -3,6 +3,20 @@ import { gql } from "@apollo/client";
 export const getProductDetails = gql`
   query getProductDetails($slug: String!) {
     produtoBy(slug: $slug) {
+    comments {
+        nodes {
+          author {
+            node {
+              ... on CommentAuthor {
+                name
+              }
+            }
+          }
+          content(format: RENDERED)
+          date
+        }
+      }
+      databaseId
       produtos {
         brand
         category
