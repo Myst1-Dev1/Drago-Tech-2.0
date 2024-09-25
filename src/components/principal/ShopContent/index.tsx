@@ -39,7 +39,7 @@ export function ShopContent({ products }:ShopContentProps) {
                 <ShopFilter filterPrice={filterPrice} setFilterPrice={setFilterPrice} setLoading = {setLoading} setFilteredCategory={setFilteredCategories} />
                 <div>
                     <ShopProducts loading = {loading} filteredCategory={filteredCategories} filterPrice={filterPrice} productFilteredByPrice={productFilteredByPrice} products={productsData} productsFiltered = {productsFiltered} />
-                    <Pagination setLoading = {setLoading} itensPerPage = {itensPerPage} productsData = {products} currentPage = {currentPage} setCurrentPage = {setCurrentPage} />
+                    <Pagination setLoading = {setLoading} itensPerPage = {itensPerPage} data = {products} currentPage = {currentPage} setCurrentPage = {setCurrentPage} />
                 </div>
             </div>
         </>

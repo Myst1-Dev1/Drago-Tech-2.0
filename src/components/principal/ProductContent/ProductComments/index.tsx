@@ -1,4 +1,7 @@
-import { FaArrowLeft, FaArrowRight, FaStar } from "react-icons/fa";
+import { useState } from "react";
+import { FaStar } from "react-icons/fa";
+import { Pagination } from "../../Pagination";
+import { SkeletonComments } from "../../SkeletonComments";
 
 interface ProductCommentsProps {
     comments: {
@@ -13,7 +16,14 @@ interface ProductCommentsProps {
 }
 
 export function ProductComments({ comments }:ProductCommentsProps) {
-    console.log(comments);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [loading, setLoading] = useState(false);
+
+    const itensPerPage = 6;
+
+    const startIndex = currentPage * itensPerPage;
+    const endIndex = startIndex + itensPerPage;
+    const commentsData = comments.slice(startIndex, endIndex);
 
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
@@ -32,8 +42,8 @@ export function ProductComments({ comments }:ProductCommentsProps) {
                     <h2 className="font-bold text-xl">Avaliações dos usuários</h2>
                 </div>
                 
-                    <div className="mt-12 flex gap-10 lg:gap-6 justify-between flex-wrap">
-                    {comments.length === 0 ? <span>Produto sem avaliações 😞</span> : comments?.map((comment, index) => (
+                    <div className="mt-12 w-full flex gap-10 lg:gap-12 justify-between flex-wrap">
+                    {commentsData.length === 0 ? <span>Produto sem avaliações 😞</span> : loading ? <SkeletonComments count={commentsData.length}/> : commentsData?.map((comment, index) => (
                         <div key={index} className="m-auto lg:m-0 max-w-[450px] w-full border-b border-gray-400 flex flex-col gap-4">
                             <h5 className="font-bold">{comment?.author.node.name}</h5>
                             <div className="flex flex-col gap-2">
@@ -53,17 +63,7 @@ export function ProductComments({ comments }:ProductCommentsProps) {
                     </div>
             </div>
             
-            <div className="flex justify-center items-center gap-5 py-12">
-                <div className="cursor-pointer p-2 flex justify-center items-center bg-black rounded-md transition-all duration-500 hover:bg-red-600">
-                    <FaArrowLeft className="text-white" />
-                </div>
-                <span className="cursor-pointer text-white p-4 flex justify-center items-center bg-black rounded-md w-5 h-5 transition-all duration-500 hover:bg-red-600">1</span>
-                <span className="cursor-pointer text-white p-4 flex justify-center items-center bg-black rounded-md w-5 h-5 transition-all duration-500 hover:bg-red-600">2</span>
-                <span className="cursor-pointer text-white p-4 flex justify-center items-center bg-black rounded-md w-5 h-5 transition-all duration-500 hover:bg-red-600">3</span>
-                <div className="cursor-pointer p-2 flex justify-center items-center bg-black rounded-md transition-all duration-500 hover:bg-red-600">
-                    <FaArrowRight className="text-white" />
-                </div>
-            </div>
+            <Pagination setLoading = {setLoading} itensPerPage = {itensPerPage} data = {comments} currentPage = {currentPage} setCurrentPage = {setCurrentPage} />
         </>
     )
 }

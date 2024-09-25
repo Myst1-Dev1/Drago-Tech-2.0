@@ -1,6 +1,5 @@
 import Image from "next/image"
 import logo from "../../../../public/images/logo.jpg";
-import blogPost from "../../../../public/images/blogPostImage.jpg";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import Link from "next/link";
 
@@ -35,22 +34,10 @@ export function Footer() {
                     <h6 className="text-gray-500">dragotech@business.com</h6>
                     <h6 className="text-gray-500">21 49009890</h6>
                 </div>
-                <div className="flex flex-col gap-3 m-auto">
-                    <h2 className="font-bold text-xl">Blog</h2>
-                    <div className="overflow-y-scroll cartScroll h-52 flex flex-col gap-4">
-                        <Link href="" className="max-w-40 flex flex-col gap-3">
-                            <Image className="w-full object-cover" src={blogPost} width={160} height={160} alt="imagem de um post do blog" />
-                            <h6 className="font-bold text-xs">Entenda de que forma a IA ajuda a otimizar a cobrança em grande empresas</h6>
-                        </Link>
-                        <Link href="" className="max-w-40 flex flex-col gap-3">
-                            <Image className="w-full object-cover" src={blogPost} width={160} height={160} alt="imagem de um post do blog" />
-                            <h6 className="font-bold text-xs">Entenda de que forma a IA ajuda a otimizar a cobrança em grande empresas</h6>
-                        </Link>
-                        <Link href="" className="max-w-40 flex flex-col gap-3">
-                            <Image className="w-full object-cover" src={blogPost} width={160} height={160} alt="imagem de um post do blog" />
-                            <h6 className="font-bold text-xs">Entenda de que forma a IA ajuda a otimizar a cobrança em grande empresas</h6>
-                        </Link>
-                    </div>
+                <div className="flex flex-col gap-3 m-auto lg:m-0">
+                    <h6>Horário de Atendimento</h6>
+                    <h6>Seg - Sex 08:00 - 19:00 <br />(Exceto Domingos e Feriados.)</h6>
+                    <h6>Rua Silva John Doe <br /> Av 305 loja 44 Centro</h6>
                 </div>
             </footer>
             <div className="py-6 border-t border-red-100">

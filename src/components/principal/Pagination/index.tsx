@@ -7,12 +7,12 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 interface PaginationProps {
     setLoading:Dispatch<SetStateAction<boolean>>;
     itensPerPage:number;
-    productsData:ProductNode[];
+    data:ProductNode[] | any;
     currentPage:number;
     setCurrentPage:Dispatch<SetStateAction<number>>
 }
 
-export function Pagination({ setLoading, itensPerPage, productsData, currentPage, setCurrentPage }:PaginationProps) {
+export function Pagination({ setLoading, itensPerPage, data, currentPage, setCurrentPage }:PaginationProps) {
 
     function handleCurrentPage(i:number) {
         if(currentPage === i) return;
@@ -25,7 +25,7 @@ export function Pagination({ setLoading, itensPerPage, productsData, currentPage
     }
 
     function renderPaginationButtons() {
-        const totalPages = Math.ceil(productsData?.length / itensPerPage); 
+        const totalPages = Math.ceil(data?.length / itensPerPage); 
         const buttons = [];
     
         for(let i = 0; i < totalPages; i++) {
@@ -54,12 +54,12 @@ export function Pagination({ setLoading, itensPerPage, productsData, currentPage
     }
 
     function handleNextPage() {
-        const totalPages = Math.ceil(productsData.length / itensPerPage);
+        const totalPages = Math.ceil(data.length / itensPerPage);
 
         if (currentPage >= totalPages - 1) return;
 
         setLoading(true)
-        setCurrentPage(Math.min(currentPage + 1, Math.ceil(productsData.length / itensPerPage) - 1))
+        setCurrentPage(Math.min(currentPage + 1, Math.ceil(data.length / itensPerPage) - 1))
         setTimeout(() => {
             setLoading(false);
         }, 500);

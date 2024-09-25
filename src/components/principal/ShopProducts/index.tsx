@@ -28,7 +28,7 @@ export function ShopProducts({ loading ,filteredCategory , filterPrice, productF
 
     return (
         <>
-            {loading ? <SkeletonProducts count={displayedProducts.length} /> : <div className="grid gap-8 grid-cols-1 md:grid-cols-2 2xl:grid-cols-5 lg:grid-cols-4 py-8">
+            {loading ? <SkeletonProducts count={displayedProducts.length} /> : <div className="grid gap-8 grid-cols-1 md:grid-cols-2 2xl:grid-cols-6 lg:grid-cols-4 py-8">
                 {displayedProducts?.map(product => (
                 <div key={product.produtos.id} className="mb-5 m-auto relative overflow-hidden max-w-[200px] transition-all duration-300 hover:scale-110 group">
                     <Link className="flex flex-col gap-4" href={`product/${product.slug}`}>

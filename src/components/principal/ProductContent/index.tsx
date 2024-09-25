@@ -29,15 +29,15 @@ export function ProductContent({ products }:ProductContentProps) {
                         <h2 className="font-bold m-auto text-xl lg:text-2xl">{products.produtos.productName}</h2>
                         <div className="mt-12 gap-12 lg:justify-between xl:justify-between 2xl:justify-evenly lg:gap-0 items-center flex flex-col lg:flex-row">
                             <div className="max-w-[450px]">
-                                <div className="flex justify-between items-center">
-                                    <div className="flex items-center gap-3">
+                                <div className="flex justify-end items-end">
+                                    {/* <div className="flex items-center gap-3">
                                         <FaStar className="text-yellow-400" />
                                         <FaStar className="text-yellow-400" />
                                         <FaStar className="text-yellow-400" />
                                         <FaStar className="text-yellow-400" />
                                         <FaStar className="text-yellow-400" />
                                         <span className="text-gray-400">(2)</span>
-                                    </div>
+                                    </div> */}
                                     <FaHeart className="text-gray-500 cursor-pointer transition-all duration-500 hover:text-red-500" />
                                 </div>
                                 <div>
