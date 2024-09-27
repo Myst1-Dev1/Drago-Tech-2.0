@@ -16,6 +16,7 @@ export default function SignUp() {
 
         try {
             setIsLoading(true);
+            setErrorText('');
 
             const formData = new FormData(e.target);
             const formEntries = Object.fromEntries(formData.entries());

@@ -28,7 +28,9 @@ export async function POST(req:NextRequest) {
             city,
             state,
             zipCode,
-            password: hashedPassword
+            password: hashedPassword,
+            favorites:[],
+            orders:[]
         });
 
         await newUser.save();
@@ -39,6 +41,7 @@ export async function POST(req:NextRequest) {
         });
 
     } catch (error) {
+        console.log(error);
         return NextResponse.json({
             message: "Erro ao cadastrar o usuário.",
             status:500,

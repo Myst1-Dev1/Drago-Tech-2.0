@@ -63,7 +63,7 @@ export function ProductComments({ comments }:ProductCommentsProps) {
                     </div>
             </div>
             
-            <Pagination setLoading = {setLoading} itensPerPage = {itensPerPage} data = {comments} currentPage = {currentPage} setCurrentPage = {setCurrentPage} />
+            {commentsData.length === 0 ? '' : <Pagination setLoading = {setLoading} itensPerPage = {itensPerPage} data = {comments} currentPage = {currentPage} setCurrentPage = {setCurrentPage} />}
         </>
     )
 }

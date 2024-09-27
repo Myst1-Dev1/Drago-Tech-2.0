@@ -12,6 +12,8 @@ const userSchema = new Schema(
         state: {type: String, required:true},
         zipCode: {type: String, required:true},
         password: {type: String, required:true},
+        favorites: {type: Array, default:[]},
+        orders: {type: Array, default:[]}
     },
 
     {timestamps:true}

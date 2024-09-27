@@ -58,7 +58,7 @@ export function ProductContent({ products }:ProductContentProps) {
                                     <FaShoppingCart />
                                     Comprar
                                 </button>
-                              <SimilarProducts similarProducts = {products.produtos.similarProducts.itens?.nodes} />
+                              {products.produtos.similarProducts.itens?.nodes.length === undefined ? '' : <SimilarProducts similarProducts = {products.produtos.similarProducts.itens?.nodes} />}
                             </div>
                         </div>
 

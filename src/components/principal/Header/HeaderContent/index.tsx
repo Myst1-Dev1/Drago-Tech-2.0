@@ -7,12 +7,13 @@ import { FaShoppingCart, FaUser, FaBars, FaTimes } from "react-icons/fa";
 import Link from "next/link";
 import { NavBar } from "../../NavBar";
 import { Cart } from "../../Cart";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ProductNode } from "@/types/products";
 import { Search } from "../../Search";
 import { useCart } from "@/services/hooks/useCart";
 import { signOut, useSession } from "next-auth/react";
 import { Session } from "next-auth";
+import { parseCookies, destroyCookie } from "nookies";
 
 interface HeaderContentProps {
     products: ProductNode[];
@@ -20,12 +21,27 @@ interface HeaderContentProps {
 }
 
 export function HeaderContent({ products, session }:HeaderContentProps) {
-    const { cart } = useCart();
+    const { cart, setCartFromCookies } = useCart();
 
     const { status } = useSession();
 
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [isResponsiveNavBarOpen, setIsResponsiveNavBarOpen] = useState(false);
+
+
+    function handleSignOut() {
+        destroyCookie(undefined, 'user');
+        signOut();
+    }
+
+    useEffect(() => {
+        const { 'cart-cookie': token } = parseCookies();
+    
+        if (token) {
+          const cartFromCookie = JSON.parse(token);
+          setCartFromCookies(cartFromCookie);
+        }
+      }, [setCartFromCookies]);
 
     return (
         <>
@@ -77,7 +93,7 @@ export function HeaderContent({ products, session }:HeaderContentProps) {
                                 <Link href='/profile'>
                                     <Image src={userIcon} width={40} height={40} alt="icone de usuário" />
                                 </Link>
-                                <span className="cursor-pointer" onClick={() => signOut()}>Sair</span>
+                                <span className="cursor-pointer" onClick={() => handleSignOut()}>Sair</span>
                             </div>
                         :
                         <div className="flex flex-col gap-1 items-center">
