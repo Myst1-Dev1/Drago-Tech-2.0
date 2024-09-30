@@ -9,10 +9,7 @@ export default async function Profile() {
     const cookie: any = cookies().get('user');
     const userId = cookie?.value;
 
-    console.log('cookie value',userId);
-
-   const user = await fetchUser(userId);
-   console.log(user);
+    const user = await fetchUser(userId);
 
     return (
         <>

@@ -5,9 +5,9 @@ import connect from '@/utils/db';
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
     try {
         await connect();
-        const userId = params.id; // Obtém o ID dos parâmetros da URL
+        const userId = params.id;
 
-        const user = await User.findById(userId).select('-password'); // Exclui a senha da resposta
+        const user = await User.findById(userId).select('-password');
 
         if (!user) {
             return NextResponse.json({
