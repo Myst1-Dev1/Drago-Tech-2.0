@@ -9,9 +9,10 @@ import { useState } from "react";
 import { ProfileOrders } from "./ProfileOrders";
 import { ProfileFavorites } from "./ProfileFavorites";
 import gsap from "gsap";
+import { User } from "@/types/user";
 
 interface ProfileDataProps {
-    user:any;
+    user:User[];
 }
 
 export function ProfileData({ user }:ProfileDataProps) {
@@ -25,11 +26,11 @@ export function ProfileData({ user }:ProfileDataProps) {
         gsap.to('.menu-box', {opacity:1, display:"flex", duration:0.5, onComplete:() => { setProfileMenu('') }})
     }
 
-    console.log(user)
+    console.log(user);
 
     return (
         <>
-            {user?.map((user:any) => ( <div className="px-4 lg:px-16 py-8 max-w-[1200px] w-full m-auto">
+            {user?.map((user:any, index:number) => ( <div  key={index} className="px-4 lg:px-16 py-8 max-w-[1200px] w-full m-auto">
                 <div className="bg-zinc-50 rounded-md w-full m-auto p-4 flex justify-between items-center flex-wrap lg:gap-0 gap-10">
                     <div className="flex gap-4 items-center">
                         <Image src={profileUserIcon} width={80} height={80} alt="imagem do usuário"/>

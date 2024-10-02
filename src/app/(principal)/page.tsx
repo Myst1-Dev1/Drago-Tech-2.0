@@ -1,18 +1,21 @@
 'use server'
 
-import Image from "next/image";
-import laptopImg from "../../../public/images/laptopsImg.png";
-import eletronicsImg from "../../../public/images/eletronicsImg.png";
-import camerasImg from "../../../public/images/cameraImg.png";
 import { PopularProducts } from "@/components/principal/PopularProducts";
 import { OfferProducts } from "@/components/principal/OfferProducts";
 import { KnowOurBlog } from "@/components/principal/KnowOurBlog";
 import { RecomendedProducts } from "@/components/principal/RecomendedProducts";
 import Link from "next/link";
 import { FetchProducts } from "@/services/fetchData/fetchProducts";
+import { fetchUser } from "@/services/fetchData/fetchUser";
+import { cookies } from "next/headers";
 
 export default async function Home() {
     const { products } = await FetchProducts();
+
+    const cookie: any = cookies().get('user');
+    const userId = cookie?.value;
+
+    const user = await fetchUser(userId);
 
     return (
       <>
@@ -23,7 +26,7 @@ export default async function Home() {
                 <button className="font-bold max-w-72 m-auto w-full p-4 rounded-md bg-red-500 text-white transition-all duration-500 hover:bg-red-700">Compre agora</button>
             </div>
         </div>
-        <div className="px-4 lg:px-28 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-60 py-20 text-white">
+        {/* <div className="px-4 lg:px-28 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-60 py-20 text-white">
             <div className="m-auto bg-collectionBg h-[192px] lg:h-[404px] bg-cover bg-no-repeat px-6 flex justify-between items-center w-[350px] lg:w-[660px]">
                 <div className="flex flex-col gap-5">
                     <h3 className="text-sm lg:text-2xl">Coleção de Laptops</h3>
@@ -47,10 +50,10 @@ export default async function Home() {
                     <Image className="object-cover w-[100px] h-[100px] lg:w-[200px] lg:h-[150px]" src={camerasImg} width={150} height={150} alt="imagem da coleção de cameras" />
                 </div>
             </div>
-        </div>
-        <PopularProducts products={products} />
-        <OfferProducts products={products}/>
-        <RecomendedProducts products={products} />
+        </div> */}
+        <PopularProducts products={products} user={user} />
+        <OfferProducts products={products} user={user}/>
+        <RecomendedProducts products={products} user={user} />
         <div className="mt-12 bg-[#141410] flex justify-center items-center">
             <div className="py-8 flex flex-col gap-5">
                 <h2 className="text-white text-xl lg:text-2xl font-bold text-center">Assine Nosso Prime E <br />Tenha descontos exclusivos</h2>

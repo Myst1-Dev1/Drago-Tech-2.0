@@ -8,13 +8,20 @@ import { ProductNode } from "@/types/products";
 import { formatPrice } from "@/utils/useFormatPrice";
 import Link from "next/link";
 import { useCart } from "@/services/hooks/useCart";
+import { addToFavorites } from "@/services/createFavorites";
+import { useRouter } from "next/navigation";
 
 interface OfferProductsProps {
     products: ProductNode[];
+    user:any;
 }
 
-export function OfferProducts({ products }:OfferProductsProps) {
+export function OfferProducts({ products, user }:OfferProductsProps) {
     const { handleAddToCart } = useCart();
+
+    const router = useRouter();
+
+    const userFavorite = user?.[0]?.user?.favorites?.map((favorite: any) => favorite.produtos.id) || [];
 
     const initialTime = 24 * 60 * 60;
     const [timeLeft, setTimeLeft] = useState(initialTime);
@@ -23,6 +30,12 @@ export function OfferProducts({ products }:OfferProductsProps) {
 
     function addProduct(id:number) {
         handleAddToCart(id, offerProducts);
+    }
+
+    async function handleAddToFavorites(slug:string) {
+        await addToFavorites(slug);
+
+        router.refresh();
     }
 
     useEffect(() => {
@@ -72,8 +85,8 @@ export function OfferProducts({ products }:OfferProductsProps) {
                                 <div onClick={() => addProduct(offer.produtos.id)} className="text-red-300 cursor-pointer w-[40px] h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white">
                                     <FaShoppingCart />
                                 </div>
-                                <div className="text-red-300 cursor-pointer w-[40px] h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white">
-                                    <FaHeart />
+                                <div className={`${userFavorite?.includes(offer.produtos.id) ? 'bg-red-500 text-white border-0' : ''} text-red-300 cursor-pointer w-[40px] h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white`}>
+                                    <FaHeart onClick={() => handleAddToFavorites(offer.slug)} />
                                 </div>
                                 <div className="text-red-300 cursor-pointer w-[40px] h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white">
                                     <FaShareAlt />

@@ -11,13 +11,17 @@ import { SkeletonProducts } from "../SkeletonProducts";
 import Link from "next/link";
 import { useCart } from "@/services/hooks/useCart";
 import { addToFavorites } from "@/services/createFavorites";
+import { useRouter } from "next/navigation";
 
 interface CarouselProductsProps {
     productsArray: ProductNode[];
+    userFavorite:any;
 }
 
-export function CarouselProducts({ productsArray }: CarouselProductsProps) {
+export function CarouselProducts({ productsArray, userFavorite }: CarouselProductsProps) {
     const { handleAddToCart } = useCart();
+
+    const router = useRouter();
 
     function addProduct(id:number) {
         handleAddToCart(id, productsArray);
@@ -25,6 +29,8 @@ export function CarouselProducts({ productsArray }: CarouselProductsProps) {
 
     async function handleAddToFavorites(slug:string) {
         await addToFavorites(slug);
+
+        router.refresh();
     }
 
     return( 
@@ -72,7 +78,7 @@ export function CarouselProducts({ productsArray }: CarouselProductsProps) {
                                 <div onClick={() => addProduct(product.produtos.id)} className="text-red-300 cursor-pointer absolute right-0 top-0 lg:top-[15px] lg:right-[-100%] w-8 h-8 lg:w-[40px] lg:h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white group-hover:right-2">
                                     <FaShoppingCart />
                                 </div>
-                                <div className="text-red-300 cursor-pointer absolute right-0 top-[65px] lg:right-[-100%] w-8 h-8 lg:w-[40px] lg:h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white group-hover:right-2">
+                                <div className={`${userFavorite?.includes(product.produtos.id) ? 'bg-red-500 text-white' : ''} text-red-300 cursor-pointer absolute right-0 top-[65px] lg:right-[-100%] w-8 h-8 lg:w-[40px] lg:h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white group-hover:right-2`}>
                                     <FaHeart onClick={() =>  handleAddToFavorites(product.slug)} />
                                 </div>
                             </div>

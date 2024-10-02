@@ -30,8 +30,8 @@ export function ProfileFavorites({ favorites, handleCloseProfileMenu }:ProfileFa
                 <h5 className="text-xl font-bold">Favoritos</h5>
                 <RiArrowGoBackFill onClick={handleCloseProfileMenu} className='mt-4 text-xl cursor-pointer' />
             </div>
-            {favorites?.map(favorite => (
-                <div key={favorite.produtos?.id} className='relative bg-zinc-50 rounded-md mb-4 p-4 w-full mt-6 flex flex-wrap gap-4 lg:gap-0 justify-between'>
+            {favorites?.map((favorite, index) => (
+                <div key={index} className='relative bg-zinc-50 rounded-md mb-4 p-4 w-full mt-6 flex flex-wrap gap-4 lg:gap-0 justify-between'>
                     <div className='flex flex-wrap items-center gap-4'>
                         <Image className='m-auto' src={favorite.produtos?.image.node?.mediaItemUrl || productImg} width={100} height={100} alt='imagem do produto' />
                         <div>
@@ -41,11 +41,11 @@ export function ProfileFavorites({ favorites, handleCloseProfileMenu }:ProfileFa
                     </div>
                     <div className='flex items-center gap-10'>
                         <div>
-                            <del className='text-gray-500 text-sm'>R$:500,00</del>
+                            <del className='text-gray-500 text-sm'>{formatPrice(favorite.produtos?.price * 0.5)}</del>
                             <h6 className='font-bold text-xl'>{formatPrice(favorite.produtos?.price)}</h6>
-                            <span className='text-gray-500 text-sm'>À vista no pix</span>
+                            <span className='text-gray-500 text-sm'>5% OFF com o prime</span>
                         </div>
-                        <button className="text-sm text-white flex items-center justify-center gap-4 font-bold bg-red-500 rounded-md max-w-56 h-10 w-full p-3 transition-all duration-500 hover:bg-red-700">
+                        <button className="text-sm text-white flex items-center justify-center gap-4 font-bold bg-red-500 rounded-md h-10 w-32 p-3 transition-all duration-500 hover:bg-red-700">
                             <FaShoppingCart onClick={() => addProduct(favorite.produtos?.id)} />
                             Comprar
                         </button>
