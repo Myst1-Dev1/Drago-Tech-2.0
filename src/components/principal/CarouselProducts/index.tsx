@@ -10,6 +10,7 @@ import { formatPrice } from "@/utils/useFormatPrice";
 import { SkeletonProducts } from "../SkeletonProducts";
 import Link from "next/link";
 import { useCart } from "@/services/hooks/useCart";
+import { addToFavorites } from "@/services/createFavorites";
 
 interface CarouselProductsProps {
     productsArray: ProductNode[];
@@ -20,6 +21,10 @@ export function CarouselProducts({ productsArray }: CarouselProductsProps) {
 
     function addProduct(id:number) {
         handleAddToCart(id, productsArray);
+    }
+
+    async function handleAddToFavorites(slug:string) {
+        await addToFavorites(slug);
     }
 
     return( 
@@ -68,7 +73,7 @@ export function CarouselProducts({ productsArray }: CarouselProductsProps) {
                                     <FaShoppingCart />
                                 </div>
                                 <div className="text-red-300 cursor-pointer absolute right-0 top-[65px] lg:right-[-100%] w-8 h-8 lg:w-[40px] lg:h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white group-hover:right-2">
-                                    <FaHeart />
+                                    <FaHeart onClick={() =>  handleAddToFavorites(product.slug)} />
                                 </div>
                             </div>
                         </SwiperSlide>

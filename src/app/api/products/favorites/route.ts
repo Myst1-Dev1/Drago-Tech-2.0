@@ -1,32 +1,43 @@
 import User from '@/Models/User';
 import connect from '@/utils/db';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
+import { FetchProductDetails } from '@/services/fetchData/fetchProductDetails';
 
-export async function POST(req:NextApiRequest, res:NextApiResponse) {
+export async function POST(req:NextRequest) {
+  try {
     await connect();
 
-  if (req.method === 'POST') {
-    const { userId, productId } = req.body;
+    const { userId, productSlug } = await req.json();
 
-    try {
-      const user = await User.findById(userId);
-
-      if (!user) {
-        return res.status(404).json({ message: 'Usuário não encontrado' });
-      }
-
-      if (user.favorites.includes(productId)) {
-        return res.status(400).json({ message: 'Produto já está nos favoritos' });
-      }
-
-      user.favorites.push(productId);
-      await user.save();
-
-      res.status(200).json({ message: 'Produto adicionado aos favoritos', favorites: user.favorites });
-    } catch (error) {
-      res.status(500).json({ message: 'Erro ao adicionar favorito', error });
+    if (!userId || !productSlug) {
+      return NextResponse.json(
+        { message: 'Faltam parâmetros necessários' },
+        { status: 400 }
+      );
     }
-  } else {
-    res.status(405).json({ message: 'Método não permitido' });
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return NextResponse.json({ message: 'Usuário não encontrado' }, { status: 404 });
+    }
+
+    if (user.favorites.some((item:any) => item.slug === productSlug)) {
+      return NextResponse.json({ message: 'Produto já está nos favoritos' }, { status: 400 });
+    }
+
+    const { products } = await FetchProductDetails(productSlug);
+
+    if (!products) {
+      return NextResponse.json({ message: 'Produto não encontrado' }, { status: 404 });
+    }
+
+    user.favorites.push(products);
+    await user.save();
+
+    return NextResponse.json({ message: 'Produto adicionado aos favoritos', favorites: user.favorites }, { status: 200 });
+  } catch (error) {
+    console.error('Erro ao adicionar favorito:', error);
+    return NextResponse.json({ message: 'Erro ao adicionar favorito', error }, { status: 500 });
   }
 }

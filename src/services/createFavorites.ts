@@ -1,25 +1,28 @@
-import { parseCookies } from 'nookies';
+import { parseCookies } from "nookies";
+import { toast } from "react-toastify";
 
-export async function addToFavorites(productId: string) {
-  const { 'user': userId } = parseCookies();
+export async function addToFavorites(productSlug:string) {
+    const { 'user': userId } = parseCookies();
 
-  try {
-    const response = await fetch('/api/user/favorites', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ userId, productId }),
-    });
+    try {
+      const res = await fetch('/api/products/favorites', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId, productSlug }),
+      });
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message || 'Erro ao adicionar favorito');
+      toast.success('Produto adicionado aos favoritos');
+  
+      if (!res.ok) {
+        // throw new Error('Erro ao adicionar aos favoritos');
+        toast.error('Erro ao adicionar o produto aos favoritos');
+      }
+  
+      const data = await res.json();
+      console.log('Produto adicionado aos favoritos:', data);
+    } catch (error) {
+      console.error(error);
     }
-
-    console.log(data.message);
-  } catch (error) {
-    console.error(error);
   }
-}

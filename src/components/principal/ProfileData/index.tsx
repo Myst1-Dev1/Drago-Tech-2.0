@@ -25,17 +25,19 @@ export function ProfileData({ user }:ProfileDataProps) {
         gsap.to('.menu-box', {opacity:1, display:"flex", duration:0.5, onComplete:() => { setProfileMenu('') }})
     }
 
+    console.log(user)
+
     return (
         <>
-            <div className="px-4 lg:px-16 py-8 max-w-[1200px] w-full m-auto">
+            {user?.map((user:any) => ( <div className="px-4 lg:px-16 py-8 max-w-[1200px] w-full m-auto">
                 <div className="bg-zinc-50 rounded-md w-full m-auto p-4 flex justify-between items-center flex-wrap lg:gap-0 gap-10">
                     <div className="flex gap-4 items-center">
                         <Image src={profileUserIcon} width={80} height={80} alt="imagem do usuário"/>
                         <div>
-                            <h5 className="font-bold text-2xl">Bem vindo, {user?.user?.name}</h5>
+                            <h5 className="font-bold text-2xl">Bem vindo, {user.user.name}</h5>
                             <div className="flex gap-3 items-center">
                                 <FaEnvelope className="text-xs text-red-500" />
-                                <span className="text-gray-500 font-bold">{user?.user?.email}</span>
+                                <span className="text-gray-500 font-bold">{user.user.email}</span>
                             </div>
                         </div>
                     </div>
@@ -73,8 +75,8 @@ export function ProfileData({ user }:ProfileDataProps) {
                 </div>
                 {profileMenu === 'info' ? <ProfileInformations user={user} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''}
                 {profileMenu === 'order' ? <ProfileOrders user={user} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''}
-                {profileMenu === 'favorite' ? <ProfileFavorites user={user} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''}
-            </div>
+                {profileMenu === 'favorite' ? <ProfileFavorites favorites={user.user.favorites} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''}
+            </div>))}
         </>
     )
 }
