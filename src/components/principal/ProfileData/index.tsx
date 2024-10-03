@@ -12,7 +12,7 @@ import gsap from "gsap";
 import { User } from "@/types/user";
 
 interface ProfileDataProps {
-    user:User[];
+    user:User[] | any;
 }
 
 export function ProfileData({ user }:ProfileDataProps) {
@@ -26,7 +26,7 @@ export function ProfileData({ user }:ProfileDataProps) {
         gsap.to('.menu-box', {opacity:1, display:"flex", duration:0.5, onComplete:() => { setProfileMenu('') }})
     }
 
-    console.log(user);
+    const userFavorite = user?.[0]?.user?.favorites;
 
     return (
         <>
@@ -76,7 +76,7 @@ export function ProfileData({ user }:ProfileDataProps) {
                 </div>
                 {profileMenu === 'info' ? <ProfileInformations user={user} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''}
                 {profileMenu === 'order' ? <ProfileOrders user={user} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''}
-                {profileMenu === 'favorite' ? <ProfileFavorites favorites={user.user.favorites} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''}
+                {profileMenu === 'favorite' ? <ProfileFavorites favorites={userFavorite} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''}
             </div>))}
         </>
     )

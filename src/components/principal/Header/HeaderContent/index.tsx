@@ -14,7 +14,6 @@ import { useCart } from "@/services/hooks/useCart";
 import { signOut, useSession } from "next-auth/react";
 import { parseCookies, destroyCookie } from "nookies";
 import { useRouter } from "next/navigation";
-import { User } from "@/types/user";
 
 interface HeaderContentProps {
     products: ProductNode[];
