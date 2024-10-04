@@ -15,11 +15,12 @@ export async function addToFavorites(productSlug:string) {
   
       if (!res.ok) {
         toast.error('Você precisa estár logado para isso');
+      }else {
+        toast.success('Produto adicionado aos favoritos');
       }
   
       const data = await res.json();
       console.log(data);
-      toast.success('Produto adicionado aos favoritos');
     } catch (error) {
       console.error(error);
     }

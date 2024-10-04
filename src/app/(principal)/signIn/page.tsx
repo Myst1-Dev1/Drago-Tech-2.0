@@ -3,7 +3,6 @@
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
-import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
 export default function SignIn() {
@@ -17,6 +16,7 @@ export default function SignIn() {
 
         try {
             setIsLoading(true);
+            setErrorText('');
 
             const formData = new FormData(e.target);
             const formEntries = Object.fromEntries(formData.entries());
@@ -24,10 +24,10 @@ export default function SignIn() {
 
             const data = { email, password };
 
-            signIn("Credentials", { ...data, redirect: false }).then(
+            await signIn("Credentials", { ...data, redirect: false }).then(
                 ({ error }: any) => {
                     if (!error) {
-                        toast.success('Login feito com sucesso');
+                        // toast.success('Login feito com sucesso');
                         router.push("/");
                     } else {
                         setErrorText('Credenciais erradas');

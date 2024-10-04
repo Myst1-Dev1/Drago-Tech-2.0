@@ -10,6 +10,7 @@ import { ProfileOrders } from "./ProfileOrders";
 import { ProfileFavorites } from "./ProfileFavorites";
 import gsap from "gsap";
 import { User } from "@/types/user";
+import { ProfileModal } from "./ProfileModal";
 
 interface ProfileDataProps {
     user:User[] | any;
@@ -17,6 +18,7 @@ interface ProfileDataProps {
 
 export function ProfileData({ user }:ProfileDataProps) {
     const [profileMenu, setProfileMenu] = useState('');
+    const [modal, setModal] = useState(false);
 
     function handleShowProfileMenu(menu:string) {
         gsap.to('.menu-box', {opacity:0, display:"none", duration:0.5, ease: 'power2.inOut', onComplete:() => { setProfileMenu(menu) }})
@@ -42,7 +44,7 @@ export function ProfileData({ user }:ProfileDataProps) {
                             </div>
                         </div>
                     </div>
-                    <button className="flex items-center gap-4 h-14 p-3 font-bold flex-shrink-0 bg-red-500 text-white w-40 rounded-md transition-all duration-500 hover:bg-red-700"><FaPencilAlt/> Editar dados</button>
+                    <button onClick={() => setModal(true)} className="flex items-center gap-4 h-14 p-3 font-bold flex-shrink-0 bg-red-500 text-white w-40 rounded-md transition-all duration-500 hover:bg-red-700"><FaPencilAlt/> Editar dados</button>
                 </div>
 
                 <div className="py-8 flex justify-between items-center flex-wrap lg:gap-0 gap-5">
@@ -78,6 +80,8 @@ export function ProfileData({ user }:ProfileDataProps) {
                 {profileMenu === 'order' ? <ProfileOrders user={user} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''}
                 {profileMenu === 'favorite' ? <ProfileFavorites favorites={userFavorite} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''}
             </div>))}
+
+            {modal && <ProfileModal setModal = {setModal} />}
         </>
     )
 }

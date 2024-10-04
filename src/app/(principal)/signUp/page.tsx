@@ -1,5 +1,6 @@
 'use client';
 
+import { handlePhone } from "@/utils/formatPhoneInput";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
@@ -59,19 +60,6 @@ export default function SignUp() {
         }finally {
             setIsLoading(false);
         }
-    }
-
-    const phoneMask = (value:string) => {
-        if(!value) return "";
-        value = value.replace(/\D/g, '');
-        value = value.replace(/(\d{2})(\d)/, "($1) $2");
-        value = value.replace(/(\d)(\d{4})$/,"$1-$2");
-        return value;
-    }
-
-    const handlePhone = (e:{ target: HTMLInputElement | any }) => {
-        let input = e.target;
-        input.value = phoneMask(input.value);
     }
 
     return (
