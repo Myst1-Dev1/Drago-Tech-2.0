@@ -51,12 +51,8 @@ export default function Checkout() {
                             <input className="mb-5 lg:mb-0 outline-none p-4 rounded-md w-full border border-gray-300" type="text" placeholder="Bairro" />
                             <input className="mb-5 lg:mb-0 outline-none p-4 rounded-md w-full border border-gray-300" type="text" placeholder="CEP" />
                         </div>
-                        {/* <select className="outline-none p-4 mb-5 text-gray-400 rounded-md w-full border border-gray-300">
-                            <option value="PIX">PIX</option>
-                            <option value="Cartão">Cartão</option>
-                        </select> */}
                         <textarea className="resize-none mb-5 outline-none p-4 text-gray-400 rounded-md w-full h-28 border border-gray-300" placeholder="Ponto de referência"/>
-                        <button className="p-4 rounded-md w-60 m-auto text-white font-bold bg-red-500 transition-all duration-500 hover:bg-red-700">Prosseguir</button>
+                        <button onClick={() => setStep('2')} className="p-4 rounded-md w-60 m-auto text-white font-bold bg-red-500 transition-all duration-500 hover:bg-red-700">Prosseguir</button>
                     </form>}
 
                     {step === '2' && <form className="mt-12 max-w-[500px] flex flex-col justify-center items-center m-auto" action="">
@@ -66,7 +62,7 @@ export default function Checkout() {
                             <input className="mb-5 lg:mb-0 outline-none p-4 rounded-md w-full border border-gray-300" type="tel" placeholder="Data de validade do cartão" />
                             <input className="mb-5 lg:mb-0 outline-none p-4 rounded-md w-full border border-gray-300" type="tel" placeholder="Crv" />
                         </div>
-                        <button className="p-4 rounded-md w-60 m-auto text-white font-bold bg-red-500 transition-all duration-500 hover:bg-red-700">Prosseguir</button>
+                        <button onClick={() => setStep('3')} className="p-4 rounded-md w-60 m-auto text-white font-bold bg-red-500 transition-all duration-500 hover:bg-red-700">Prosseguir</button>
                     </form>}
 
                     {step === '3' && <div className="mt-12 flex flex-col justify-center items-center m-auto">
