@@ -5,28 +5,28 @@ import bcrypt from 'bcryptjs';
 import connect from '@/utils/db';
 import { cookies } from 'next/headers';
 
-const OPTIONS:NextAuthOptions = NextAuth({
+const OPTIONS: NextAuthOptions = NextAuth({
     secret: process.env.AUTH_SECRET,
-    providers:[
+    providers: [
         CredentialsProvider({
             id: 'Credentials',
             name: 'Credentials',
             credentials: {
                 email: { label: "Email", type: "text", placeholder: "Seu email" },
                 password: { label: "Senha", type: "password", placeholder: "Sua senha" },
-              },
+            },
             async authorize(credentials) {
                 await connect();
-
+            
                 try {
                     const user = await User.findOne({ email: credentials!.email });
                     console.log("Usuário encontrado:", user?._id);
                     cookies().set('user', user?._id);
-
+            
                     if (user) {
                         const validPassword = await bcrypt.compare(credentials!.password, user.password);
                         console.log("Senha válida:", validPassword);
-
+            
                         if (validPassword) {
                             return user;
                         } else {
@@ -35,26 +35,39 @@ const OPTIONS:NextAuthOptions = NextAuth({
                     } else {
                         throw new Error("Credenciais erradas");
                     }
-
-                } catch (error:any) {
-                    console.log(error);
+            
+                } catch (error) {
+                    console.error("Erro ao autorizar:", error);
+                    throw new Error("Erro na autorização");
                 }
-            },
-        })
+            }            
+        }),
     ],
     pages: {
-        error:"/signIn"
+        error: "/signIn",
     },
     callbacks: {
+ 
         async jwt({ token, user }) {
-          user && (token.user = user)
-          return token
+            if (user) {
+                token.id = user.id; 
+            }
+            return token;
         },
+
         async session({ session, token }) {
-          session = token.user as any
-          return session
+            if (token) {
+                session.user!.id = token.id;
+            }
+            return session;
         },
-      },
+    },
+    session: {
+        strategy: "jwt",
+    },
+    jwt: {
+        secret: process.env.AUTH_SECRET,
+    },
 });
 
 export { OPTIONS as GET, OPTIONS as POST, OPTIONS };

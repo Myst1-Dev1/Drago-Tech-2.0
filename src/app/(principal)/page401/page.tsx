@@ -10,7 +10,7 @@ export default function page401() {
                     <Image src={img401} width={250} height={250} alt="imagem da página de 401" />
                     <h2 className="text-red-600 font-bold text-xl">Você não tem permissão para acessar esta página</h2>
                     <Link href="/">
-                        <button className="bg-red-500 text-white w-40 rounded-md p-3 transition-all duration-500 hover:bg-red-600">Retornar para Home</button>
+                        <button className="bg-red-500 text-white w-60 rounded-md p-3 transition-all duration-500 hover:bg-red-600">Retornar para Home</button>
                     </Link>
                 </div>
             </div>

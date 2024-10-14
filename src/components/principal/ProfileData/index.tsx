@@ -30,6 +30,10 @@ export function ProfileData({ user }:ProfileDataProps) {
 
     const userFavorite = user?.[0]?.user?.favorites;
 
+    const userOrder = user?.[0]?.user?.orders;
+
+    console.log(userOrder);
+
     return (
         <>
             {user?.map((user:any, index:number) => ( <div  key={index} className="px-4 lg:px-16 py-8 max-w-[1200px] w-full m-auto">
@@ -77,7 +81,7 @@ export function ProfileData({ user }:ProfileDataProps) {
                     </div>
                 </div>
                 {profileMenu === 'info' ? <ProfileInformations user={user} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''}
-                {profileMenu === 'order' ? <ProfileOrders user={user} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''}
+                {profileMenu === 'order' ? <ProfileOrders user={userOrder} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''}
                 {profileMenu === 'favorite' ? <ProfileFavorites favorites={userFavorite} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''}
             </div>))}
 

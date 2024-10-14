@@ -10,11 +10,13 @@ interface ProductFormProps {
 export function ProductForm({ commentOn }:ProductFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [isFormVisible, setIsFormVisible] = useState(false);
+  const [errorText, setErrorText] = useState('');
 
     async function handleCreateProductComment(e: FormEvent | any) {
         e.preventDefault();
 
         setIsLoading(true);
+        setErrorText('');
     
         const formData = new FormData(e.target);
         const formEntries = Object.fromEntries(formData.entries());
@@ -41,7 +43,8 @@ export function ProductForm({ commentOn }:ProductFormProps) {
             toast.success('Comentário enviado com sucesso');
             setIsLoading(false);
           } else {
-            toast.error('Error ao enviar comentário');
+            setErrorText('Preencha todos os campos')
+            setIsLoading(false);
             console.error('Erro ao enviar comentário:', response.statusText);
           }
         } catch (error) {
@@ -76,6 +79,7 @@ export function ProductForm({ commentOn }:ProductFormProps) {
                         <option value="Excelente">Excelente</option>
                     </select> */}
                     <textarea className="resize-none h-28 outline-none p-4 rounded-md w-full border border-gray-300" placeholder="Avaliação" name="content"/>
+                    {errorText !== '' ? <span className="py-3 text-red-600 font-bold text-center">{errorText}</span> : ''}
                     <button className="p-4 rounded-md w-72 text-white font-bold bg-red-500 transition-all duration-500 hover:bg-red-700">
                         {isLoading ? 
                             <div role="status">

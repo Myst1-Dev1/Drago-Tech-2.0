@@ -41,7 +41,7 @@ export function SimilarProducts({ similarProducts }:SimilarProductsProps) {
                                 spaceBetween: 30
                             },
                             1350: {
-                                slidesPerView:4,
+                                slidesPerView:3,
                                 spaceBetween:30
                             },
                             1600: {

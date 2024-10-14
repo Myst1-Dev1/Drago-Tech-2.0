@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { Pagination } from "../../Pagination";
 import { SkeletonComments } from "../../SkeletonComments";
+import { formatDate } from "@/utils/formatDate";
 
 interface ProductCommentsProps {
     comments: {
@@ -24,15 +25,6 @@ export function ProductComments({ comments }:ProductCommentsProps) {
     const startIndex = currentPage * itensPerPage;
     const endIndex = startIndex + itensPerPage;
     const commentsData = comments.slice(startIndex, endIndex);
-
-    const formatDate = (dateString: string) => {
-        const date = new Date(dateString);
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const year = date.getFullYear();
-      
-        return `${day}/${month}/${year}`;
-      };
 
     return (
         <>

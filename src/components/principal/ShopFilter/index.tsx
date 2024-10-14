@@ -16,30 +16,28 @@ interface ShopFilterProps {
 }
 
 export function ShopFilter({ setLoading, setFilteredCategory, filterPrice, setFilterPrice }:ShopFilterProps) {
-    const [activeFilter, setActiveFilter] = useState<string | null>(null);
+    const [openFilters, setOpenFilters] = useState<{ [key: string]: boolean }>({});
     const [isFilterMobile, setIsFilterMobile] = useState(false);
 
     function handleShowCategory(name: string, value: string) {
-        if (activeFilter === name) {
-            gsap.to(`.${name}`, {
-                height: 0,
-                duration: 0.5,
-            });
-            setActiveFilter(null);
-        } else {
-            if (activeFilter) {
-                gsap.to(`.${name}`, {
-                    height: 0,
-                    duration: 0.5,
-                });
-            }
+        const isOpen = openFilters[name];
 
-            gsap.to(`.${name}`, {
-                height: value,
-                duration: 0.5,
-            });
-            setActiveFilter(name);
+        if (isOpen) {
+          gsap.to(`.${name}`, {
+            height: 0,
+            duration: 0.5,
+          });
+        } else {
+          gsap.to(`.${name}`, {
+            height: value,
+            duration: 0.5,
+          });
         }
+    
+        setOpenFilters((prevState) => ({
+          ...prevState,
+          [name]: !isOpen,
+        }));
     }
 
     function handleCategorySelection(category: string) {
@@ -78,7 +76,7 @@ export function ShopFilter({ setLoading, setFilteredCategory, filterPrice, setFi
                         <div key={filter.id} className="border-b border-[#4a4747] pb-6">
                             <div className="flex justify-between items-center">
                                 <h3 className="font-bold text-xl">{filter.filterName}</h3>
-                                <Image onClick={() => handleShowCategory(filter.showName, '240px')} className={`cursor-pointer transition-all duration-500 ${activeFilter === filter.showName ? 'rotate-0' : 'rotate-180'}`} src={ArrowUp} width={20} height={20} alt="flecha que abre o menu de items" />
+                                <Image onClick={() => handleShowCategory(filter.showName, '240px')} className={`cursor-pointer transition-all duration-500 ${openFilters[filter.showName] ? 'rotate-0' : 'rotate-180'}`} src={ArrowUp} width={20} height={20} alt="flecha que abre o menu de items" />
                             </div>
                             <div className={`${filter.showName} overflow-hidden h-0 mt-6 flex flex-col gap-4`}>
                                 {filter.categories.map(categorie => (

@@ -6,7 +6,7 @@ export default function middleware(request: NextRequest) {
     const homeURL = new URL('/', request.url);
 
     if (!token) {
-        if (request.nextUrl.pathname === '/signIn') {
+        if (request.nextUrl.pathname === '/signIn'  || request.nextUrl.pathname === '/signUp') {
             return NextResponse.next();
         }
         return NextResponse.redirect(page401);

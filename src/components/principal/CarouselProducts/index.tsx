@@ -41,7 +41,6 @@ export function CarouselProducts({ productsArray, userFavorite }: CarouselProduc
                         navigation={{
                             nextEl: ".swiper-button-next-custom",
                             prevEl: ".swiper-button-prev-custom",
-                            disabledClass: "swiper-button-disabled-custom"
                         }}
                         breakpoints={{
                             320: {
