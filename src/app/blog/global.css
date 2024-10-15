@@ -4,9 +4,8 @@ body {
 
 .home-carousel .swiper-pagination-bullet-active {
     background: #f43f5e!important;
-    width: 20px!important;
+    width: 12px!important;
     height: 12px!important;
-    border-radius: 10px!important;
 }
 
 .home-carousel .swiper-pagination-bullet {

@@ -11,8 +11,8 @@ import 'swiper/css';
 export function SideBar() {
     return (
         <>
-            <div className="flex flex-col gap-20 m-auto lg:m-0 px-4 lg:px-0">
-                <div className="bg-white h-fit shadow-sm max-w-80 lg:max-w-96 w-full rounded-[13px] p-4">
+            <div className="flex flex-wrap lg:flex-col gap-20 m-auto lg:m-0 px-4 lg:px-0">
+                <div className="bg-white h-fit m-auto lg:m-0 shadow-sm max-w-80 lg:max-w-96 w-full rounded-[13px] p-4">
                     <h3 className="font-bold text-xl">Artigos Populares</h3>
                     <div className="mt-5 flex gap-4">
                         <Image className="max-w-[100px] w-full h-[100px] object-cover rounded-[13px]" src={postImage} width={100} height={100} alt="imagem do artigo" />
