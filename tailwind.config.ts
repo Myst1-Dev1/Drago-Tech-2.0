@@ -15,6 +15,10 @@ const config: Config = {
         "homeBanner": "linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url(/images/home-banner.jpg)",
         "collectionBg":"url(/images/collection-bg.jpg)"
       },
+      colors: {
+        "blog-post-title": "#38393C",
+        "blog-post-gray": "#777778",
+      },
       animation: {
         'fadeIn': 'fadeIn 1s ease',
       },

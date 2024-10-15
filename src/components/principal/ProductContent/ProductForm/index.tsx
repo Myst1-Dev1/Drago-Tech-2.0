@@ -1,4 +1,5 @@
 import gsap from "gsap";
+import { parseCookies } from "nookies";
 import { FormEvent, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -11,6 +12,8 @@ export function ProductForm({ commentOn }:ProductFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [errorText, setErrorText] = useState('');
+
+  const { 'user': userId } = parseCookies();
 
     async function handleCreateProductComment(e: FormEvent | any) {
         e.preventDefault();
@@ -43,7 +46,11 @@ export function ProductForm({ commentOn }:ProductFormProps) {
             toast.success('Comentário enviado com sucesso');
             setIsLoading(false);
           } else {
-            setErrorText('Preencha todos os campos')
+            if(!userId) {
+              setErrorText('Você precisa estár logado para isso');
+            } else {
+              setErrorText('Preencha todos os campos')
+            }
             setIsLoading(false);
             console.error('Erro ao enviar comentário:', response.statusText);
           }
