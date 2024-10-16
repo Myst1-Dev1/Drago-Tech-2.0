@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useCart } from "@/services/hooks/useCart";
 import { addToFavorites } from "@/services/createFavorites";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 interface OfferProductsProps {
     products: ProductNode[];
@@ -37,6 +38,17 @@ export function OfferProducts({ products, user }:OfferProductsProps) {
 
         router.refresh();
     }
+
+    function handleCopyLink (slug:string) {
+        const productUrl = `${window.location.origin}/product/${slug}`;
+        navigator.clipboard.writeText(productUrl)
+          .then(() => {
+            toast.success("Link copiado para a área de transferência!");
+          })
+          .catch(err => {
+            console.error("Falha ao copiar o link: ", err);
+          });
+      };
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -88,7 +100,7 @@ export function OfferProducts({ products, user }:OfferProductsProps) {
                                 <div className={`${userFavorite?.includes(offer.produtos.id) ? 'bg-red-500 text-white border-0' : ''} text-red-300 cursor-pointer w-[40px] h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white`}>
                                     <FaHeart onClick={() => handleAddToFavorites(offer.slug)} />
                                 </div>
-                                <div className="text-red-300 cursor-pointer w-[40px] h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white">
+                                <div onClick={() => handleCopyLink(offer.slug)} className="text-red-300 cursor-pointer w-[40px] h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white">
                                     <FaShareAlt />
                                 </div>
                             </div>

@@ -1,7 +1,8 @@
 import Image from "next/image";
 import logo from "../../../../public/images/logo.jpg"
-import { FaBell, FaSearch } from "react-icons/fa";
+import { FaBell } from "react-icons/fa";
 import Link from "next/link";
+import { BlogSearch } from "../BlogSearch";
 
 export function Header() {
     return (
@@ -12,10 +13,7 @@ export function Header() {
                     <Image src={logo} width={40} height={40} alt="logo do drago blog" />
                 </div>
                 <div className="flex gap-10">
-                    <div className="flex items-center gap-3 cursor-pointer transition-all duration-500 hover:border-b hover:border-rose-400">
-                        <FaSearch className="text-rose-500" />
-                        <h6 className="hidden lg:block text-[#38393C]">Pesquisar</h6>
-                    </div>
+                    <BlogSearch />
                     <div className="flex items-center gap-5">
                         <Link href="" className="text-rose-500 font-bold">Login</Link>
                         <Link href="">

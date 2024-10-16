@@ -23,7 +23,7 @@ export default async function Home() {
             <div className="max-w-[450px] flex flex-col justify-center items-center gap-4 m-auto">
                 <h2 className="text-xl text-center lg:text-3xl font-bold">Os Melhores Equipamentos Você Encontra Só Aqui</h2>
                 <p className="text-center">lorem ipsum is simply dummy about this shop lorem asprt the technology john doe has about this</p>
-                <button className="font-bold max-w-72 m-auto w-full p-4 rounded-md bg-red-500 text-white transition-all duration-500 hover:bg-red-700">Compre agora</button>
+                <Link href="/shop"><button className="font-bold max-w-72 m-auto w-full p-4 rounded-md bg-red-500 text-white transition-all duration-500 hover:bg-red-700">Compre agora</button></Link>
             </div>
         </div>
         {/* <div className="px-4 lg:px-28 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-60 py-20 text-white">

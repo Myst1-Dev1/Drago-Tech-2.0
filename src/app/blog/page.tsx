@@ -17,7 +17,7 @@ export default function Home() {
                     <div className="flex flex-col gap-10">
                         <div className="flex flex-wrap items-center gap-5">
                             <Image className="rounded-[13px] object-cover w-full lg:max-w-[330px] h-[330px]" src={postImage} width={330} height={330} alt="imagem do artigo" />
-                            <div className="w-full lg:max-w-96 flex flex-col gap-5">
+                            <div className="w-full lg:max-w-96 2xl:max-w-[600px] flex flex-col gap-5">
                                 <h5 className="text-blog-post-title font-bold text-xl">Modern and Colorfull styles created by IA</h5>
                                 <div className="flex w-full justify-between items-center">
                                     <div className="flex gap-4 items-center">
@@ -40,7 +40,7 @@ export default function Home() {
                         </div>
                         <div className="flex flex-wrap items-center gap-5">
                             <Image className="rounded-[13px] object-cover w-full lg:max-w-[330px] h-[330px]" src={postImage} width={330} height={330} alt="imagem do artigo" />
-                            <div className="w-full lg:max-w-96 flex flex-col gap-5">
+                            <div className="w-full lg:max-w-96 2xl:max-w-[600px] flex flex-col gap-5">
                                 <h5 className="text-blog-post-title font-bold text-xl">Modern and Colorfull styles created by IA</h5>
                                 <div className="flex w-full justify-between items-center">
                                     <div className="flex gap-4 items-center">
@@ -63,7 +63,7 @@ export default function Home() {
                         </div>
                         <div className="flex flex-wrap items-center gap-5">
                             <Image className="rounded-[13px] object-cover w-full lg:max-w-[330px] h-[330px]" src={postImage} width={330} height={330} alt="imagem do artigo" />
-                            <div className="w-full lg:max-w-96 flex flex-col gap-5">
+                            <div className="w-full lg:max-w-96 2xl:max-w-[600px] flex flex-col gap-5">
                                 <h5 className="text-blog-post-title font-bold text-xl">Modern and Colorfull styles created by IA</h5>
                                 <div className="flex w-full justify-between items-center">
                                     <div className="flex gap-4 items-center">

@@ -17,18 +17,13 @@ body {
 }
 
 .home-carousel .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal {
-    max-width: 300px!important;
-    left: 22%!important;
+    max-width: 100px!important;
+    left: 50%!important;
 }
 
-@media(min-width:1500px) {
+@media(max-width:1280px) {
     .home-carousel .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal {
-        left: 28%!important;
-    }   
-}
-
-@media(max-width:480px) {
-    .home-carousel .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal {
-        max-width: 380px!important;
+        left: 50%!important;
+        transform: translate(-50%, 0);
     }
 }
