@@ -22,12 +22,14 @@ export function ProfileOrders({ user, handleCloseProfileMenu }: ProfileOrdersPro
             {user?.map((order: any, index: number) => (
                 <div key={index} className='bg-zinc-50 rounded-md mb-4 p-4 w-full mt-6 flex flex-col gap-3'>
                     <span className='text-gray-600 font-bold'>
-                        Pedido 0{index + 1} - {
-                            new Intl.DateTimeFormat('pt-BR', {
-                            day: '2-digit',
-                            month: '2-digit',
-                            year: 'numeric',
-                            }).format(user?.orderDate)
+                            Pedido 0{index + 1} - {
+                            (() => {
+                                const date = new Date(order?.orderDate);
+                                const day = String(date.getDate()).padStart(2, '0');
+                                const month = String(date.getMonth() + 1).padStart(2, '0');
+                                const year = date.getFullYear();
+                                return `${day}/${month}/${year}`;
+                            })()
                         }
                     </span>
                     {/* <span className='text-green-400 font-bold'>Pedido Concluído</span> */}

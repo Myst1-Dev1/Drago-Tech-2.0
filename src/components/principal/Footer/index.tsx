@@ -27,7 +27,7 @@ export function Footer() {
                     <Link className="text-gray-500 transition-all duration-500 hover:text-red-600" href="/about">Sobre</Link>
                     <Link className="text-gray-500 transition-all duration-500 hover:text-red-600" href="/prime">Prime</Link>
                     <Link className="text-gray-500 transition-all duration-500 hover:text-red-600" href="/contact">Contato</Link>
-                    <Link className="text-gray-500 transition-all duration-500 hover:text-red-600" href="/blog">Blog</Link>
+                    {/* <Link className="text-gray-500 transition-all duration-500 hover:text-red-600" href="/blog">Blog</Link> */}
                 </div>
                 <div className="flex flex-col gap-3 lg:m-0 m-auto">
                     <h2 className="font-bold text-xl">Contato</h2>

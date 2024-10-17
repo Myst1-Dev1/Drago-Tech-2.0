@@ -5,7 +5,7 @@ import bcrypt from 'bcryptjs';
 import connect from '@/utils/db';
 import { cookies } from 'next/headers';
 
-const OPTIONS: NextAuthOptions = NextAuth({
+const authOptions: NextAuthOptions = {
     secret: process.env.AUTH_SECRET,
     providers: [
         CredentialsProvider({
@@ -17,16 +17,16 @@ const OPTIONS: NextAuthOptions = NextAuth({
             },
             async authorize(credentials) {
                 await connect();
-            
+
                 try {
                     const user = await User.findOne({ email: credentials!.email });
                     console.log("Usuário encontrado:", user?._id);
                     cookies().set('user', user?._id);
-            
+
                     if (user) {
                         const validPassword = await bcrypt.compare(credentials!.password, user.password);
                         console.log("Senha válida:", validPassword);
-            
+
                         if (validPassword) {
                             return user;
                         } else {
@@ -35,19 +35,18 @@ const OPTIONS: NextAuthOptions = NextAuth({
                     } else {
                         throw new Error("Credenciais erradas");
                     }
-            
+
                 } catch (error) {
                     console.error("Erro ao autorizar:", error);
                     throw new Error("Erro na autorização");
                 }
-            }            
+            }
         }),
     ],
     pages: {
         error: "/signIn",
     },
     callbacks: {
- 
         async jwt({ token, user }) {
             if (user) {
                 token.id = user.id; 
@@ -68,6 +67,7 @@ const OPTIONS: NextAuthOptions = NextAuth({
     jwt: {
         secret: process.env.AUTH_SECRET,
     },
-});
+};
 
-export { OPTIONS as GET, OPTIONS as POST, OPTIONS };
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };
