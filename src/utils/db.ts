@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export default async function connect() {
-    const mongoUri = process.env.MONGO;
+    const mongoUri = process.env.NEXT_PUBLIC_MONGO;
 
     if (!mongoUri) {
         throw new Error("A variável de ambiente MONGO não está definida.");
