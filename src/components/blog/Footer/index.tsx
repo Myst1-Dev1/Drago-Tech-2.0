@@ -28,7 +28,7 @@ export function Footer() {
                             <Link className="text-rose-400 font-bold transition-all duration-500 hover:text-rose-600" href="/blog">Home</Link>
                         </div>
                         <div className="border-b border-rose-200 pb-3 w-full">
-                            <Link className="text-rose-400 font-bold transition-all duration-500 hover:text-rose-600" href="/shop">Loja</Link>
+                            <Link className="text-rose-400 font-bold transition-all duration-500 hover:text-rose-600" href="/">Loja</Link>
                         </div>
                         <div className="border-b border-rose-200 pb-3 w-full">
                             <Link className="text-rose-400 font-bold transition-all duration-500 hover:text-rose-600" href="/prime">Prime</Link>

@@ -117,7 +117,7 @@ export function HeaderContent({ products }:HeaderContentProps) {
                     <Link onClick={() => setIsResponsiveNavBarOpen(false)} className="transition-all duration-500 hover:text-red-600" href="/about">Sobre</Link>
                     <Link onClick={() => setIsResponsiveNavBarOpen(false)} className="transition-all duration-500 hover:text-red-600" href="/prime">Prime</Link>
                     <Link onClick={() => setIsResponsiveNavBarOpen(false)} className="transition-all duration-500 hover:text-red-600" href="/contact">Contato</Link>
-                    <Link onClick={() => setIsResponsiveNavBarOpen(false)} className="transition-all duration-500 hover:text-red-600" href="/blog">Blog</Link>
+                    {/* <Link onClick={() => setIsResponsiveNavBarOpen(false)} className="transition-all duration-500 hover:text-red-600" href="/blog">Blog</Link> */}
                 </nav>
             </div>}
             {isCartOpen && <Cart setIsCartOpen = {setIsCartOpen} />}

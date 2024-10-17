@@ -58,7 +58,7 @@ export function HomeCarousel() {
                     <SwiperSlide key={data.id} className="flex items-center justify-center">
                     <div className="flex-wrap px-4 lg:px-16 relative z-20 flex flex-col lg:flex-row items-center justify-center gap-5">
                         <Image
-                        className="rounded-[13px] lg:max-w-[700px] 2xl:max-w-[900px] w-full h-[400px] object-cover"
+                        className="brightness-75 rounded-[13px] lg:max-w-[700px] 2xl:max-w-[900px] w-full h-[400px] object-cover"
                         src={data.slide}
                         width={700}
                         height={400}

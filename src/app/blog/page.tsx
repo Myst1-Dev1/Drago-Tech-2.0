@@ -19,6 +19,7 @@ export default function Home() {
                             <Image className="rounded-[13px] object-cover w-full lg:max-w-[330px] h-[330px]" src={postImage} width={330} height={330} alt="imagem do artigo" />
                             <div className="w-full lg:max-w-96 2xl:max-w-[600px] flex flex-col gap-5">
                                 <h5 className="text-blog-post-title font-bold text-xl">Modern and Colorfull styles created by IA</h5>
+                                <span className="rounded-md p-2 bg-rose-400 text-white max-w-36 w-full text-center text-xs transition-all duration-500 hover:bg-rose-500">Inteligência Artificial</span>
                                 <div className="flex w-full justify-between items-center">
                                     <div className="flex gap-4 items-center">
                                         <Image src={postAuthorImage} width={50} height={50} alt="imagem do autor do artigo" />
@@ -26,7 +27,7 @@ export default function Home() {
                                     </div>
                                     <span className="text-blog-post-gray">12 de Novembro de 2023</span>
                                 </div>
-                                <p className="text-blog-post-gray">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure tenetur ipsa, laudantium voluptate aliquid iste distinctio nostrum quam exercitationem ...</p>
+                                <p className="text-blog-post-gray">Lorem, ipsum dolor sit amet consectetur adipisicing elit...</p>
                                 <div className="flex w-full justify-between">
                                     <Link href="">
                                         <button className="p-3 bg-rose-500 text-white rounded-md max-w-28 font-bold w-full transition-all duration-500 hover:bg-rose-600">Leia Mais</button>
@@ -42,6 +43,7 @@ export default function Home() {
                             <Image className="rounded-[13px] object-cover w-full lg:max-w-[330px] h-[330px]" src={postImage} width={330} height={330} alt="imagem do artigo" />
                             <div className="w-full lg:max-w-96 2xl:max-w-[600px] flex flex-col gap-5">
                                 <h5 className="text-blog-post-title font-bold text-xl">Modern and Colorfull styles created by IA</h5>
+                                <span className="rounded-md p-2 bg-rose-400 text-white max-w-36 w-full text-center text-xs transition-all duration-500 hover:bg-rose-500">Inteligência Artificial</span>
                                 <div className="flex w-full justify-between items-center">
                                     <div className="flex gap-4 items-center">
                                         <Image src={postAuthorImage} width={50} height={50} alt="imagem do autor do artigo" />
@@ -49,7 +51,7 @@ export default function Home() {
                                     </div>
                                     <span className="text-blog-post-gray">12 de Novembro de 2023</span>
                                 </div>
-                                <p className="text-blog-post-gray">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure tenetur ipsa, laudantium voluptate aliquid iste distinctio nostrum quam exercitationem ...</p>
+                                <p className="text-blog-post-gray">Lorem, ipsum dolor sit amet consectetur adipisicing elit...</p>
                                 <div className="flex w-full justify-between">
                                     <Link href="">
                                         <button className="p-3 bg-rose-500 text-white rounded-md max-w-28 font-bold w-full transition-all duration-500 hover:bg-rose-600">Leia Mais</button>
@@ -65,6 +67,7 @@ export default function Home() {
                             <Image className="rounded-[13px] object-cover w-full lg:max-w-[330px] h-[330px]" src={postImage} width={330} height={330} alt="imagem do artigo" />
                             <div className="w-full lg:max-w-96 2xl:max-w-[600px] flex flex-col gap-5">
                                 <h5 className="text-blog-post-title font-bold text-xl">Modern and Colorfull styles created by IA</h5>
+                                <span className="rounded-md p-2 bg-rose-400 text-white max-w-36 w-full text-center text-xs transition-all duration-500 hover:bg-rose-500">Inteligência Artificial</span>
                                 <div className="flex w-full justify-between items-center">
                                     <div className="flex gap-4 items-center">
                                         <Image src={postAuthorImage} width={50} height={50} alt="imagem do autor do artigo" />
@@ -72,7 +75,7 @@ export default function Home() {
                                     </div>
                                     <span className="text-blog-post-gray">12 de Novembro de 2023</span>
                                 </div>
-                                <p className="text-blog-post-gray">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure tenetur ipsa, laudantium voluptate aliquid iste distinctio nostrum quam exercitationem ...</p>
+                                <p className="text-blog-post-gray">Lorem, ipsum dolor sit amet consectetur adipisicing elit...</p>
                                 <div className="flex w-full justify-between">
                                     <Link href="">
                                         <button className="p-3 bg-rose-500 text-white rounded-md max-w-28 font-bold w-full transition-all duration-500 hover:bg-rose-600">Leia Mais</button>

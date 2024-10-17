@@ -13,7 +13,7 @@ export function NavBar() {
                         <Link className="transition-all duration-500 hover:text-red-600" href="/prime">Prime</Link>
                         <Link className="transition-all duration-500 hover:text-red-600" href="/contact">Contato</Link>
                     </div>
-                    <Link className="transition-all duration-500 hover:text-red-600" href="/blog">Blog</Link>
+                    {/* <Link className="transition-all duration-500 hover:text-red-600" href="/blog">Blog</Link> */}
                 </nav>
             </div>
         </>

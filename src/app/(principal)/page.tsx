@@ -2,7 +2,7 @@
 
 import { PopularProducts } from "@/components/principal/PopularProducts";
 import { OfferProducts } from "@/components/principal/OfferProducts";
-import { KnowOurBlog } from "@/components/principal/KnowOurBlog";
+// import { KnowOurBlog } from "@/components/principal/KnowOurBlog";
 import { RecomendedProducts } from "@/components/principal/RecomendedProducts";
 import Link from "next/link";
 import { FetchProducts } from "@/services/fetchData/fetchProducts";
@@ -60,7 +60,7 @@ export default async function Home() {
                 <Link href="/prime"><button className="font-bold max-w-72 w-full p-4 rounded-md bg-red-500 text-white transition-all duration-500 hover:bg-red-700">Quero ser Prime</button></Link>
             </div>
         </div>
-        <KnowOurBlog />
+        {/* <KnowOurBlog /> */}
       </>
     );
   }
