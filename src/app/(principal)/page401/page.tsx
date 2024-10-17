@@ -2,7 +2,7 @@ import Link from "next/link";
 import img401 from '../../../../public/images/401PageImg.png';
 import Image from "next/image";
 
-export default function page401() {
+export default function Page401() {
     return (
         <>
             <div className="px-8 lg:px-16 py-8 flex justify-center items-center">

@@ -10,7 +10,7 @@ export const useUser = create<UserStore>((set) => ({
     user: null,
     fetchUser: async (id) => {
         try {
-            const response = await fetch(`http://localhost:3000/api/auth/getUser/${id}`);
+            const response = await fetch(`https://drago-tech-2-0.vercel.app/api/auth/getUser/${id}`);
             if (!response.ok) {
                 throw new Error('Erro ao buscar usuário');
             }

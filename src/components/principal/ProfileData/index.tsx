@@ -34,6 +34,8 @@ export function ProfileData({ user }:ProfileDataProps) {
 
     console.log(userOrder);
 
+    console.log(user);
+
     return (
         <>
             {user?.map((user:any, index:number) => ( <div  key={index} className="px-4 lg:px-16 py-8 max-w-[1200px] w-full m-auto">
