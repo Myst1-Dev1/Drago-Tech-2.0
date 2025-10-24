@@ -10,10 +10,12 @@ import { fetchUser } from "@/services/fetchData/fetchUser";
 import { cookies } from "next/headers";
 
 export default async function Home() {
-    const { products } = await FetchProducts();
+    const products = await FetchProducts();
 
     const cookie: any = cookies().get('user');
     const userId = cookie?.value;
+
+    console.log('aquiii',products);
 
     const user = await fetchUser(userId);
 

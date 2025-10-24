@@ -12,10 +12,10 @@ export function Search({ products }:SearchProps) {
     const [search, setSearch] = useState('');
     
     const productsData = products
-    .map(product => ({
+    ?.map(product => ({
         ...product.produtos,
         slug: product.slug   
-    })).filter((product: Product) => product.productName?.toLowerCase().includes(search.toLowerCase()));
+    }))?.filter((product: Product) => product.productName?.toLowerCase().includes(search.toLowerCase()));
 
     return (
         <>

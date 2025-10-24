@@ -1,14 +1,9 @@
 'use server';
 
-import { getProducts } from "@/services/graphql/getProducts"
-import { getClient } from "@/services/client";
-
 export async function FetchProducts() {
-    const client = getClient();
+    const res = await fetch('http://lab.mystdev.com.br/api/Drago-Tech-Api/products');
 
-    const { data, loading } = await client.query<any>({query: getProducts});
+    const data = await res.json();
 
-    const products = data.produtos.nodes;
-
-    return {products, loading}
+    return data;
 }

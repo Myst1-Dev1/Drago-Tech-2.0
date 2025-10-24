@@ -3,11 +3,11 @@
 import { Pagination } from "../Pagination";
 import { ShopFilter } from "../ShopFilter";
 import { ShopProducts } from "../ShopProducts";
-import { ProductNode } from "@/types/products";
+import { Product, ProductNode } from "@/types/products";
 import { useState } from "react";
 
 interface ShopContentProps {
-    products:ProductNode[];
+    products:Product[];
     user:any;
 }
 
@@ -26,13 +26,15 @@ export function ShopContent({ products, user }:ShopContentProps) {
     ? productsData
     : products.filter(product => 
         filteredCategories.some((filter: any) => 
-            product.produtos.category.includes(filter) || product.produtos.brand.includes(filter)
+            product.category.includes(filter) || product.brand.includes(filter)
         )
     );
 
     const productFilteredByPrice = productsData.filter(product => {
-        return product.produtos.price >= filterPrice;
+        return product.price >= filterPrice;
     });
+
+    console.log('aqui estou', products);
 
     return (
         <>

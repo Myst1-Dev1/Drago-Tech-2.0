@@ -5,7 +5,7 @@ import { Navigation} from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { FaHeart, FaShoppingCart, FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import { ProductNode } from "@/types/products"
+import { Product } from "@/types/products"
 import { formatPrice } from "@/utils/useFormatPrice";
 import { SkeletonProducts } from "../SkeletonProducts";
 import Link from "next/link";
@@ -14,7 +14,7 @@ import { addToFavorites } from "@/services/createFavorites";
 import { useRouter } from "next/navigation";
 
 interface CarouselProductsProps {
-    productsArray: ProductNode[];
+    productsArray: Product[];
     userFavorite:any;
 }
 
@@ -23,9 +23,9 @@ export function CarouselProducts({ productsArray, userFavorite }: CarouselProduc
 
     const router = useRouter();
 
-    function addProduct(id:number) {
-        handleAddToCart(id, productsArray);
-    }
+    // function addProduct(id:number) {
+    //     handleAddToCart(id, productsArray);
+    // }
 
     async function handleAddToFavorites(slug:string) {
         await addToFavorites(slug);
@@ -65,20 +65,20 @@ export function CarouselProducts({ productsArray, userFavorite }: CarouselProduc
                             }
                         }}
                     >
-                    {productsArray.length === 0 ? <SkeletonProducts count={productsArray.length} /> : productsArray?.map(product => (
-                        <SwiperSlide key={product.produtos.id}>
+                    {productsArray?.length === 0 ? <SkeletonProducts count={productsArray.length} /> : productsArray?.map(product => (
+                        <SwiperSlide key={product.id}>
                             <div className="mb-8 m-auto relative overflow-hidden max-w-[250px] transition-all duration-300 hover:scale-110 group">
-                                <Link className="flex flex-col gap-4" href={`/product/${product.slug}`}>
-                                    <Image className="object-cover m-auto" src={product.produtos.image.node?.mediaItemUrl} width={150} height={150} alt="imagem do produto" />
-                                    <span className="text-zinc-400">{product.produtos.category}</span>
-                                    <p className='text-sm max-w-[50ch] overflow-hidden text-ellipsis whitespace-nowrap'>{product.produtos.productName}</p>
-                                    <h6 className="text-xl font-bold text-center">{formatPrice(product.produtos.price)}</h6>
+                                <Link className="flex flex-col gap-4" href={`/product/${product.id}`}>
+                                    <Image className="object-cover m-auto" src={product.imageUrl} width={150} height={150} alt="imagem do produto" />
+                                    <span className="text-zinc-400">{product.category}</span>
+                                    <p className='text-sm max-w-[50ch] overflow-hidden text-ellipsis whitespace-nowrap'>{product.name}</p>
+                                    <h6 className="text-xl font-bold text-center">{formatPrice(product.price)}</h6>
                                 </Link>
-                                <div onClick={() => addProduct(product.produtos.id)} className="text-red-300 cursor-pointer absolute right-0 top-0 lg:top-[15px] lg:right-[-100%] w-8 h-8 lg:w-[40px] lg:h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white group-hover:right-2">
+                                <div className="text-red-300 cursor-pointer absolute right-0 top-0 lg:top-[15px] lg:right-[-100%] w-8 h-8 lg:w-[40px] lg:h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white group-hover:right-2">
                                     <FaShoppingCart />
                                 </div>
-                                <div className={`${userFavorite?.includes(product.produtos.id) ? 'bg-red-500 text-white' : ''} text-red-300 cursor-pointer absolute right-0 top-[65px] lg:right-[-100%] w-8 h-8 lg:w-[40px] lg:h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white group-hover:right-2`}>
-                                    <FaHeart onClick={() =>  handleAddToFavorites(product.slug)} />
+                                <div className={`${userFavorite?.includes(product.id) ? 'bg-red-500 text-white' : ''} text-red-300 cursor-pointer absolute right-0 top-[65px] lg:right-[-100%] w-8 h-8 lg:w-[40px] lg:h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white group-hover:right-2`}>
+                                    <FaHeart />
                                 </div>
                             </div>
                         </SwiperSlide>

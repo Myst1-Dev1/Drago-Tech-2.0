@@ -27,29 +27,21 @@ type ProductImage = {
   }
   
   export type Product = {
-    brand: string;
-    category: string[];
-    description: string;
     id: number;
-    popularProduct: boolean;
-    productName: string;
-    slug:string;
-    image: {
-      node: {
-        mediaItemUrl: string;
-      };
-    };
+    name: string;
+    description: string;
+    brand: string;
+    category: string;
+    techInfo: [];
     price: number;
-    recomendedProduct: boolean;
-    inoffer: {
-      isoffer:boolean;
-      priceoffer:number;
-    }
-    similarProducts: {
-      itens: {
-        nodes: SimilarProduct[];
-      };
-    };
+    imageUrl: string;
+    relatedImages: string[];
+    isOffer: boolean;
+    priceOffer: number;
+    popularProduct: boolean;
+    recomendedProduct: boolean,
+    similarProduct: [],
+    comments: []
   }
   
  export type ProductNode = {

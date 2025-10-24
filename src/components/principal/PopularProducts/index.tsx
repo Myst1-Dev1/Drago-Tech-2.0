@@ -1,13 +1,13 @@
-import { ProductNode } from "@/types/products";
+import { Product, ProductNode } from "@/types/products";
 import { CarouselProducts } from "../CarouselProducts";
   
 interface PopularProductsProps {
-    products: ProductNode[];
+    products: Product[];
     user:any;
 }
   
 export function PopularProducts({ products, user }:PopularProductsProps) {
-    const popularProducts = products.filter(product => product.produtos.popularProduct);
+    const popularProducts = products?.filter(product => product.popularProduct);
 
     const userFavorite = user?.[0]?.user?.favorites?.map((favorite: any) => favorite.produtos.id) || [];
 

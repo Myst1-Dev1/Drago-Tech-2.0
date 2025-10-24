@@ -27,11 +27,11 @@ export function OfferProducts({ products, user }:OfferProductsProps) {
     const initialTime = 24 * 60 * 60;
     const [timeLeft, setTimeLeft] = useState(initialTime);
 
-    const offerProducts = products.filter(product => product.produtos.inoffer.isoffer);
+    // const offerProducts = products?.filter(product => product.produtos.inoffer.isoffer);
 
-    function addProduct(id:number) {
-        handleAddToCart(id, offerProducts);
-    }
+    // function addProduct(id:number) {
+    //     handleAddToCart(id, offerProducts);
+    // }
 
     async function handleAddToFavorites(slug:string) {
         await addToFavorites(slug);
@@ -77,7 +77,7 @@ export function OfferProducts({ products, user }:OfferProductsProps) {
                     </div>
                     <Image className="object-cover mt-10" src={limitedTimeImage} width={350} height={200} alt="imagem da edição especial" />
                 </div>
-                <div className="flex flex-col gap-5 w-full">
+                {/* <div className="flex flex-col gap-5 w-full">
                     {offerProducts?.map(offer => (
                         <div key={offer.slug} className="p-5 border border-gray-200 rounded-md flex flex-wrap justify-between items-center w-full transition-all duration-500 hover:bg-black hover:text-white">
                             <Link href={`/product/${offer.slug}`}>
@@ -106,7 +106,7 @@ export function OfferProducts({ products, user }:OfferProductsProps) {
                             </div>
                         </div>
                     ))}
-                </div>
+                </div> */}
             </div>
         </>
     )
