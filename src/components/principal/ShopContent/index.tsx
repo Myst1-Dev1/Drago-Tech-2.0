@@ -3,15 +3,14 @@
 import { Pagination } from "../Pagination";
 import { ShopFilter } from "../ShopFilter";
 import { ShopProducts } from "../ShopProducts";
-import { Product, ProductNode } from "@/types/products";
+import { Product } from "@/types/products";
 import { useState } from "react";
 
 interface ShopContentProps {
     products:Product[];
-    user:any;
 }
 
-export function ShopContent({ products, user }:ShopContentProps) {
+export function ShopContent({ products }:ShopContentProps) {
     const [filteredCategories, setFilteredCategories] = useState<string[] | any>([]);
     const [loading, setLoading] = useState(false);
     const [filterPrice, setFilterPrice] = useState(0);
@@ -41,7 +40,7 @@ export function ShopContent({ products, user }:ShopContentProps) {
             <div className="flex flex-col lg:flex-row gap-12 px-4 py-8">
                 <ShopFilter filterPrice={filterPrice} setFilterPrice={setFilterPrice} setLoading = {setLoading} setFilteredCategory={setFilteredCategories} />
                 <div>
-                    <ShopProducts user={user} loading = {loading} filteredCategory={filteredCategories} filterPrice={filterPrice} productFilteredByPrice={productFilteredByPrice} products={productsData} productsFiltered = {productsFiltered} />
+                    <ShopProducts loading = {loading} filteredCategory={filteredCategories} filterPrice={filterPrice} productFilteredByPrice={productFilteredByPrice} products={productsData} productsFiltered = {productsFiltered} />
                     <Pagination setLoading = {setLoading} itensPerPage = {itensPerPage} data = {products} currentPage = {currentPage} setCurrentPage = {setCurrentPage} />
                 </div>
             </div>

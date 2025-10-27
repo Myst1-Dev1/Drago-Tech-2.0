@@ -11,12 +11,9 @@ import { ProfileFavorites } from "./ProfileFavorites";
 import gsap from "gsap";
 import { User } from "@/types/user";
 import { ProfileModal } from "./ProfileModal";
+import { parseCookies } from "nookies";
 
-interface ProfileDataProps {
-    user:User[] | any;
-}
-
-export function ProfileData({ user }:ProfileDataProps) {
+export function ProfileData() {
     const [profileMenu, setProfileMenu] = useState('');
     const [modal, setModal] = useState(false);
 
@@ -28,25 +25,21 @@ export function ProfileData({ user }:ProfileDataProps) {
         gsap.to('.menu-box', {opacity:1, display:"flex", duration:0.5, onComplete:() => { setProfileMenu('') }})
     }
 
-    const userFavorite = user?.[0]?.user?.favorites;
+    const { 'user-token': user } = parseCookies();
 
-    const userOrder = user?.[0]?.user?.orders;
-
-    console.log(userOrder);
-
-    console.log(user);
+    const data = JSON.parse(user);
 
     return (
         <>
-            {user?.map((user:any, index:number) => ( <div  key={index} className="px-4 lg:px-16 py-8 max-w-[1200px] w-full m-auto">
+             <div className="px-4 lg:px-16 py-8 max-w-[1200px] w-full m-auto">
                 <div className="bg-zinc-50 rounded-md w-full m-auto p-4 flex justify-between items-center flex-wrap lg:gap-0 gap-10">
                     <div className="flex gap-4 items-center">
                         <Image src={profileUserIcon} width={80} height={80} alt="imagem do usuário"/>
                         <div>
-                            <h5 className="font-bold text-2xl">Bem vindo, {user.user.name}</h5>
+                            <h5 className="font-bold text-2xl">Bem vindo, {data?.name}</h5>
                             <div className="flex gap-3 items-center">
                                 <FaEnvelope className="text-xs text-red-500" />
-                                <span className="text-gray-500 font-bold">{user.user.email}</span>
+                                <span className="text-gray-500 font-bold">{data?.email}</span>
                             </div>
                         </div>
                     </div>
@@ -82,10 +75,10 @@ export function ProfileData({ user }:ProfileDataProps) {
                         </div>
                     </div>
                 </div>
-                {profileMenu === 'info' ? <ProfileInformations user={user} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''}
-                {profileMenu === 'order' ? <ProfileOrders user={userOrder} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''}
-                {profileMenu === 'favorite' ? <ProfileFavorites favorites={userFavorite} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''}
-            </div>))}
+                {profileMenu === 'info' ? <ProfileInformations user={data} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''}
+                {/* {profileMenu === 'order' ? <ProfileOrders user={userOrder} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''}
+                {profileMenu === 'favorite' ? <ProfileFavorites favorites={userFavorite} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''} */}
+            </div>
 
             {modal && <ProfileModal setModal = {setModal} />}
         </>

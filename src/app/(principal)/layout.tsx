@@ -3,7 +3,6 @@ import { Footer } from "@/components/principal/Footer";
 import { Header } from "@/components/principal/Header";
 import { ToastContainer } from 'react-toastify';
 import type { Metadata } from "next";
-import Session from "@/components/Session";
 
 export const metadata: Metadata = {
   title: "Drago Tech",
@@ -17,12 +16,10 @@ export default function PrincipalLayout({
 }) {
   return (
     <>
-        <Session>
           <Header />
           {children}
           <ToastContainer position="top-right" theme="light" />
           <Footer />
-        </Session>
     </>
   );
 }

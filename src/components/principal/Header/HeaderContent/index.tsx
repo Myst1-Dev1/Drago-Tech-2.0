@@ -11,7 +11,6 @@ import { useEffect, useState } from "react";
 import { ProductNode } from "@/types/products";
 import { Search } from "../../Search";
 import { useCart } from "@/services/hooks/useCart";
-import { signOut, useSession } from "next-auth/react";
 import { parseCookies, destroyCookie } from "nookies";
 import { useRouter } from "next/navigation";
 
@@ -22,8 +21,6 @@ interface HeaderContentProps {
 export function HeaderContent({ products }:HeaderContentProps) {
     const { cart, setCartFromCookies } = useCart();
 
-    const { status } = useSession();
-
     const router = useRouter();
 
     const [isCartOpen, setIsCartOpen] = useState(false);
@@ -31,10 +28,11 @@ export function HeaderContent({ products }:HeaderContentProps) {
 
 
     function handleSignOut() {
-        destroyCookie(undefined, 'user');
-        signOut();
+        destroyCookie(undefined, 'user-token');
         router.push('/');
     }
+
+    const { 'user-token': userToken } = parseCookies();
 
     useEffect(() => {
         const { 'cart-cookie': token } = parseCookies();
@@ -63,7 +61,7 @@ export function HeaderContent({ products }:HeaderContentProps) {
                             </div>}
                             <FaShoppingCart onClick={() => setIsCartOpen(true)}  className="transition-all duration-500 hover:text-red-600" />
                         </div>
-                        {status === 'authenticated' ? 
+                        {userToken ? 
                            <div className="flex items-center gap-3">
                                 <Link href='/profile'>
                                     <Image src={userIcon} width={20} height={20} alt="icone de usuário" />
@@ -88,7 +86,7 @@ export function HeaderContent({ products }:HeaderContentProps) {
                         <h6 className="transition-all duration-500 hover:text-red-600">Carrinho</h6>
                     </div>
                     
-                        {status === 'authenticated' ? 
+                        {userToken ? 
                             <div className="flex items-center gap-6">
                                 <Link href='/profile'>
                                     <Image src={userIcon} width={40} height={40} alt="icone de usuário" />

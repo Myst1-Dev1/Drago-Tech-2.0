@@ -13,7 +13,7 @@ export default async function Profile() {
 
     return (
         <>
-            <ProfileData user={user} />
+            <ProfileData />
         </>
     )
 }

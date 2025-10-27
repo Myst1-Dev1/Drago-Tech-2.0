@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export default function middleware(request: NextRequest) {
-    const token = request.cookies.get('user')?.value;
+    const token = request.cookies.get('user-token')?.value;
     const page401 = new URL('/page401', request.url);
     const homeURL = new URL('/', request.url);
 
