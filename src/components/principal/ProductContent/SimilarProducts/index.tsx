@@ -15,6 +15,7 @@ interface SimilarProductsProps {
 export function SimilarProducts({ similarProducts }:SimilarProductsProps) {
     return (
         <>
+            {similarProducts?.length === 0 ? '' :
               <div className="relative flex flex-col gap-4">
                 <h6 className="text-xl font-bold">Produtos Similares</h6>
                 <div className="max-w-[380px] overflow-x-hidden flex gap-8">
@@ -62,7 +63,7 @@ export function SimilarProducts({ similarProducts }:SimilarProductsProps) {
                         <MdOutlineArrowForwardIos className="text-gray-500 text-sm" />
                     </div>
                 </div> 
-            </div>
+            </div>}
         </>
     )
 }

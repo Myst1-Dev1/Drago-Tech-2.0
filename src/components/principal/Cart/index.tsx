@@ -28,9 +28,9 @@ export function Cart({ setIsCartOpen }:CartProps) {
                                 {cart.length === 0 ? 'Não há itens no seu carrinho' : cart?.map(item => (
                                     <div key={item.product.id} className="flex justify-between items-center">
                                         <div className="flex items-center gap-6">    
-                                            <Image className="w-[80px] h-[80px] object-cover" src={item.product.image.node.mediaItemUrl} width={80} height={80} alt="imagem do produto no carrinho" />
+                                            <Image className="w-[80px] h-[80px] object-cover" src={item.product.imageUrl} width={80} height={80} alt="imagem do produto no carrinho" />
                                             <div className="flex flex-col gap-4">
-                                                <h5>{item.product.productName}</h5>
+                                                <h5>{item.product.name}</h5>
                                                 <h6 className="font-bold text-xl">{formatPrice(item.product.price * item.quantity)}</h6>
                                                 <div className="flex">
                                                     <div onClick={() => handleDecreaseQuantity(item.product.id)} className="flex justify-center items-center w-[30px] h-[30px] p-2 border border-gray-300 cursor-pointer transition-all duration-500 hover:bg-red-500 hover:text-white hover:border-none">

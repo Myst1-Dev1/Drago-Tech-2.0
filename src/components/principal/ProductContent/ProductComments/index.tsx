@@ -2,18 +2,10 @@ import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { Pagination } from "../../Pagination";
 import { SkeletonComments } from "../../SkeletonComments";
-import { formatDate } from "@/utils/formatDate";
+import { Comments } from "@/types/products";
 
 interface ProductCommentsProps {
-    comments: {
-        author: {
-          node: {
-            name: string;
-          };
-        };
-        content: string;
-        date: string;
-      }[];
+    comments: Comments[];
 }
 
 export function ProductComments({ comments }:ProductCommentsProps) {
@@ -26,6 +18,8 @@ export function ProductComments({ comments }:ProductCommentsProps) {
     const endIndex = startIndex + itensPerPage;
     const commentsData = comments.slice(startIndex, endIndex);
 
+    console.log(comments);
+
     return (
         <>
             <div className="py-12">
@@ -37,19 +31,18 @@ export function ProductComments({ comments }:ProductCommentsProps) {
                     <div className="mt-12 w-full flex gap-10 lg:gap-12 justify-between flex-wrap">
                     {commentsData.length === 0 ? <span>Produto sem avaliações 😞</span> : loading ? <SkeletonComments count={commentsData.length}/> : commentsData?.map((comment, index) => (
                         <div key={index} className="m-auto lg:m-0 max-w-[450px] w-full border-b border-gray-400 flex flex-col gap-4">
-                            <h5 className="font-bold">{comment?.author.node.name}</h5>
+                            <h5 className="font-bold">{comment?.clientName}</h5>
                             <div className="flex flex-col gap-2">
-                                {/* <div className="flex items-center gap-3">
-                                    <FaStar className="text-yellow-400" />
-                                    <FaStar className="text-yellow-400" />
-                                    <FaStar className="text-yellow-400" />
-                                    <FaStar className="text-yellow-400" />
-                                    <FaStar className="text-yellow-400" />
-                                </div> */}
-                                <span className="text-gray-400">Avaliado em {formatDate(comment?.date)}</span>
+                                <div className="flex items-center gap-3">
+                                    {[...Array(comment?.rating)].map((_, i) => (
+                                        <FaStar
+                                        key={i}
+                                        className={i < comment.rating ? "text-yellow-400" : "text-gray-300"}
+                                        />
+                                    ))}
+                                </div>
                             </div>
-                            {/* <h6 className="font-bold">Incrível</h6> */}
-                            <div dangerouslySetInnerHTML={{ __html: comment.content }} />
+                            <p className="font-normal text-gray-400">{comment.content}</p>
                         </div>
                         ))}
                     </div>

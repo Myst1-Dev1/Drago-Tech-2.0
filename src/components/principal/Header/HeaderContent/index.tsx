@@ -8,14 +8,14 @@ import Link from "next/link";
 import { NavBar } from "../../NavBar";
 import { Cart } from "../../Cart";
 import { useEffect, useState } from "react";
-import { ProductNode } from "@/types/products";
+import { Product, ProductNode } from "@/types/products";
 import { Search } from "../../Search";
 import { useCart } from "@/services/hooks/useCart";
 import { parseCookies, destroyCookie } from "nookies";
 import { useRouter } from "next/navigation";
 
 interface HeaderContentProps {
-    products: ProductNode[];
+    products: Product[];
 }
 
 export function HeaderContent({ products }:HeaderContentProps) {

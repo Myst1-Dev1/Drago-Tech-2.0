@@ -2,12 +2,8 @@ export type Cart = {
     product: {
         brand: string;
         id: number;
-        productName: string;
-        image: {
-            node: {
-                mediaItemUrl: string;
-            };
-        };
+        name: string;
+        imageUrl: string;
         price: number;
     };
     quantity: number;

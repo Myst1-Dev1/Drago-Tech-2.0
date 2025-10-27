@@ -1,12 +1,12 @@
 import { Cart } from "@/types/cart";
-import { ProductNode } from "@/types/products";
+import { Product } from "@/types/products";
 import { toast } from "react-toastify";
 import { create } from "zustand";
 import { setCookie } from 'nookies';
 
 interface CartState {
   cart: Cart[];
-  handleAddToCart: (id: number, data: ProductNode[]) => void;
+  handleAddToCart: (id: number, data: Product[]) => void;
   totalCart: () => string;
   handleDeleteProductToCart: (id: number) => void;
   handleIncreaseQuantity: (id: number) => void;
@@ -21,9 +21,9 @@ export const useCart = create<CartState>((set, get) => ({
     set(() => ({ cart: cartFromCookie }));
 },
 
-  handleAddToCart: (id: number, data: ProductNode[]) => {
+  handleAddToCart: (id: number, data: Product[]) => {
     set((state) => {
-      const productItem = data.find((product: ProductNode) => product.produtos.id === id);
+      const productItem = data.find((product: Product) => product.id === id);
 
       if (!productItem) {
         console.error("Produto não encontrado");
@@ -36,7 +36,7 @@ export const useCart = create<CartState>((set, get) => ({
         ? state.cart.map((item) =>
             item.product.id === id ? { ...item, quantity: item.quantity + 1 } : item
           )
-        : [...state.cart, { product: productItem.produtos, quantity: 1 }];
+        : [...state.cart, { product: productItem, quantity: 1 }];
 
       toast.success('Produto adicionado ao carrinho');
 

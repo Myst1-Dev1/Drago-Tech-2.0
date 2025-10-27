@@ -1,17 +1,15 @@
 'use client';
 
-import { ProductTechInfo } from "@/utils/dataProducts";
+import { TechInfo } from "@/types/products";
 import { useState } from "react";
 
 interface ProductsInformationsProps {
+    info: TechInfo[];
     description:string;
-    id:number;
 }
 
-export function ProductsInformations({ description, id }:ProductsInformationsProps) {
+export function ProductsInformations({ info, description }:ProductsInformationsProps) {
     const [isActiveTab, setIsActiveTab] = useState('description');
-
-    const techInfoData = ProductTechInfo.filter(info => info.id === id);
 
     const handleTabClick = (tab: string) => {
         setIsActiveTab(tab);
@@ -42,14 +40,12 @@ export function ProductsInformations({ description, id }:ProductsInformationsPro
                     )}
                   {isActiveTab === 'information' && (
                     <div className={`w-full mt-8 gap-6 m-auto ${isActiveTab === 'information' ? 'fadeIn' : ''}`}>
-                        {techInfoData.map(info => (
-                            <div key={info.id} className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                                {info.techInfo.map(infoTech => (
-                                    <div key={infoTech.id} className="w-full flex-flow flex justify-between items-center">
-                                        <h6 className="font-bold">{infoTech.techInfoTitle}</h6>
-                                        <span className="text-gray-500 text-xs lg:text-sm">{infoTech.techInfoValue}</span>
-                                    </div>
-                                ))}
+                        {info.map((info, index: number) => (
+                            <div key={index} className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                                <div className="w-full flex-flow flex justify-between items-center">
+                                    <h6 className="font-bold">{info.techInfoTitle}</h6>
+                                    <span className="text-gray-500 text-xs lg:text-sm">{info.techInfoValue}</span>
+                                </div>
                             </div>
                         ))}
                     </div>

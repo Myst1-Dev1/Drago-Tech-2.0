@@ -15,8 +15,6 @@ export default async function Home() {
     const cookie: any = cookies().get('user');
     const userId = cookie?.value;
 
-    console.log('aquiii',products);
-
     const user = await fetchUser(userId);
 
     return (

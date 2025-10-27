@@ -25,6 +25,17 @@ type ProductImage = {
         }
       ]
   }
+
+  export type TechInfo = {
+    techInfoTitle: string;
+    techInfoValue: string;
+  }
+
+  export type Comments = {
+    clientName: string;
+    content: string;
+    rating: number;
+  }
   
   export type Product = {
     id: number;
@@ -32,7 +43,7 @@ type ProductImage = {
     description: string;
     brand: string;
     category: string;
-    techInfo: [];
+    techInfo: TechInfo[];
     price: number;
     imageUrl: string;
     relatedImages: string[];
@@ -41,7 +52,7 @@ type ProductImage = {
     popularProduct: boolean;
     recomendedProduct: boolean,
     similarProduct: [],
-    comments: []
+    comments: Comments[]
   }
   
  export type ProductNode = {

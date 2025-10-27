@@ -33,8 +33,6 @@ export function ShopContent({ products }:ShopContentProps) {
         return product.price >= filterPrice;
     });
 
-    console.log('aqui estou', products);
-
     return (
         <>
             <div className="flex flex-col lg:flex-row gap-12 px-4 py-8">

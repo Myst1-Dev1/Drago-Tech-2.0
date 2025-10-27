@@ -1,21 +1,20 @@
-import { Product, ProductNode } from "@/types/products";
+import { Product } from "@/types/products";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 
 interface SearchProps {
-    products:ProductNode[];
+    products:Product[];
 }
 
 export function Search({ products }:SearchProps) {
     const [search, setSearch] = useState('');
     
     const productsData = products
-    ?.map(product => ({
-        ...product.produtos,
-        slug: product.slug   
-    }))?.filter((product: Product) => product.productName?.toLowerCase().includes(search.toLowerCase()));
+    ?.filter((product) =>
+      product.name?.toLowerCase().includes(search.toLowerCase())
+    );
 
     return (
         <>
@@ -33,16 +32,16 @@ export function Search({ products }:SearchProps) {
                     </div>
                 </div>
                 <div className="absolute top-[56px] left-0 right-0">
-                    {search === '' ? '' : productsData.length === 0 ? 
+                    {search === '' ? '' : productsData?.length === 0 ? 
                     <div className="h-[61px] w-full flex items-center gap-3 px-4 bg-white border border-l-gray-300 border-r-gray-300 border-b-gray-300 border-t-0">
                         <p className="text-slate-400">Sem produtos para sua pesquisa</p>
                     </div> 
                     : 
-                    productsData.map(srcproduct => (
-                        <Link onClick={() => setSearch('')} key={srcproduct.id} href={`/product/${srcproduct.slug}`}>
+                    productsData?.map(srcproduct => (
+                        <Link onClick={() => setSearch('')} key={srcproduct.id} href={`/product/${srcproduct.id}`}>
                             <div className="w-full flex items-center gap-3 px-4 bg-white border border-l-gray-300 border-r-gray-300 border-b-gray-300 border-t-0">
-                                <Image src={srcproduct.image.node.mediaItemUrl} width={60} height={60} alt="imagem do produto pesquisado" />
-                                <p className="text-sm max-w-[50ch] overflow-hidden text-ellipsis whitespace-nowrap">{srcproduct.productName}</p>
+                                <Image src={srcproduct.imageUrl} width={60} height={60} alt="imagem do produto pesquisado" />
+                                <p className="text-sm max-w-[50ch] overflow-hidden text-ellipsis whitespace-nowrap">{srcproduct.name}</p>
                             </div>
                         </Link>
                     ))}

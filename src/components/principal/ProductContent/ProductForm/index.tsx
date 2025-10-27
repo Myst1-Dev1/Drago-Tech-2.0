@@ -1,7 +1,8 @@
+import { createComment } from "@/actions/productActions";
 import gsap from "gsap";
-import { parseCookies } from "nookies";
-import { FormEvent, useState } from "react";
-import { FaPlus } from "react-icons/fa";
+import { useState } from "react";
+import { useFormState } from "react-dom";
+import { FaPlus, FaStar } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 interface ProductFormProps {
@@ -9,56 +10,25 @@ interface ProductFormProps {
 }
 
 export function ProductForm({ commentOn }:ProductFormProps) {
-  const [isLoading, setIsLoading] = useState(false);
   const [isFormVisible, setIsFormVisible] = useState(false);
-  const [errorText, setErrorText] = useState('');
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0);
 
-  const { 'user': userId } = parseCookies();
+    async function actionWithId(prevState: any, formData: FormData) {
+      const result = await createComment(prevState, commentOn, formData);
 
-    async function handleCreateProductComment(e: FormEvent | any) {
-        e.preventDefault();
-
-        setIsLoading(true);
-        setErrorText('');
-    
-        const formData = new FormData(e.target);
-        const formEntries = Object.fromEntries(formData.entries());
-        const { author, content } = formEntries as { [key: string]: string };
-    
-        const commentData = {
-          author,
-          content,
-          commentOn,
-        };
-
-        try {
-          const response = await fetch('/api/comment', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(commentData),
-          });
-    
-          if (response.ok) {
-            const result = await response.json();
-            console.log(result);
-            toast.success('Comentário enviado com sucesso');
-            setIsLoading(false);
-          } else {
-            if(!userId) {
-              setErrorText('Você precisa estár logado para isso');
+      if (result?.success) {
+            if (result.success) {
+                toast.success(result.message);
             } else {
-              setErrorText('Preencha todos os campos')
+                toast.error(result.message);
             }
-            setIsLoading(false);
-            console.error('Erro ao enviar comentário:', response.statusText);
-          }
-        } catch (error) {
-          console.error('Erro de rede:', error);
-          setIsLoading(false);
         }
-      }
+
+        return result;
+    }
+
+    const [formState, formAction, pending] = useFormState(actionWithId, { success: false });
 
     function handleShowAvaliationForm() {
       setIsFormVisible(!isFormVisible);
@@ -77,18 +47,27 @@ export function ProductForm({ commentOn }:ProductFormProps) {
                     <FaPlus onClick={handleShowAvaliationForm} className="cursor-pointer text-red-500" />
                     <h2 className="font-bold text-xl">Avaliar produto</h2>
                 </div>
-                <form onSubmit={handleCreateProductComment} className="avaliation-form opacity-0 overflow-hidden h-0 mt-12 flex justify-center items-center m-auto flex-col gap-5 max-w-[900px]">
-                    <input className="outline-none p-4 rounded-md w-full border border-gray-300" type="text" placeholder="Nome" name="author" />
-                    {/* <select className="text-gray-400 outline-none p-4 rounded-md w-full border border-gray-300">
-                        <option value="Longe do perfrito">Longe do perfeito</option>
-                        <option value="Bom">Bom</option>
-                        <option value="Incrível">Incrível</option>
-                        <option value="Excelente">Excelente</option>
-                    </select> */}
+                <form action={formAction} className="avaliation-form opacity-0 overflow-hidden h-0 mt-12 flex justify-center items-center m-auto flex-col gap-5 max-w-[900px]">
+                    <input className="outline-none p-4 rounded-md w-full border border-gray-300" type="text" placeholder="Nome" name="clientName" />
                     <textarea className="resize-none h-28 outline-none p-4 rounded-md w-full border border-gray-300" placeholder="Avaliação" name="content"/>
-                    {errorText !== '' ? <span className="py-3 text-red-600 font-bold text-center">{errorText}</span> : ''}
+                     <input type="number" name="rating" value={rating} className="hidden" readOnly />
+                      <div className="flex items-center gap-3 cursor-pointer">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <FaStar
+                            key={star}
+                            size={24}
+                            onClick={() => setRating(star)}
+                            onMouseEnter={() => setHover(star)}
+                            onMouseLeave={() => setHover(0)}
+                            className={`transition-colors duration-500 ${
+                              star <= (hover || rating) ? "text-yellow-400" : "text-gray-400"
+                            }`}
+                          />
+                        ))}
+                        </div>
+                    {/* {errorText !== '' ? <span className="py-3 text-red-600 font-bold text-center">{errorText}</span> : ''} */}
                     <button className="p-4 rounded-md w-72 text-white font-bold bg-red-500 transition-all duration-500 hover:bg-red-700">
-                        {isLoading ? 
+                        {pending ? 
                             <div role="status">
                             <svg aria-hidden="true" className="m-auto w-8 h-8 text-gray-200 animate-spin dark:text-gray-500 fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
