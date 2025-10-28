@@ -8,6 +8,97 @@ interface SignInResult {
   message?: string;
 }
 
+export async function createProduct(
+    _:SignInResult, 
+    techInfo: { techInfoTitle: string; techInfoValue: string }[], 
+    formData: FormData): Promise<SignInResult> {
+    
+    const image = formData.get("image") as File | null;
+    const relatedImages = formData.getAll("relatedImages") as File[];
+    const name = formData.get("name")?.toString() ?? "";
+    const price = formData.get("price")?.toString() ?? "";
+    const brand = formData.get("brand")?.toString() ?? "";
+    const category = formData.get("category")?.toString() ?? "";
+    const description = formData.get("description")?.toString() ?? "";
+    const isOffer = formData.get('isOffer') === 'on';
+    const priceOffer = formData.get('priceOffer')?.toString() ?? '';
+    const recomendedProduct = formData.get('recomendedProduct') === 'on';
+    const popularProduct = formData.get('popularProduct') === 'on';
+
+    try {
+        const body = new FormData();
+        body.append("name", name);
+        body.append("price", price);
+        body.append("brand", brand);
+        body.append("category", category);
+        body.append("description", description);
+        body.append("techInfo", JSON.stringify(techInfo));
+        body.append('isOffer', JSON.stringify(isOffer));
+        body.append('priceOffer', priceOffer);
+        body.append('recomendedProduct', JSON.stringify(recomendedProduct));
+        body.append('popularProduct', JSON.stringify(popularProduct));
+
+        const cookieStore = cookies();
+        const rawCookie = cookieStore.get("user-token")?.value;
+
+        const parsedCookie = rawCookie ? JSON.parse(rawCookie) : null;
+        const token = parsedCookie?.token;
+
+        if(!token) return { success: false, message: 'Sem autorização' };
+
+        if (image) {
+            body.append("image", image, image.name);
+        }
+
+        relatedImages.forEach((file, index) => {
+            body.append("relatedImages", file, file.name);
+        });
+
+        console.log(body);
+
+        await fetch("http://lab.mystdev.com.br/api/Drago-Tech-Api/products", {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            body,
+        });
+
+        console.log('Produto criado com sucesso');
+
+        return { success: true, message: 'Produto criado com sucesso !' };
+    } catch (error) {
+        console.log(error);
+        return { success: false, message: 'Produto criado com sucesso !' };        
+    }
+}
+
+export async function deleteProduct(id: number) {
+    try {
+        const cookieStore = cookies();
+        const rawCookie = cookieStore.get("user-token")?.value;
+
+        const parsedCookie = rawCookie ? JSON.parse(rawCookie) : null;
+        const token = parsedCookie?.token;
+
+        if(!token) return { success: false, message: 'Sem autorização' };
+
+        await fetch('http://lab.mystdev.com.br/api/Drago-Tech-Api/products/' + id, {
+             method: 'DELETE',
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+        });
+
+        revalidatePath('/admin/products');
+
+        console.log('Produto deletado com sucesso !');
+    } catch (error) {
+        console.log('Erro ao deletar o produto !', error);
+    }
+}
+
 export async function createComment(_: SignInResult, id:number, formData: FormData): Promise<SignInResult> {
     const clientName = formData.get("clientName")?.toString();
     const content = formData.get("content")?.toString();
