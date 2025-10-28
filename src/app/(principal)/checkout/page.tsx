@@ -122,7 +122,7 @@ export default function Checkout() {
                             <div className="mt-6 border-b flex flex-col gap-4 border-gray-400 pb-6">
                                 {cart.map(item => (
                                 <div key={item.product.id} className="flex justify-between w-full">
-                                    <h6 className="max-w-[35ch] overflow-hidden text-ellipsis whitespace-nowrap">{item.product.productName}</h6>
+                                    <h6 className="max-w-[35ch] overflow-hidden text-ellipsis whitespace-nowrap">{item.product.name}</h6>
                                     <h6 className="font-bold">{formatPrice(item.product.price)}</h6>
                                 </div>
                                 ))}

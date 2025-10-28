@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { FaCircleCheck } from "react-icons/fa6";
 
-
 export default function SuccessPage() {
     return (
         <>
