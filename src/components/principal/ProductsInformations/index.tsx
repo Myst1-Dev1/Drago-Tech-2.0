@@ -39,11 +39,11 @@ export function ProductsInformations({ info, description }:ProductsInformationsP
                         </p>
                     )}
                   {isActiveTab === 'information' && (
-                    <div className={`w-full mt-8 gap-6 m-auto ${isActiveTab === 'information' ? 'fadeIn' : ''}`}>
+                    <div className={`grid grid-cols-1 lg:grid-cols-2 w-full mt-8 gap-6 m-auto ${isActiveTab === 'information' ? 'fadeIn' : ''}`}>
                         {info.map((info, index: number) => (
-                            <div key={index} className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                                <div className="w-full flex-flow flex justify-between items-center">
-                                    <h6 className="font-bold">{info.techInfoTitle}</h6>
+                            <div key={index} className="w-full grid grid-cols-1 lg:grid-cols-2 gap-4">
+                                <div className="w-full flex-col flex lg:justify-between lg:items-center">
+                                    <h6 className="font-bold mr-auto">{info.techInfoTitle}</h6>
                                     <span className="text-gray-500 text-xs lg:text-sm">{info.techInfoValue}</span>
                                 </div>
                             </div>

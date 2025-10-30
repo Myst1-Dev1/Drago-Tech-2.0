@@ -21,7 +21,10 @@ export async function createProduct(
     const category = formData.get("category")?.toString() ?? "";
     const description = formData.get("description")?.toString() ?? "";
     const isOffer = formData.get('isOffer') === 'on';
-    const priceOffer = formData.get('priceOffer')?.toString() ?? '';
+
+    const priceOfferRaw = formData.get('priceOffer')?.toString() ?? '';
+    const priceOfferValue = priceOfferRaw.trim() === '' ? 'null' : priceOfferRaw;
+    
     const recomendedProduct = formData.get('recomendedProduct') === 'on';
     const popularProduct = formData.get('popularProduct') === 'on';
 
@@ -33,16 +36,18 @@ export async function createProduct(
         body.append("category", category);
         body.append("description", description);
         body.append("techInfo", JSON.stringify(techInfo));
-        body.append('isOffer', JSON.stringify(isOffer));
-        body.append('priceOffer', priceOffer);
-        body.append('recomendedProduct', JSON.stringify(recomendedProduct));
-        body.append('popularProduct', JSON.stringify(popularProduct));
+        body.append('priceOffer', priceOfferValue);
+        body.append('isOffer', isOffer.toString());
+        body.append('recomendedProduct', recomendedProduct.toString());
+        body.append('popularProduct', popularProduct.toString());
 
         const cookieStore = cookies();
         const rawCookie = cookieStore.get("user-token")?.value;
 
         const parsedCookie = rawCookie ? JSON.parse(rawCookie) : null;
         const token = parsedCookie?.token;
+
+        console.log(token);
 
         if(!token) return { success: false, message: 'Sem autorização' };
 
@@ -56,13 +61,19 @@ export async function createProduct(
 
         console.log(body);
 
-        await fetch("http://lab.mystdev.com.br/api/Drago-Tech-Api/products", {
+        const response = await fetch("http://lab.mystdev.com.br/api/Drago-Tech-Api/products", {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${token}`,
             },
             body,
         });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('Falha na API:', response.status, errorData);
+            throw new Error(`Falha ao criar produto: ${response.status} - ${errorData.message || 'Erro desconhecido'}`);
+        }
 
         console.log('Produto criado com sucesso');
 
