@@ -137,9 +137,11 @@ export async function createComment(_: SignInResult, id:number, formData: FormDa
             body: JSON.stringify({ clientName, content, rating:ratingValue })
         });
 
-        const data = await res.json();
-
-        console.log(data);
+        if (!res.ok) {
+            const errorData = await res.json();
+            console.error('Falha na API:', res.status, errorData);
+            throw new Error(`Falha ao criar produto: ${res.status} - ${errorData.message || 'Erro desconhecido'}`);
+        }
 
         revalidatePath('/product/' + id);
 

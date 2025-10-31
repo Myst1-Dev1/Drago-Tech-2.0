@@ -1,6 +1,6 @@
 import { createComment } from "@/actions/productActions";
 import gsap from "gsap";
-import { useActionState, useState } from "react";
+import { useActionState, useRef, useState } from "react";
 import { FaPlus, FaStar } from "react-icons/fa";
 import { toast } from "react-toastify";
 
@@ -13,12 +13,17 @@ export function ProductForm({ commentOn }:ProductFormProps) {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
 
+  const formRef = useRef<HTMLFormElement>(null);
+
     async function actionWithId(prevState: any, formData: FormData) {
       const result = await createComment(prevState, commentOn, formData);
 
       if (result?.success) {
             if (result.success) {
                 toast.success(result.message);
+                setRating(0);
+                setHover(0);
+                formRef.current?.reset();
             } else {
                 toast.error(result.message);
             }
@@ -46,7 +51,7 @@ export function ProductForm({ commentOn }:ProductFormProps) {
                     <FaPlus onClick={handleShowAvaliationForm} className="cursor-pointer text-red-500" />
                     <h2 className="font-bold text-xl">Avaliar produto</h2>
                 </div>
-                <form action={formAction} className="avaliation-form opacity-0 overflow-hidden h-0 mt-12 flex justify-center items-center m-auto flex-col gap-5 max-w-[900px]">
+                <form ref={formRef} action={formAction} className="avaliation-form opacity-0 overflow-hidden h-0 mt-12 flex justify-center items-center m-auto flex-col gap-5 max-w-[900px]">
                     <input className="outline-none p-4 rounded-md w-full border border-gray-300" type="text" placeholder="Nome" name="clientName" />
                     <textarea className="resize-none h-28 outline-none p-4 rounded-md w-full border border-gray-300" placeholder="Avaliação" name="content"/>
                      <input type="number" name="rating" value={rating} className="hidden" readOnly />

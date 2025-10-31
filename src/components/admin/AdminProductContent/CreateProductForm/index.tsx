@@ -1,22 +1,20 @@
 import { createProduct } from "@/actions/productActions";
-import { Dispatch, SetStateAction, useActionState, useState } from "react";
+import { useActionState, useRef, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { FaUpload } from "react-icons/fa6";
 
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
 
-interface CreateProductFormProps {
-    setOpenProductForm: Dispatch<SetStateAction<boolean>>
-}
-
-export function CreateProductForm({ setOpenProductForm }:CreateProductFormProps) {
+export function CreateProductForm() {
     const [techInfo, setTechInfo] = useState({ techInfoTitle: "", techInfoValue: "" });
     const [techInfoList, setTechInfoList] = useState<
         { techInfoTitle: string; techInfoValue: string }[]
     >([]);
     const [file, setFile] = useState<File | null>();
     const [files, setFiles] = useState<FileList | null>(null);
+
+    const formRef = useRef<HTMLFormElement>(null);
 
     async function handleCreateProduct(prevState: any, formData: FormData) {
         try {
@@ -26,7 +24,7 @@ export function CreateProductForm({ setOpenProductForm }:CreateProductFormProps)
                 if (result.success) {
                     alert('Produto criado com sucesso');
 
-                    setOpenProductForm(true)
+                    formRef.current!.reset();
                 } else {
                     alert('Tivemos um erro na criação do produto');
                 }
@@ -64,7 +62,7 @@ export function CreateProductForm({ setOpenProductForm }:CreateProductFormProps)
         <>
             <div className="px-4 mt-4">
                 <h3 className="text-xl font-bold">Cadastrar novo produto</h3>
-                <form action={formAction} className="py-6 max-w-[29rem] w-full">
+                <form ref={formRef} action={formAction} className="py-6 max-w-[29rem] w-full">
                     <div className="flex flex-col gap-4">
                         <label 
                             htmlFor="image" 

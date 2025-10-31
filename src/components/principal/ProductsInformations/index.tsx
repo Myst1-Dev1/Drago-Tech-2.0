@@ -45,7 +45,7 @@ export function ProductsInformations({ info, description }:ProductsInformationsP
                             <div key={index} className="w-full grid grid-cols-1 lg:grid-cols-2 gap-4">
                                 <div className="w-full flex-col flex lg:justify-between lg:items-center">
                                     <h6 className="font-bold mr-auto">{info.techInfoTitle}</h6>
-                                    <span className="text-gray-500 text-xs lg:text-sm">{info.techInfoValue}</span>
+                                    <span className="mr-auto mb-auto text-gray-500 text-xs lg:text-sm">{info.techInfoValue}</span>
                                 </div>
                             </div>
                         ))}
