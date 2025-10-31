@@ -1,7 +1,6 @@
 import { createComment } from "@/actions/productActions";
 import gsap from "gsap";
-import { useState } from "react";
-import { useFormState } from "react-dom";
+import { useActionState, useState } from "react";
 import { FaPlus, FaStar } from "react-icons/fa";
 import { toast } from "react-toastify";
 
@@ -28,7 +27,7 @@ export function ProductForm({ commentOn }:ProductFormProps) {
         return result;
     }
 
-    const [formState, formAction, pending] = useFormState(actionWithId, { success: false });
+    const [formState, formAction, pending] = useActionState(actionWithId, { success: false });
 
     function handleShowAvaliationForm() {
       setIsFormVisible(!isFormVisible);

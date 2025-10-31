@@ -41,7 +41,7 @@ export function AdminProductClient({ products }:AdminProductClientProps) {
                         ))}
                     </div>
                     :
-                    <CreateProductForm />
+                    <CreateProductForm setOpenProductForm = {setOpenProductForm} />
                 }
             </div>
         </>

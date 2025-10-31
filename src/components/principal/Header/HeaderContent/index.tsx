@@ -29,7 +29,7 @@ export function HeaderContent({ products }:HeaderContentProps) {
 
     function handleSignOut() {
         destroyCookie(undefined, 'user-token');
-        router.push('/');
+        router.refresh();
     }
 
     const { 'user-token': userToken } = parseCookies();

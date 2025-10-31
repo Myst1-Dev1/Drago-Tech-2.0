@@ -83,7 +83,7 @@ export async function login(_: SignInResult, formData: FormData): Promise<SignIn
 
         const token = data;
 
-        const cookieStore = cookies();
+        const cookieStore = await cookies();
             cookieStore.set({
             name: "user-token",
             value: JSON.stringify(token),

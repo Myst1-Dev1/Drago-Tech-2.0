@@ -3,13 +3,10 @@ import { CarouselProducts } from "../CarouselProducts";
 
 interface RecomendedProductsProps {
     products: ProductNode[];
-    user:any;
 }
 
-export function RecomendedProducts({ products, user }:RecomendedProductsProps) {
+export function RecomendedProducts({ products }:RecomendedProductsProps) {
     // const recomendedProducts = products?.filter(product => product.produtos.recomendedProduct);
-
-    const userFavorite = user?.[0]?.user?.favorites?.map((favorite: any) => favorite.produtos.id) || [];
 
     return (
         <>

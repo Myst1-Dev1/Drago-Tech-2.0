@@ -8,21 +8,17 @@ import { ProductNode } from "@/types/products";
 import { formatPrice } from "@/utils/useFormatPrice";
 import Link from "next/link";
 import { useCart } from "@/services/hooks/useCart";
-import { addToFavorites } from "@/services/createFavorites";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 interface OfferProductsProps {
     products: ProductNode[];
-    user:any;
 }
 
-export function OfferProducts({ products, user }:OfferProductsProps) {
+export function OfferProducts({ products }:OfferProductsProps) {
     const { handleAddToCart } = useCart();
 
     const router = useRouter();
-
-    const userFavorite = user?.[0]?.user?.favorites?.map((favorite: any) => favorite.produtos.id) || [];
 
     const initialTime = 24 * 60 * 60;
     const [timeLeft, setTimeLeft] = useState(initialTime);
@@ -32,12 +28,6 @@ export function OfferProducts({ products, user }:OfferProductsProps) {
     // function addProduct(id:number) {
     //     handleAddToCart(id, offerProducts);
     // }
-
-    async function handleAddToFavorites(slug:string) {
-        await addToFavorites(slug);
-
-        router.refresh();
-    }
 
     function handleCopyLink (slug:string) {
         const productUrl = `${window.location.origin}/product/${slug}`;

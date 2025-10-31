@@ -34,9 +34,10 @@ export function ProductsInformations({ info, description }:ProductsInformationsP
                 </div>
                 <div className="transition-all duration-500">
                     {isActiveTab === 'description' && (
-                        <p className={`mt-8 ${isActiveTab === 'description' ? 'fadeIn' : ''}`}>
-                            {description}
-                        </p>
+                        <div
+                            className={`mt-8 ${isActiveTab === 'description' ? 'fadeIn' : ''}`}
+                            dangerouslySetInnerHTML={{ __html: description }}
+                        />
                     )}
                   {isActiveTab === 'information' && (
                     <div className={`grid grid-cols-1 lg:grid-cols-2 w-full mt-8 gap-6 m-auto ${isActiveTab === 'information' ? 'fadeIn' : ''}`}>

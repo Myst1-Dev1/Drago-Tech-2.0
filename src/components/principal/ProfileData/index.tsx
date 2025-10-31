@@ -6,10 +6,7 @@ import profileUserIcon from "../../../../public/images/profileUserIcon.png"
 import { FaEnvelope, FaHeart, FaPencilAlt, FaUser } from "react-icons/fa";
 import { FaCartFlatbedSuitcase } from "react-icons/fa6";
 import { useState } from "react";
-import { ProfileOrders } from "./ProfileOrders";
-import { ProfileFavorites } from "./ProfileFavorites";
 import gsap from "gsap";
-import { User } from "@/types/user";
 import { ProfileModal } from "./ProfileModal";
 import { parseCookies } from "nookies";
 
@@ -26,6 +23,8 @@ export function ProfileData() {
     }
 
     const { 'user-token': user } = parseCookies();
+
+    if(!user) return <p>Dados do usuário não foram carregados!</p>;
 
     const data = JSON.parse(user);
 

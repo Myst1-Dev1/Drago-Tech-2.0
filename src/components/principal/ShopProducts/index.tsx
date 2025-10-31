@@ -2,12 +2,11 @@
 
 import Image from "next/image";
 import { FaHeart, FaShoppingCart } from "react-icons/fa";
-import { Product, ProductNode } from "@/types/products";
+import { Product } from "@/types/products";
 import { formatPrice } from "@/utils/useFormatPrice";
 import Link from "next/link";
 import { SkeletonProducts } from "../SkeletonProducts";
 import { useCart } from "@/services/hooks/useCart";
-import { addToFavorites } from "@/services/createFavorites";
 import { useRouter } from "next/navigation";
 
 interface ShopProductsProps {
@@ -27,12 +26,6 @@ export function ShopProducts({loading ,filteredCategory , filterPrice, productFi
     function addProduct(id:number) {
         handleAddToCart(id, products);
     }
-
-    // async function handleAddToFavorites(slug:string) {
-    //     await addToFavorites(slug);
-
-    //     router.refresh();
-    // }
 
     const displayedProducts = filterPrice ? productFilteredByPrice : filteredCategory ? productsFiltered : products;
 

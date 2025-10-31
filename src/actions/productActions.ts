@@ -41,7 +41,7 @@ export async function createProduct(
         body.append('recomendedProduct', recomendedProduct.toString());
         body.append('popularProduct', popularProduct.toString());
 
-        const cookieStore = cookies();
+        const cookieStore = await cookies();
         const rawCookie = cookieStore.get("user-token")?.value;
 
         const parsedCookie = rawCookie ? JSON.parse(rawCookie) : null;
@@ -77,6 +77,8 @@ export async function createProduct(
 
         console.log('Produto criado com sucesso');
 
+        revalidatePath('/admin/products');
+
         return { success: true, message: 'Produto criado com sucesso !' };
     } catch (error) {
         console.log(error);
@@ -86,7 +88,7 @@ export async function createProduct(
 
 export async function deleteProduct(id: number) {
     try {
-        const cookieStore = cookies();
+        const cookieStore = await cookies();
         const rawCookie = cookieStore.get("user-token")?.value;
 
         const parsedCookie = rawCookie ? JSON.parse(rawCookie) : null;
@@ -116,7 +118,7 @@ export async function createComment(_: SignInResult, id:number, formData: FormDa
     const ratingValue = Number(formData.get("rating")); 
 
     try {
-        const cookieStore = cookies();
+        const cookieStore = await cookies();
         const rawCookie = cookieStore.get("user-token")?.value;
 
         const parsedCookie = rawCookie ? JSON.parse(rawCookie) : null;

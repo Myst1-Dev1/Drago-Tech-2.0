@@ -4,8 +4,8 @@ import { register } from "@/actions/authActions";
 import { handlePhone } from "@/utils/formatPhoneInput";
 import Link from "next/link";
 import { toast } from "react-toastify";
-import { useFormState } from 'react-dom';
 import { useRouter } from "next/navigation";
+import { useActionState } from "react";
 
 export default function SignUpContent() {
 
@@ -27,7 +27,7 @@ export default function SignUpContent() {
         return result;
     }
 
-    const [formState, formAction, pending] = useFormState(registerActionWithToastMessage, { success: false });
+    const [formState, formAction, pending] = useActionState(registerActionWithToastMessage, { success: false });
 
     return (
         <>
