@@ -37,17 +37,16 @@ export async function createProduct(
         body.append("description", description);
         body.append("techInfo", JSON.stringify(techInfo));
         body.append('priceOffer', priceOfferValue);
-        body.append('isOffer', isOffer.toString());
-        body.append('recomendedProduct', recomendedProduct.toString());
-        body.append('popularProduct', popularProduct.toString());
+        body.append('isOffer', JSON.stringify(isOffer));
+        body.append('recomendedProduct', JSON.stringify(recomendedProduct));
+        body.append('popularProduct', JSON.stringify(popularProduct));
+
 
         const cookieStore = await cookies();
         const rawCookie = cookieStore.get("user-token")?.value;
 
         const parsedCookie = rawCookie ? JSON.parse(rawCookie) : null;
         const token = parsedCookie?.token;
-
-        console.log(token);
 
         if(!token) return { success: false, message: 'Sem autorização' };
 
@@ -83,6 +82,88 @@ export async function createProduct(
     } catch (error) {
         console.log(error);
         return { success: false, message: 'Produto criado com sucesso !' };        
+    }
+}
+
+export async function updateProduct(
+    _:SignInResult, 
+    techInfo: { techInfoTitle: string; techInfoValue: string }[],
+    productId: number,
+    formData: FormData): Promise<SignInResult> {
+    
+    const image = formData.get("image") as File | null;
+    const relatedImages = formData.getAll("relatedImages") as File[];
+    const name = formData.get("name")?.toString() ?? "";
+    const price = formData.get("price")?.toString() ?? "";
+    const brand = formData.get("brand")?.toString() ?? "";
+    const category = formData.get("category")?.toString() ?? "";
+    const description = formData.get("description")?.toString() ?? "";
+    const isOffer = formData.get('isOffer') === 'on';
+
+    const priceOfferRaw = formData.get('priceOffer')?.toString() ?? '';
+    const priceOfferValue = priceOfferRaw.trim() === '' ? 'null' : priceOfferRaw;
+    
+    const recomendedProduct = formData.get('recomendedProduct') === 'on';
+    const popularProduct = formData.get('popularProduct') === 'on';
+
+    try {
+        const body = new FormData();
+        body.append("name", name);
+        body.append("price", price);
+        body.append("brand", brand);
+        body.append("category", category);
+        body.append("description", description);
+        body.append("techInfo", JSON.stringify(techInfo));
+        body.append('priceOffer', priceOfferValue);
+        body.append('isOffer', JSON.stringify(isOffer));
+        body.append('recomendedProduct', JSON.stringify(recomendedProduct));
+        body.append('popularProduct', JSON.stringify(popularProduct));
+
+
+        const cookieStore = await cookies();
+        const rawCookie = cookieStore.get("user-token")?.value;
+
+        const parsedCookie = rawCookie ? JSON.parse(rawCookie) : null;
+        const token = parsedCookie?.token;
+
+        if(!token) return { success: false, message: 'Sem autorização' };
+
+        if (image && image.size > 0) {
+            body.append('image', image);
+        }
+
+        if (relatedImages && relatedImages.length > 0) {
+            relatedImages.forEach((file) => {
+                if (file.size > 0) {
+                    body.append('relatedImages', file);
+                }
+            });
+        }
+
+        console.log(body);
+
+        const response = await fetch("http://lab.mystdev.com.br/api/Drago-Tech-Api/products/" + productId, {
+            method: "PATCH",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            body,
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('Falha na API:', response.status, errorData);
+            throw new Error(`Falha ao atualizarr produto: ${response.status} - ${errorData.message || 'Erro desconhecido'}`);
+        }
+
+        console.log('Produto atualizado com sucesso');
+
+        revalidatePath('/admin/products');
+
+        return { success: true, message: 'Produto atualizado com sucesso !' };
+    } catch (error) {
+        console.log(error);
+        return { success: false, message: 'Tivemos um erro ao atualizar o produto !' };        
     }
 }
 

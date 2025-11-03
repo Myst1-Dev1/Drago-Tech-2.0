@@ -4,33 +4,30 @@ import Image from "next/image";
 import limitedTimeImage from "../../../../public/images/timeOfferImage.png";
 import { FaHeart, FaShareAlt, FaShoppingCart } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import { ProductNode } from "@/types/products";
+import { Product } from "@/types/products";
 import { formatPrice } from "@/utils/useFormatPrice";
 import Link from "next/link";
 import { useCart } from "@/services/hooks/useCart";
-import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 interface OfferProductsProps {
-    products: ProductNode[];
+    products: Product[];
 }
 
 export function OfferProducts({ products }:OfferProductsProps) {
     const { handleAddToCart } = useCart();
 
-    const router = useRouter();
-
     const initialTime = 24 * 60 * 60;
     const [timeLeft, setTimeLeft] = useState(initialTime);
 
-    // const offerProducts = products?.filter(product => product.produtos.inoffer.isoffer);
+    const offerProducts = products?.filter(product => product.isOffer);
 
-    // function addProduct(id:number) {
-    //     handleAddToCart(id, offerProducts);
-    // }
+    function addProduct(id:number) {
+        handleAddToCart(id, offerProducts);
+    }
 
-    function handleCopyLink (slug:string) {
-        const productUrl = `${window.location.origin}/product/${slug}`;
+    function handleCopyLink (id:string | any) {
+        const productUrl = `${window.location.origin}/product/${id}`;
         navigator.clipboard.writeText(productUrl)
           .then(() => {
             toast.success("Link copiado para a área de transferência!");
@@ -67,36 +64,36 @@ export function OfferProducts({ products }:OfferProductsProps) {
                     </div>
                     <Image className="object-cover mt-10" src={limitedTimeImage} width={350} height={200} alt="imagem da edição especial" />
                 </div>
-                {/* <div className="flex flex-col gap-5 w-full">
-                    {offerProducts?.map(offer => (
-                        <div key={offer.slug} className="p-5 border border-gray-200 rounded-md flex flex-wrap justify-between items-center w-full transition-all duration-500 hover:bg-black hover:text-white">
-                            <Link href={`/product/${offer.slug}`}>
+                <div className="flex flex-col gap-5 w-full">
+                    {offerProducts?.length === 0 ? 'Não há produtos em oferta' : offerProducts?.map(offer => (
+                        <div key={offer.id} className="p-5 border border-gray-200 rounded-md flex flex-wrap justify-between items-center w-full transition-all duration-500 hover:bg-black hover:text-white">
+                            <Link href={`/product/${offer.id}`}>
                                 <div className="flex flex-wrap items-center gap-4">
-                                    <Image className="m-auto" src={offer.produtos.image.node.mediaItemUrl} width={100} height={100} alt="imagem do produto" />
+                                    <Image className="m-auto" src={offer.imageUrl} width={100} height={100} alt="imagem do produto" />
                                     <div className="flex items-start flex-col gap-3">
                                         <span className="gray-400">Laptop</span>
-                                        <p className='text-sm max-w-[20ch] overflow-hidden text-ellipsis whitespace-nowrap'>{offer.produtos.productName}</p>
+                                        <p className='text-sm max-w-[20ch] overflow-hidden text-ellipsis whitespace-nowrap'>{offer.name}</p>
                                         <div className="flex flex-col gap-1">
-                                            <h6 className="line-through text-gray-400 font-normal text-sm">{formatPrice(offer.produtos.price)}</h6>
-                                            <h6 className="mb-5 lg:mb-0 text-xl font-bold text-center">{formatPrice(offer.produtos.inoffer.priceoffer)}</h6>
+                                            <h6 className="line-through text-gray-400 font-normal text-sm">{formatPrice(offer.price)}</h6>
+                                            <h6 className="mb-5 lg:mb-0 text-xl font-bold text-center">{formatPrice(offer.priceOffer)}</h6>
                                         </div>
                                     </div>
                                 </div>
                             </Link>
                             <div className="flex flex-row lg:flex-col gap-4 m-auto lg:m-0">
-                                <div onClick={() => addProduct(offer.produtos.id)} className="text-red-300 cursor-pointer w-[40px] h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white">
+                                <div onClick={() => addProduct(offer.id)} className="text-red-300 cursor-pointer w-[40px] h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white">
                                     <FaShoppingCart />
                                 </div>
-                                <div className={`${userFavorite?.includes(offer.produtos.id) ? 'bg-red-500 text-white border-0' : ''} text-red-300 cursor-pointer w-[40px] h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white`}>
-                                    <FaHeart onClick={() => handleAddToFavorites(offer.slug)} />
+                                <div className={` text-red-300 cursor-pointer w-[40px] h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white`}>
+                                    <FaHeart />
                                 </div>
-                                <div onClick={() => handleCopyLink(offer.slug)} className="text-red-300 cursor-pointer w-[40px] h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white">
+                                <div onClick={() => handleCopyLink(offer.id)} className="text-red-300 cursor-pointer w-[40px] h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white">
                                     <FaShareAlt />
                                 </div>
                             </div>
                         </div>
                     ))}
-                </div> */}
+                </div>
             </div>
         </>
     )

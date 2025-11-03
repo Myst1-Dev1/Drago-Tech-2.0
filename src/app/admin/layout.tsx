@@ -1,3 +1,4 @@
+import { SideBar } from "@/components/admin/sideBar";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -12,7 +13,12 @@ export default function AdminLayout({
 }) {
   return (
     <>
-        {children}
+        <div className="flex">
+            <SideBar />
+            <div className="flex-1">
+              {children}
+            </div>
+        </div>
     </>
   );
 }
