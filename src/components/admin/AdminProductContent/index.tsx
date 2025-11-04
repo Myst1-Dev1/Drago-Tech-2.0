@@ -22,7 +22,7 @@ export function AdminProductClient({ products }:AdminProductClientProps) {
     return (
         <>    
             <div className="border-b border-gray-300 pb-1 w-full flex justify-between items-center">
-                <h1 className="px-4 py-3 text-xl font-semibold">Produtos</h1>
+                <h1 className="px-4 py-3 text-xl font-semibold ml-5 lg:ml-0">Produtos</h1>
                 <button onClick={() => {
                     setOpenProductForm(!openProductForm);
                     setTypeForm('create');
@@ -32,7 +32,7 @@ export function AdminProductClient({ products }:AdminProductClientProps) {
             </div>
             {openProductForm === false
                 ?
-                <div className="py-12 px-4 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+                <div className="py-12 px-4 grid grid-cols-1 place-items-center gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
                     {products?.map((product: Product) => (
                         <div key={product.id} className="relative max-w-60 w-full p-3 grid grid-cols-1 place-items-center">
                             <Image src={product.imageUrl || "/images/productImg.jpg"} className="mb-3 max-w-28 h-28 w-full object-cover" width={300} height={300} alt="foto do produto" />

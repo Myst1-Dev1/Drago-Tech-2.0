@@ -74,7 +74,7 @@ export function UpdateProductForm({ products, productId }: UpdateProductFormProp
                     <div className="flex flex-col gap-4">
                         <label 
                             htmlFor="image" 
-                            className={`relative w-full h-48 ${file ? '' : 'bg-gray-100'}`}
+                            className={`relative w-full h-48 ${file ? '' : 'bg-gray-100 dark:bg-gray-400'}`}
                             style={file ? { backgroundImage: `url(${URL.createObjectURL(file)})`, backgroundSize: 'cover', backgroundPosition: 'center' } : 
                             {backgroundImage: `url(${productData[0].imageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center'}}
                         >
@@ -83,13 +83,13 @@ export function UpdateProductForm({ products, productId }: UpdateProductFormProp
                         <input type="file" className="hidden" name="image" id="image" onChange={(e) => setFile(e.target.files?.[0])} />
                         <div className="flex gap-4">
                             <input type="file" className="hidden" name="relatedImages" id="relatedImages" multiple onChange={handleFileChange} />
-                            <label htmlFor="relatedImages" className="w-20 h-20 bg-gray-100 grid place-items-center cursor-pointer">
+                            <label htmlFor="relatedImages" className="w-20 h-20 bg-gray-100 dark:bg-gray-400 grid place-items-center cursor-pointer">
                                 <span className="font-bold text-3xl">+</span>
                             </label>
                             {files ? Array.from(files).slice(0, 4).map((file, index) => (
                             <div
                                 key={index}
-                                className="w-20 h-20 bg-gray-200"
+                                className="w-20 h-20 bg-gray-200 dark:bg-gray-400"
                                 style={{
                                 backgroundImage: `url(${URL.createObjectURL(file)})`,
                                 backgroundSize: "cover",
@@ -102,7 +102,7 @@ export function UpdateProductForm({ products, productId }: UpdateProductFormProp
                                     {productData[0].relatedImages?.map((img: string, index: number) => (
                                         <div
                                         key={index}
-                                        className="w-20 h-20 bg-gray-200"
+                                        className="w-20 h-20 bg-gray-200 dark:bg-gray-400"
                                         style={{
                                             backgroundImage: `url(${img})`,
                                             backgroundSize: "cover",
@@ -117,21 +117,21 @@ export function UpdateProductForm({ products, productId }: UpdateProductFormProp
                     <div className="mt-4 flex gap-4 flex-col lg:flex-row">
                         <div className="flex flex-col gap-3">
                             <label htmlFor="name" className="font-semibold">Nome do produto</label>
-                            <input readOnly value={productData[0].name} type="text" className="rounded-md w-full p-3 border border-gray-300 outline-none" name="name" id="name" placeholder="Teclado HyperX" />
+                            <input readOnly value={productData[0].name} type="text" className="rounded-md w-full p-3 border border-gray-300 dark:bg-transparent outline-none" name="name" id="name" placeholder="Teclado HyperX" />
                         </div>
                         <div className="flex flex-col gap-3">
                             <label htmlFor="price" className="font-semibold">Preço do produto</label>
-                            <input readOnly value={productData[0].price} type="text" className="rounded-md w-full p-3 border border-gray-300 outline-none" name="price" id="price" placeholder="R$:0,00" />
+                            <input readOnly value={productData[0].price} type="text" className="rounded-md w-full p-3 border border-gray-300 dark:bg-transparent outline-none" name="price" id="price" placeholder="R$:0,00" />
                         </div>
                     </div>
                     <div className="mt-4 flex gap-4 flex-col lg:flex-row">
                         <div className="flex flex-col gap-3">
                             <label htmlFor="brand" className="font-semibold">Marca do produto</label>
-                            <input readOnly value={productData[0].brand} type="text" className="rounded-md w-full p-3 border border-gray-300 outline-none" name="brand" id="brand" placeholder="Asus" />
+                            <input readOnly value={productData[0].brand} type="text" className="rounded-md w-full p-3 border border-gray-300 dark:bg-transparent outline-none" name="brand" id="brand" placeholder="Asus" />
                         </div>
                         <div className="flex flex-col gap-3">
                             <label htmlFor="category" className="font-semibold">Categoria do produto</label>
-                            <input readOnly value={productData[0].category} type="text" className="rounded-md w-full p-3 border border-gray-300 outline-none" name="category" id="category" placeholder="Teclado" />
+                            <input readOnly value={productData[0].category} type="text" className="rounded-md w-full p-3 border border-gray-300 dark:bg-transparent outline-none" name="category" id="category" placeholder="Teclado" />
                         </div>
                     </div>
                     <div className="flex flex-col gap-3 mt-4">
@@ -142,7 +142,7 @@ export function UpdateProductForm({ products, productId }: UpdateProductFormProp
                                 value={techInfo.techInfoTitle}
                                 onChange={(e) => handleChange("techInfoTitle", e.target.value)}
                                 type="text"
-                                className="rounded-md w-full p-3 border border-gray-300 outline-none"
+                                className="rounded-md w-full p-3 border border-gray-300 dark:bg-transparent outline-none"
                                 name="techInfoTitle"
                                 id="techInfoTitle"
                                 placeholder="Ex: Tamanho"
@@ -151,7 +151,7 @@ export function UpdateProductForm({ products, productId }: UpdateProductFormProp
                                 value={techInfo.techInfoValue}
                                 onChange={(e) => handleChange("techInfoValue", e.target.value)}
                                 type="text"
-                                className="rounded-md w-full p-3 border border-gray-300 outline-none"
+                                className="rounded-md w-full p-3 border border-gray-300 dark:bg-transparent outline-none"
                                 name="techInfoValue"
                                 id="techInfoValue"
                                 placeholder="Ex: 33cm"
@@ -201,7 +201,7 @@ export function UpdateProductForm({ products, productId }: UpdateProductFormProp
                         </div>
                         <div className="flex flex-col gap-3">
                             <label htmlFor="priceOffer">Preço em oferta</label>
-                            <input value={productData[0].priceOffer} type="text" id="priceOffer" name="priceOffer" placeholder="R$:12,00" className="rounded-md w-full p-3 border border-gray-300 outline-none" />
+                            <input value={productData[0].priceOffer} type="text" id="priceOffer" name="priceOffer" placeholder="R$:12,00" className="rounded-md w-full p-3 border border-gray-300 dark:bg-transparent outline-none" />
                         </div>
                     </div>
                     <div className="mt-4 flex gap-4 flex-col w-full justify-between lg:flex-row">

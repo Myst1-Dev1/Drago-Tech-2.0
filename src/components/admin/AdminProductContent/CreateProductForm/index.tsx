@@ -66,7 +66,7 @@ export function CreateProductForm() {
                     <div className="flex flex-col gap-4">
                         <label 
                             htmlFor="image" 
-                            className={`relative w-full h-48 ${file ? '' : 'bg-gray-100'}`}
+                            className={`relative w-full h-48 ${file ? '' : 'bg-gray-100 dark:bg-gray-400'}`}
                             style={file ? { backgroundImage: `url(${URL.createObjectURL(file)})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}
                         >
                             {file ? '' : <FaUpload className="absolute top-1/2 left-1/2 -translation-x-1/2 -translation-y-1/2 text-2xl cursor-pointer" />}
@@ -74,13 +74,13 @@ export function CreateProductForm() {
                         <input type="file" className="hidden" name="image" id="image" onChange={(e) => setFile(e.target.files?.[0])} />
                         <div className="flex gap-4">
                             <input type="file" className="hidden" name="relatedImages" id="relatedImages" multiple onChange={handleFileChange} />
-                            <label htmlFor="relatedImages" className="w-20 h-20 bg-gray-100 grid place-items-center cursor-pointer">
+                            <label htmlFor="relatedImages" className="w-20 h-20 bg-gray-100 dark:bg-gray-400 grid place-items-center cursor-pointer">
                                 <span className="font-bold text-3xl">+</span>
                             </label>
                             {files && Array.from(files).slice(0, 4).map((file, index) => (
                             <div
                                 key={index}
-                                className="w-20 h-20 bg-gray-200"
+                                className="w-20 h-20 bg-gray-200 dark:bg-gray-400"
                                 style={{
                                 backgroundImage: `url(${URL.createObjectURL(file)})`,
                                 backgroundSize: "cover",
@@ -93,21 +93,21 @@ export function CreateProductForm() {
                     <div className="mt-4 flex gap-4 flex-col lg:flex-row">
                         <div className="flex flex-col gap-3">
                             <label htmlFor="name" className="font-semibold">Nome do produto</label>
-                            <input type="text" className="rounded-md w-full p-3 border border-gray-300 outline-none" name="name" id="name" placeholder="Teclado HyperX" />
+                            <input type="text" className="rounded-md w-full p-3 border dark:bg-transparent border-gray-300 outline-none" name="name" id="name" placeholder="Teclado HyperX" />
                         </div>
                         <div className="flex flex-col gap-3">
                             <label htmlFor="price" className="font-semibold">Preço do produto</label>
-                            <input type="text" className="rounded-md w-full p-3 border border-gray-300 outline-none" name="price" id="price" placeholder="R$:0,00" />
+                            <input type="text" className="rounded-md w-full p-3 border dark:bg-transparent border-gray-300 outline-none" name="price" id="price" placeholder="R$:0,00" />
                         </div>
                     </div>
                     <div className="mt-4 flex gap-4 flex-col lg:flex-row">
                         <div className="flex flex-col gap-3">
                             <label htmlFor="brand" className="font-semibold">Marca do produto</label>
-                            <input type="text" className="rounded-md w-full p-3 border border-gray-300 outline-none" name="brand" id="brand" placeholder="Asus" />
+                            <input type="text" className="rounded-md w-full p-3 border dark:bg-transparent border-gray-300 outline-none" name="brand" id="brand" placeholder="Asus" />
                         </div>
                         <div className="flex flex-col gap-3">
                             <label htmlFor="category" className="font-semibold">Categoria do produto</label>
-                            <input type="text" className="rounded-md w-full p-3 border border-gray-300 outline-none" name="category" id="category" placeholder="Teclado" />
+                            <input type="text" className="rounded-md w-full p-3 border dark:bg-transparent border-gray-300 outline-none" name="category" id="category" placeholder="Teclado" />
                         </div>
                     </div>
                     <div className="flex flex-col gap-3 mt-4">
@@ -118,7 +118,7 @@ export function CreateProductForm() {
                                 value={techInfo.techInfoTitle}
                                 onChange={(e) => handleChange("techInfoTitle", e.target.value)}
                                 type="text"
-                                className="rounded-md w-full p-3 border border-gray-300 outline-none"
+                                className="rounded-md w-full p-3 border dark:bg-transparent border-gray-300 outline-none"
                                 name="techInfoTitle"
                                 id="techInfoTitle"
                                 placeholder="Ex: Tamanho"
@@ -127,7 +127,7 @@ export function CreateProductForm() {
                                 value={techInfo.techInfoValue}
                                 onChange={(e) => handleChange("techInfoValue", e.target.value)}
                                 type="text"
-                                className="rounded-md w-full p-3 border border-gray-300 outline-none"
+                                className="rounded-md w-full p-3 border dark:bg-transparent border-gray-300 outline-none"
                                 name="techInfoValue"
                                 id="techInfoValue"
                                 placeholder="Ex: 33cm"
@@ -163,7 +163,7 @@ export function CreateProductForm() {
                         </div>
                         <div className="flex flex-col gap-3">
                             <label htmlFor="priceOffer">Preço em oferta</label>
-                            <input type="text" id="priceOffer" name="priceOffer" placeholder="R$:12,00" className="rounded-md w-full p-3 border border-gray-300 outline-none" />
+                            <input type="text" id="priceOffer" name="priceOffer" placeholder="R$:12,00" className="rounded-md w-full p-3 border dark:bg-transparent border-gray-300 outline-none" />
                         </div>
                     </div>
                     <div className="mt-4 flex gap-4 flex-col w-full justify-between lg:flex-row">

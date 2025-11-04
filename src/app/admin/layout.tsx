@@ -13,7 +13,7 @@ export default function AdminLayout({
 }) {
   return (
     <>
-        <div className="flex">
+        <div className="flex bg-white min-h-screen text-black dark:bg-[#202020] dark:text-white">
             <SideBar />
             <div className="flex-1">
               {children}
