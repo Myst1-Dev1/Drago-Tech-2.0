@@ -9,6 +9,8 @@ import { formatPrice } from "@/utils/useFormatPrice";
 import Link from "next/link";
 import { useCart } from "@/services/hooks/useCart";
 import { toast } from "react-toastify";
+import { favoriteAProduct } from "@/actions/productActions";
+import { dataUser } from "@/services/fetchData/user";
 
 interface OfferProductsProps {
     products: Product[];
@@ -84,8 +86,8 @@ export function OfferProducts({ products }:OfferProductsProps) {
                                 <div onClick={() => addProduct(offer.id)} className="text-red-300 cursor-pointer w-[40px] h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white">
                                     <FaShoppingCart />
                                 </div>
-                                <div className={` text-red-300 cursor-pointer w-[40px] h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white`}>
-                                    <FaHeart />
+                                <div className={`${dataUser?.favorites?.some((fav: any) => Number(fav.id) === Number(offer.id)) ? 'bg-red-500 text-white' : 'border border-red-300 text-red-300'} cursor-pointer w-[40px] h-[40px] rounded-full aspect-square flex justify-center items-center transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white`}>
+                                    <FaHeart onClick={() => favoriteAProduct(offer.id)} />
                                 </div>
                                 <div onClick={() => handleCopyLink(offer.id)} className="text-red-300 cursor-pointer w-[40px] h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white">
                                     <FaShareAlt />

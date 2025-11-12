@@ -1,17 +1,13 @@
-import { ProductNode } from "./products";
 
 export type User = {
-    _id: string;
-    name: string;
+    id: number;
     email: string;
-    phone: string;
+    name: string;
     address: string;
-    city: string;
-    state: string;
     zipCode: string;
-    favorites: ProductNode[];
-    orders: any[];
-    createdAt: string;
-    updatedAt: string;
-    __v: number;
+    phone: string;
+    state: string;
+    city: string;
+    favorites: [];
+    orders: [];
 }

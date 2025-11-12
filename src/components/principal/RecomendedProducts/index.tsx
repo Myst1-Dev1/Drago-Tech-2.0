@@ -8,8 +8,6 @@ interface RecomendedProductsProps {
 export function RecomendedProducts({ products }:RecomendedProductsProps) {
     const recomendedProducts = products?.filter(product => product.recomendedProduct);
 
-    console.log(products);
-
     return (
         <>
             <div className="px-4 lg:px-28 py-12">

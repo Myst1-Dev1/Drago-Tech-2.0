@@ -57,7 +57,7 @@ export default function Checkout() {
 
     return (
         <>
-            <div className="px-4 py-12 m-auto flex flex-col">
+            {/* <div className="px-4 py-12 m-auto flex flex-col">
                 <div>
                     <div className="flex justify-between items-center m-auto w-full max-w-[500px]">
                         <div className="flex flex-col justify-center items-center gap-4">
@@ -143,6 +143,9 @@ export default function Checkout() {
                         </div>
                     </div>}
                 </div>
+            </div> */}
+            <div className="px-4 py-12 flex justify-center items-center">
+                <p>Página em desenvolvimento</p>
             </div>
         </>
     )

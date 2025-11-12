@@ -10,7 +10,11 @@ import { formatPrice } from "@/utils/useFormatPrice";
 import { SkeletonProducts } from "../SkeletonProducts";
 import Link from "next/link";
 import { useCart } from "@/services/hooks/useCart";
+import { favoriteAProduct } from "@/actions/productActions";
+import { dataUser } from "@/services/fetchData/user";
 import { useRouter } from "next/navigation";
+import { useUser } from "@/services/hooks/useUser";
+import { useEffect } from "react";
 
 interface CarouselProductsProps {
     productsArray: Product[];
@@ -19,11 +23,25 @@ interface CarouselProductsProps {
 export function CarouselProducts({ productsArray }: CarouselProductsProps) {
     const { handleAddToCart } = useCart();
 
+    const { user, fetchUser } = useUser();
+
     const router = useRouter();
 
-    // function addProduct(id:number) {
-    //     handleAddToCart(id, productsArray);
-    // }
+    function addProduct(id:number) {
+        handleAddToCart(id, productsArray);
+    }
+
+    async function handleFavoriteProduct(id:number) {
+        await favoriteAProduct(id);
+
+        router.refresh();
+    }
+
+    useEffect(() => {
+        fetchUser();
+    },[]);
+
+    console.log(user);
 
     return( 
         <>
@@ -67,10 +85,16 @@ export function CarouselProducts({ productsArray }: CarouselProductsProps) {
                                     <h6 className="text-xl font-bold text-center">{formatPrice(product.price)}</h6>
                                 </Link>
                                 <div className="text-red-300 cursor-pointer absolute right-0 top-0 lg:top-[15px] lg:right-[-100%] w-8 h-8 lg:w-[40px] lg:h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white group-hover:right-2">
-                                    <FaShoppingCart />
+                                    <FaShoppingCart onClick={() => addProduct(product.id)} />
                                 </div>
-                                <div className={`text-red-300 cursor-pointer absolute right-0 top-[65px] lg:right-[-100%] w-8 h-8 lg:w-[40px] lg:h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white group-hover:right-2`}>
-                                    <FaHeart />
+                                <div
+                                    className={`${
+                                        dataUser?.favorites?.some((fav: any) => Number(fav.id) === Number(product.id))
+                                        ? "bg-red-500 text-white"
+                                        : "border border-red-300 text-red-300"
+                                    } cursor-pointer absolute right-0 top-[65px] lg:right-[-100%] w-8 h-8 lg:w-[40px] lg:h-[40px] rounded-full aspect-square flex justify-center items-center transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white group-hover:right-2`}
+                                >
+                                    <FaHeart onClick={() => handleFavoriteProduct(product.id)} />
                                 </div>
                             </div>
                         </SwiperSlide>

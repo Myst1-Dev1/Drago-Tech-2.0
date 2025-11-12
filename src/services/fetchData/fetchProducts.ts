@@ -7,6 +7,7 @@ export async function FetchProducts() {
             'Content-Type': 'application/json'
         },
         cache: 'no-store',
+        next: { tags: ['products'] }
     });
 
     const data = await res.json();

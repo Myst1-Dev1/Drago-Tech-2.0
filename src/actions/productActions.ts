@@ -1,6 +1,6 @@
 'use server';
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
 interface SignInResult {
@@ -231,4 +231,33 @@ export async function createComment(_: SignInResult, id:number, formData: FormDa
         console.log(error)
         return { success: false, message:'Tivemos um erro no envio do comentário !' };
     }
+}
+
+export async function favoriteAProduct(id: number) {
+  try {
+    const cookieStore = await cookies();
+    const rawCookie = cookieStore.get("user-token")?.value;
+    const parsedCookie = rawCookie ? JSON.parse(rawCookie) : null;
+    const token = parsedCookie?.token;
+
+    if (!token) return { success: false, message: "Sem autorização" };
+
+    await fetch(
+      `http://lab.mystdev.com.br/api/Drago-Tech-Api/products/favorite/${id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    revalidateTag('user');
+
+    return { success: true };
+  } catch (error) {
+    console.error("Erro ao favoritar:", error);
+    return { success: false };
+  }
 }
