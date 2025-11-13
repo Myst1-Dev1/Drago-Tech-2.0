@@ -10,13 +10,14 @@ import Link from "next/link";
 import { useCart } from "@/services/hooks/useCart";
 import { toast } from "react-toastify";
 import { favoriteAProduct } from "@/actions/productActions";
-import { dataUser } from "@/services/fetchData/user";
+import { User } from "@/types/user";
 
 interface OfferProductsProps {
     products: Product[];
+    user: User;
 }
 
-export function OfferProducts({ products }:OfferProductsProps) {
+export function OfferProducts({ products, user }:OfferProductsProps) {
     const { handleAddToCart } = useCart();
 
     const initialTime = 24 * 60 * 60;
@@ -86,7 +87,7 @@ export function OfferProducts({ products }:OfferProductsProps) {
                                 <div onClick={() => addProduct(offer.id)} className="text-red-300 cursor-pointer w-[40px] h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white">
                                     <FaShoppingCart />
                                 </div>
-                                <div className={`${dataUser?.favorites?.some((fav: any) => Number(fav.id) === Number(offer.id)) ? 'bg-red-500 text-white' : 'border border-red-300 text-red-300'} cursor-pointer w-[40px] h-[40px] rounded-full aspect-square flex justify-center items-center transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white`}>
+                                <div className={`${user?.favorites?.some((fav: any) => Number(fav.id) === Number(offer.id)) ? 'bg-red-500 text-white' : 'border border-red-300 text-red-300'} cursor-pointer w-[40px] h-[40px] rounded-full aspect-square flex justify-center items-center transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white`}>
                                     <FaHeart onClick={() => favoriteAProduct(offer.id)} />
                                 </div>
                                 <div onClick={() => handleCopyLink(offer.id)} className="text-red-300 cursor-pointer w-[40px] h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white">

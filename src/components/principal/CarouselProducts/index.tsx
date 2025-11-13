@@ -11,19 +11,17 @@ import { SkeletonProducts } from "../SkeletonProducts";
 import Link from "next/link";
 import { useCart } from "@/services/hooks/useCart";
 import { favoriteAProduct } from "@/actions/productActions";
-import { dataUser } from "@/services/fetchData/user";
 import { useRouter } from "next/navigation";
-import { useUser } from "@/services/hooks/useUser";
-import { useEffect } from "react";
+import { User } from "@/types/user";
 
 interface CarouselProductsProps {
     productsArray: Product[];
+    user: User;
 }
 
-export function CarouselProducts({ productsArray }: CarouselProductsProps) {
+export function CarouselProducts({ productsArray, user }: CarouselProductsProps) {
     const { handleAddToCart } = useCart();
 
-    const { user, fetchUser } = useUser();
 
     const router = useRouter();
 
@@ -37,74 +35,68 @@ export function CarouselProducts({ productsArray }: CarouselProductsProps) {
         router.refresh();
     }
 
-    useEffect(() => {
-        fetchUser();
-    },[]);
-
-    console.log(user);
-
     return( 
         <>
             <div className="mt-10 relative">
-                    <Swiper
-                        modules={[Navigation]}
-                        navigation={{
-                            nextEl: ".swiper-button-next-custom",
-                            prevEl: ".swiper-button-prev-custom",
-                        }}
-                        breakpoints={{
-                            320: {
-                                slidesPerView: 1,
-                                spaceBetween: 10
-                            },
-                            640: {
-                                slidesPerView: 2,
-                                spaceBetween: 20
-                            },
-                            1024: {
-                                slidesPerView: 3,
-                                spaceBetween: 30
-                            },
-                            1350: {
-                                slidesPerView:4,
-                                spaceBetween:30
-                            },
-                            1600: {
-                                slidesPerView:5,
-                                spaceBetween:30
-                            }
-                        }}
-                    >
-                    {productsArray?.length === 0 ? <SkeletonProducts count={productsArray.length} /> : productsArray?.map(product => (
-                        <SwiperSlide key={product.id}>
-                            <div className="mb-8 m-auto relative overflow-hidden max-w-[250px] transition-all duration-300 hover:scale-110 group">
-                                <Link className="flex flex-col gap-4" href={`/product/${product.id}`}>
-                                    <Image className="object-cover m-auto" src={product.imageUrl} width={150} height={150} alt="imagem do produto" />
-                                    <span className="text-zinc-400">{product.category}</span>
-                                    <p className='text-sm max-w-[50ch] overflow-hidden text-ellipsis whitespace-nowrap'>{product.name}</p>
-                                    <h6 className="text-xl font-bold text-center">{formatPrice(product.price)}</h6>
-                                </Link>
-                                <div className="text-red-300 cursor-pointer absolute right-0 top-0 lg:top-[15px] lg:right-[-100%] w-8 h-8 lg:w-[40px] lg:h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white group-hover:right-2">
-                                    <FaShoppingCart onClick={() => addProduct(product.id)} />
-                                </div>
-                                <div
-                                    className={`${
-                                        dataUser?.favorites?.some((fav: any) => Number(fav.id) === Number(product.id))
-                                        ? "bg-red-500 text-white"
-                                        : "border border-red-300 text-red-300"
-                                    } cursor-pointer absolute right-0 top-[65px] lg:right-[-100%] w-8 h-8 lg:w-[40px] lg:h-[40px] rounded-full aspect-square flex justify-center items-center transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white group-hover:right-2`}
-                                >
-                                    <FaHeart onClick={() => handleFavoriteProduct(product.id)} />
-                                </div>
+                <Swiper
+                    modules={[Navigation]}
+                    navigation={{
+                        nextEl: ".swiper-button-next-custom",
+                        prevEl: ".swiper-button-prev-custom",
+                    }}
+                    breakpoints={{
+                        320: {
+                            slidesPerView: 1,
+                            spaceBetween: 10
+                        },
+                        640: {
+                            slidesPerView: 2,
+                            spaceBetween: 20
+                        },
+                        1024: {
+                            slidesPerView: 3,
+                            spaceBetween: 30
+                        },
+                        1350: {
+                            slidesPerView:4,
+                            spaceBetween:30
+                        },
+                        1600: {
+                            slidesPerView:5,
+                            spaceBetween:30
+                        }
+                    }}
+                >
+                {productsArray?.length === 0 ? <SkeletonProducts count={productsArray.length} /> : productsArray?.map(product => (
+                    <SwiperSlide key={product.id}>
+                        <div className="mb-8 m-auto relative overflow-hidden max-w-[250px] transition-all duration-300 hover:scale-110 group">
+                            <Link className="flex flex-col gap-4" href={`/product/${product.id}`}>
+                                <Image className="object-cover m-auto" src={product.imageUrl} width={150} height={150} alt="imagem do produto" />
+                                <span className="text-zinc-400">{product.category}</span>
+                                <p className='text-sm max-w-[50ch] overflow-hidden text-ellipsis whitespace-nowrap'>{product.name}</p>
+                                <h6 className="text-xl font-bold text-center">{formatPrice(product.price)}</h6>
+                            </Link>
+                            <div className="text-red-300 cursor-pointer absolute right-0 top-0 lg:top-[15px] lg:right-[-100%] w-8 h-8 lg:w-[40px] lg:h-[40px] rounded-full aspect-square flex justify-center items-center border border-red-300 transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white group-hover:right-2">
+                                <FaShoppingCart onClick={() => addProduct(product.id)} />
                             </div>
-                        </SwiperSlide>
-                    ))}
-                    </Swiper>
-                    <div>
-                        <div className="swiper-button-prev-custom w-10 h-10 border border-gray-400 rounded-md flex justify-center items-center absolute right-16 group transition-all cursor-pointer duration-500 hover:bg-red-500 hover:border-0"><FaArrowLeft className="text-zinc-500 group-hover:text-white"/></div>
-                        <div className="swiper-button-next-custom w-10 h-10 border border-gray-400 rounded-md flex justify-center items-center absolute right-0 transition-all duration-500 group cursor-pointer hover:bg-red-500 hover:border-0"><FaArrowRight className="text-zinc-500 group-hover:text-white"/></div>
-                    </div>
+                            <div
+                                className={`${
+                                    user?.favorites?.some((fav: any) => Number(fav.id) === Number(product.id))
+                                    ? "bg-red-500 text-white"
+                                    : "border border-red-300 text-red-300"
+                                } cursor-pointer absolute right-0 top-[65px] lg:right-[-100%] w-8 h-8 lg:w-[40px] lg:h-[40px] rounded-full aspect-square flex justify-center items-center transition-all duration-300 hover:bg-red-500 hover:border-none hover:text-white group-hover:right-2`}
+                            >
+                                <FaHeart onClick={() => handleFavoriteProduct(product.id)} />
+                            </div>
+                        </div>
+                    </SwiperSlide>
+                ))}
+                </Swiper>
+                <div>
+                    <div className="swiper-button-prev-custom w-10 h-10 border border-gray-400 rounded-md flex justify-center items-center absolute right-16 group transition-all cursor-pointer duration-500 hover:bg-red-500 hover:border-0"><FaArrowLeft className="text-zinc-500 group-hover:text-white"/></div>
+                    <div className="swiper-button-next-custom w-10 h-10 border border-gray-400 rounded-md flex justify-center items-center absolute right-0 transition-all duration-500 group cursor-pointer hover:bg-red-500 hover:border-0"><FaArrowRight className="text-zinc-500 group-hover:text-white"/></div>
                 </div>
+            </div>
         </>
     )
 }

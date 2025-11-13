@@ -1,23 +1,29 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { RiArrowGoBackFill } from 'react-icons/ri';
-import { ProductNode } from '@/types/products';
 import { useCart } from '@/services/hooks/useCart';
-import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import { FaHeart, FaShoppingCart } from 'react-icons/fa';
+import { formatPrice } from '@/utils/useFormatPrice';
+import { Favorites } from '@/types/user';
 
 interface ProfileFavoritesProps {
-    favorites:ProductNode[];
+    favorites: Favorites[] | any;
     handleCloseProfileMenu: () => void;
 }
 
 export function ProfileFavorites({ favorites, handleCloseProfileMenu }:ProfileFavoritesProps) {
     const { handleAddToCart } = useCart();
 
-    const router = useRouter();
+    function addProduct(id:number) {
+        handleAddToCart(id, favorites);
+    }
 
     useGSAP(() => {
         gsap.to('.favorite', {opacity:1, marginTop:-30, duration:0.5})
     }, []);
+
+    console.log(favorites)
     
     return (
         <div className="favorite opacity-0">
@@ -25,30 +31,29 @@ export function ProfileFavorites({ favorites, handleCloseProfileMenu }:ProfileFa
                 <h5 className="text-xl font-bold">Favoritos</h5>
                 <RiArrowGoBackFill onClick={handleCloseProfileMenu} className='mt-4 text-xl cursor-pointer' />
             </div>
-            {/* {favorites?.map((favorite, index) => (
-                <div key={index} className='relative bg-zinc-50 rounded-md mb-4 p-4 w-full mt-6 flex flex-wrap gap-4 lg:gap-0 justify-between'>
+            {favorites?.map((favorite:any) => (
+                <div key={favorite.id} className='relative bg-zinc-50 rounded-md mb-4 p-4 w-full mt-6 flex flex-wrap gap-4 lg:gap-0 justify-between'>
                     <div className='flex flex-wrap items-center gap-4'>
-                        <Image className='m-auto' src={favorite.produtos.image.node?.mediaItemUrl || productImg} width={100} height={100} alt='imagem do produto' />
+                        <Image className='m-auto' src={favorite.imageUrl} width={100} height={100} alt='imagem do produto' />
                         <div>
-                            <span>{favorite.produtos?.category}</span>
-                            <h6 className='max-w-[600px]'>{favorite.produtos.productName}</h6>
+                            {/* <span>{favorite.category}</span> */}
+                            <h6 className='max-w-[600px]'>{favorite.name}</h6>
                         </div>
                     </div>
                     <div className='flex items-center gap-10'>
                         <div>
-                            <del className='text-gray-500 text-sm'>{formatPrice(favorite.produtos.price * 0.95)}</del>
-                            <h6 className='font-bold text-xl'>{formatPrice(favorite.produtos.price)}</h6>
+                            <del className='text-gray-500 text-sm'>{formatPrice(favorite.price * 0.95)}</del>
+                            <h6 className='font-bold text-xl'>{formatPrice(favorite.price)}</h6>
                             <span className='text-gray-500 text-sm'>5% OFF com o prime</span>
                         </div>
-                        <button onClick={() => addProduct(favorite.produtos.id)} className="text-sm text-white flex items-center justify-center gap-4 font-bold bg-red-500 rounded-md h-10 w-32 p-3 transition-all duration-500 hover:bg-red-700">
+                        <button onClick={() => addProduct(favorite.id)} className="text-sm text-white flex items-center justify-center gap-4 font-bold bg-red-500 rounded-md h-10 w-32 p-3 transition-all duration-500 hover:bg-red-700">
                             <FaShoppingCart />
                             Comprar
                         </button>
                     </div>
                     <FaHeart className='text-red-500 absolute right-5 top-3' />
-                    <FaTrashAlt onClick={() => handleDeleteFavorites(favorite.databaseId)} className='text-red-500 absolute right-0 -top-2 cursor-pointer' />
                 </div>
-            ))} */}
+            ))}
         </div>
     )
 }

@@ -1,9 +1,10 @@
+import { User } from '@/types/user';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { RiArrowGoBackFill } from 'react-icons/ri';
 
 interface ProfileInformationsProps {
-    user:any;
+    user:User;
     handleCloseProfileMenu: () => void;
 }
 

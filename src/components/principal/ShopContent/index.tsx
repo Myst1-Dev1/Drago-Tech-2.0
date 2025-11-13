@@ -1,5 +1,6 @@
 'use client';
 
+import { User } from "@/types/user";
 import { Pagination } from "../Pagination";
 import { ShopFilter } from "../ShopFilter";
 import { ShopProducts } from "../ShopProducts";
@@ -8,9 +9,10 @@ import { useState } from "react";
 
 interface ShopContentProps {
     products:Product[];
+    user: User;
 }
 
-export function ShopContent({ products }:ShopContentProps) {
+export function ShopContent({ products, user }:ShopContentProps) {
     const [filteredCategories, setFilteredCategories] = useState<string[] | any>([]);
     const [loading, setLoading] = useState(false);
     const [filterPrice, setFilterPrice] = useState(0);
@@ -38,7 +40,7 @@ export function ShopContent({ products }:ShopContentProps) {
             <div className="flex flex-col lg:flex-row gap-12 px-4 py-8">
                 <ShopFilter filterPrice={filterPrice} setFilterPrice={setFilterPrice} setLoading = {setLoading} setFilteredCategory={setFilteredCategories} />
                 <div>
-                    <ShopProducts loading = {loading} filteredCategory={filteredCategories} filterPrice={filterPrice} productFilteredByPrice={productFilteredByPrice} products={productsData} productsFiltered = {productsFiltered} />
+                    <ShopProducts loading = {loading} filteredCategory={filteredCategories} filterPrice={filterPrice} productFilteredByPrice={productFilteredByPrice} products={productsData} productsFiltered = {productsFiltered} user = {user} />
                     <Pagination setLoading = {setLoading} itensPerPage = {itensPerPage} data = {products} currentPage = {currentPage} setCurrentPage = {setCurrentPage} />
                 </div>
             </div>

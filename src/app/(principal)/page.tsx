@@ -6,9 +6,12 @@ import { OfferProducts } from "@/components/principal/OfferProducts";
 import { RecomendedProducts } from "@/components/principal/RecomendedProducts";
 import Link from "next/link";
 import { FetchProducts } from "@/services/fetchData/fetchProducts";
+import { GetUser } from "@/services/fetchData/user";
 
 export default async function Home() {
     const products = await FetchProducts();
+
+    const user = await GetUser();
 
     return (
       <>
@@ -44,9 +47,9 @@ export default async function Home() {
                 </div>
             </div>
         </div> */}
-        <PopularProducts products={products} />
-        <OfferProducts products={products} />
-        <RecomendedProducts products={products} />
+        <PopularProducts products={products} user = {user} />
+        <OfferProducts products={products} user = {user} />
+        <RecomendedProducts products={products} user = {user} />
         <div className="mt-12 bg-[#141410] flex justify-center items-center">
             <div className="py-8 flex flex-col gap-5">
                 <h2 className="text-white text-xl lg:text-2xl font-bold text-center">Assine Nosso Prime E <br />Tenha descontos exclusivos</h2>

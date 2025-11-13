@@ -8,6 +8,14 @@ export type User = {
     phone: string;
     state: string;
     city: string;
-    favorites: [];
+    favorites: Favorites[];
     orders: [];
+}
+
+export type Favorites = {
+    id: number;
+    name: string;
+    description: string;
+    imageUrl: string;
+    price: number
 }

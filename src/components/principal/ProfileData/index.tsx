@@ -9,8 +9,14 @@ import { useState } from "react";
 import gsap from "gsap";
 import { ProfileModal } from "./ProfileModal";
 import { parseCookies } from "nookies";
+import { User } from "@/types/user";
+import { ProfileFavorites } from "./ProfileFavorites";
 
-export function ProfileData() {
+interface ProfileDataProps {
+    user: User;
+}
+
+export function ProfileData({ user }:ProfileDataProps) {
     const [profileMenu, setProfileMenu] = useState('');
     const [modal, setModal] = useState(false);
 
@@ -22,12 +28,6 @@ export function ProfileData() {
         gsap.to('.menu-box', {opacity:1, display:"flex", duration:0.5, onComplete:() => { setProfileMenu('') }})
     }
 
-    const { 'user-token': user } = parseCookies();
-
-    if(!user) return <p>Dados do usuário não foram carregados!</p>;
-
-    const data = JSON.parse(user);
-
     return (
         <>
              <div className="px-4 lg:px-16 py-8 max-w-[1200px] w-full m-auto">
@@ -35,10 +35,10 @@ export function ProfileData() {
                     <div className="flex gap-4 items-center">
                         <Image src={profileUserIcon} width={80} height={80} alt="imagem do usuário"/>
                         <div>
-                            <h5 className="font-bold text-2xl">Bem vindo, {data?.name}</h5>
+                            <h5 className="font-bold text-2xl">Bem vindo, {user?.name}</h5>
                             <div className="flex gap-3 items-center">
                                 <FaEnvelope className="text-xs text-red-500" />
-                                <span className="text-gray-500 font-bold">{data?.email}</span>
+                                <span className="text-gray-500 font-bold">{user?.email}</span>
                             </div>
                         </div>
                     </div>
@@ -74,9 +74,9 @@ export function ProfileData() {
                         </div>
                     </div>
                 </div>
-                {profileMenu === 'info' ? <ProfileInformations user={data} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''}
-                {/* {profileMenu === 'order' ? <ProfileOrders user={userOrder} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''}
-                {profileMenu === 'favorite' ? <ProfileFavorites favorites={userFavorite} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''} */}
+                {profileMenu === 'info' ? <ProfileInformations user={user} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''}
+                {/* {profileMenu === 'order' ? <ProfileOrders user={userOrder} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''} */}
+                {profileMenu === 'favorite' ? <ProfileFavorites favorites={user?.favorites} handleCloseProfileMenu={handleCloseProfileMenu} /> : ''}
             </div>
 
             {modal && <ProfileModal setModal = {setModal} />}

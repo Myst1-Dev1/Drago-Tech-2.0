@@ -9,19 +9,29 @@ import { useCart } from "@/services/hooks/useCart";
 import { SimilarProducts } from "./SimilarProducts";
 import { ProductComments } from "./ProductComments";
 import { ProductForm } from "./ProductForm";
+import { User } from "@/types/user";
+import { useRouter } from "next/navigation";
+import { favoriteAProduct } from "@/actions/productActions";
 
 interface ProductContentProps {
     product:Product[];
+    user: User;
 }
 
-export function ProductContent({ product }:ProductContentProps) {
+export function ProductContent({ product, user }:ProductContentProps) {
     const { handleAddToCart } = useCart();
+
+    const router = useRouter();
 
     function addProduct(id:number) {
         handleAddToCart(id, product);
     }
 
-    console.log(product);
+    async function handleFavoriteProduct(id:number) {
+        await favoriteAProduct(id);
+
+        router.refresh();
+    }
 
     return (
         <>
@@ -32,7 +42,7 @@ export function ProductContent({ product }:ProductContentProps) {
                         <div className="mt-12 gap-12 lg:justify-between xl:justify-between 2xl:justify-evenly lg:gap-0 items-center flex flex-col lg:flex-row">
                             <div className="max-w-[450px]">
                                 <div className="flex justify-end items-end">
-                                    <FaHeart className={`text-gray-500 cursor-pointer transition-all duration-500 hover:text-red-500`} />
+                                    <FaHeart onClick={() => handleFavoriteProduct(products.id)} className={`${user?.favorites?.some((fav: any) => Number(fav.id) === Number(products.id)) ? 'text-red-500' : 'text-gray-500'} cursor-pointer transition-all duration-500 hover:text-red-500`} />
                                 </div>
                                 <div>
                                     <Image className="w-full py-4 object-cover" src={products.imageUrl} width={400} height={400} alt="imagem do produto" />

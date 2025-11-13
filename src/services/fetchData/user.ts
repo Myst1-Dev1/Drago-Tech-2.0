@@ -1,15 +1,23 @@
-import { parseCookies } from "nookies";
+'use server';
 
-const cookies = parseCookies();
+import { cookies } from "next/headers";
 
-let dataUser:any = null;
+export async function GetUser() {
+    const cookieStore = await cookies();
+    const rawCookie = cookieStore.get("user-token")?.value;
+    const parsedCookie = rawCookie ? JSON.parse(rawCookie) : null;
+    const token = parsedCookie?.token;
 
-try {
-  const rawUser = cookies["user-token"];
-  dataUser = rawUser ? JSON.parse(rawUser) : null;
-} catch (error) {
-  console.error("Erro ao tentar parsear cookie user-token:", error);
-  dataUser = null;
+    const res = await fetch("http://lab.mystdev.com.br/api/Drago-Tech-Api/auth/getUser", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        next: { tags: ['user'] }
+      });
+
+      const data = await res.json();
+
+    return data;
 }
-
-export { dataUser };
