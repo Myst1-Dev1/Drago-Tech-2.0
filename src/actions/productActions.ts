@@ -58,8 +58,6 @@ export async function createProduct(
             body.append("relatedImages", file, file.name);
         });
 
-        console.log(body);
-
         const response = await fetch("http://lab.mystdev.com.br/api/Drago-Tech-Api/products", {
             method: "POST",
             headers: {
